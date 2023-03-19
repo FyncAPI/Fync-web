@@ -63,6 +63,7 @@ export default function PageLogin(props: PageProps<Data>) {
               {/* {error ? <p class="text-red-500">{error.message}</p> : ""} */}
             </div>
             <Login />
+            {/* <GoogleSignIn /> */}
           </div>
           {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
         </div>

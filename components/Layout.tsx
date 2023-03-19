@@ -20,32 +20,13 @@ const Meta = ({ ...customMeta }) => {
       <title>{meta.title}</title>
       <meta content={meta.description} name="description" />
       <link rel="icon" href="/favicon.ico" />
+      <style>
+        @import
+        url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+      </style>
     </Head>
   );
 };
-
-const Nav = () => (
-  <>
-    <div class="bg-grey-500">
-      <nav class="flex items-center justify-between flex-wrap max-w-screen-md bg-gray-800">
-        <div class="flex items-center text-white mr-6">
-          <a href="/">
-            <img
-              src={asset("/logo.svg")}
-              width={50}
-              alt="Fync logo"
-            />
-          </a>
-          <a href="/">
-            <span class="font-semibold text-xl tracking-tight text-red-200 ">
-              Fync
-            </span>
-          </a>
-        </div>
-      </nav>
-    </div>
-  </>
-);
 
 const Footer = () => (
   <footer class="bg-teal-500">
@@ -61,7 +42,7 @@ export function Layout({ children, ...customMeta }: Props) {
   return (
     <>
       <Meta {...customMeta} />
-      <Nav />
+      {/* <Nav /> */}
       {children}
       <Footer />
     </>
