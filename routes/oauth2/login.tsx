@@ -7,41 +7,41 @@ interface Data {
   query: string;
 }
 
-export const handler: Handlers<Data> = {
-  POST: async (req, ctx) => {
-    console.log(req, ctx, "bro");
-    const login = await fetch(`${ctx.API_URL}/auth/local`, {
-      method: "POST",
-      body: await req.formData(),
-    }).then(async (res) => await res.json());
-    console.log(login);
+// export const handler: Handlers<Data> = {
+//   POST: async (req, ctx) => {
+//     console.log(req, ctx, "bro");
+//     const login = await fetch(`${ctx.API_URL}/auth/local`, {
+//       method: "POST",
+//       body: await req.formData(),
+//     }).then(async (res) => await res.json());
+//     console.log(login);
 
-    // Redirect if we got a login success, else render the form with an error
-    if (login.error) {
-      return ctx.render({ ...ctx.state, error: login.error });
-    } else {
-      const { user, jwt } = login;
-      // Put the login into the redis store
-      const state = Object.assign(ctx.state, { user, jwt, webview: false });
-      return await ctx.store.set(ctx.REDIS_KEY, JSON.stringify(state)).then(
-        () => {
-          // Redirect. Next request will get the session from it's cookie
-          const res = new Response(null, {
-            status: 302,
-            headers: new Headers({
-              location: ctx.BASE_URL + `/account`,
-            }),
-          });
-          return res;
-        },
-      );
-    }
-  },
-  GET: (req, ctx) => {
-    console.log(req, ctx, "asf");
-    return ctx.render({ ...ctx.state, error: null });
-  },
-};
+//     // Redirect if we got a login success, else render the form with an error
+//     if (login.error) {
+//       return ctx.render({ ...ctx.state, error: login.error });
+//     } else {
+//       const { user, jwt } = login;
+//       // Put the login into the redis store
+//       const state = Object.assign(ctx.state, { user, jwt, webview: false });
+//       return await ctx.store.set(ctx.REDIS_KEY, JSON.stringify(state)).then(
+//         () => {
+//           // Redirect. Next request will get the session from it's cookie
+//           const res = new Response(null, {
+//             status: 302,
+//             headers: new Headers({
+//               location: ctx.BASE_URL + `/account`,
+//             }),
+//           });
+//           return res;
+//         },
+//       );
+//     }
+//   },
+//   GET: (req, ctx) => {
+//     console.log(req, ctx, "asf");
+//     return ctx.render({ ...ctx.state, error: null });
+//   },
+// };
 
 export default function PageLogin(props: PageProps<Data>) {
   console.log(props);
