@@ -3,9 +3,13 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
 import { Navbar } from "../../components/Navbar.tsx";
 
-type CreateUser = {};
-export const handler: Handlers<CreateUser, WithSession> = {
-  async GET(_req, ctx) {
+type Data = {
+  session: Record<string, string>;
+  userData: Object;
+};
+
+export const handler: Handlers<Data, WithSession> = {
+  GET(_req, ctx) {
     const { session } = ctx.state;
     const user = session.get("createUser");
     console.log(user, "getting session");
@@ -13,7 +17,7 @@ export const handler: Handlers<CreateUser, WithSession> = {
   },
 };
 
-export default function CreateAccount(props: PageProps<CreateUser>) {
+export default function CreateAccount(props: PageProps<Data>) {
   return (
     <>
       <Navbar />

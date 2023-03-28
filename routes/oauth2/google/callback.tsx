@@ -45,7 +45,7 @@ export const handler: Handlers<
 
     //redirect to create user page
     return new Response("", {
-      status: 307,
+      status: 302,
       headers: { Location: "/account/create" },
     });
   },

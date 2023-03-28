@@ -26,7 +26,7 @@ export const Navbar = () => (
         </a>
       </div>
       <div class="flex items-center justify-center ml-auto mr-5 self-center">
-        <NavButton href="https://dev.fync.deno.dev" text="develop" />
+        <NavButton href="/dev" text="develop" />
         <NavButton href="/login" text="Login" />
         {/* <NavButton href="/sign-up" text="Sign up" /> */}
       </div>

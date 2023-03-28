@@ -28,10 +28,10 @@ const Meta = ({ ...customMeta }) => {
   );
 };
 
-const Footer = () => (
-  <footer class="bg-teal-500">
-    <div class="max-w-screen-md mx-auto py-8 px-4 sm:px-6 lg:px-8">
-      <p class="mt-8 text-center text-base text-white">
+export const Footer = () => (
+  <footer class="bg-primary-900 ">
+    <div class="max-w-screen-md mx-auto py-8 px-4 sm:px-6 lg:px-8 brightness-50 saturate-50 bg-opacity-30">
+      <p class="mt-8 text-center text-base text-white ">
         &copy; 2023 Fync, Inc. All rights reserved.
       </p>
     </div>
@@ -46,7 +46,6 @@ export function Layout({ children, ...customMeta }: Props) {
       <main class="flex-1 ">
         {children}
       </main>
-      <Footer />
     </>
   );
 }

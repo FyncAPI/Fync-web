@@ -12,7 +12,7 @@ export const handler: Handlers<
     const uri = googleAuthorizationURI!;
 
     return new Response("", {
-      status: 307,
+      status: 302,
       headers: { Location: uri },
     });
   },
