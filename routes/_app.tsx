@@ -1,4 +1,4 @@
-import { AppProps, Handlers } from "$fresh/server.ts";
+import { AppProps } from "$fresh/server.ts";
 import { Layout } from "../components/Layout.tsx";
 
 export default function App({ Component }: AppProps) {
