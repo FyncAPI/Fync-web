@@ -1,9 +1,8 @@
 import { Head } from "$fresh/runtime.ts";
-import { Button } from "../components/Button.tsx";
-import Hero from "../components/Hero.tsx";
-import { LinkButton } from "../components/LinkButton.tsx";
-import { Navbar } from "../components/Navbar.tsx";
-import Counter from "../islands/Counter.tsx";
+import { Button } from "@/components/Button.tsx";
+import Hero from "@/components/Hero.tsx";
+import { LinkButton } from "@/components/LinkButton.tsx";
+import { Navbar } from "@/components/Navbar.tsx";
 
 export default function Home() {
   return (

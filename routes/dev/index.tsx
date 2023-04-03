@@ -1,9 +1,9 @@
 import { Head } from "$fresh/runtime.ts";
-import { Button } from "../../components/Button.tsx";
-import { DevNavbar } from "../../components/DevNavbar.tsx";
-import { Footer } from "../../components/Layout.tsx";
-import { LinkButton } from "../../components/LinkButton.tsx";
-import { Navbar } from "../../components/Navbar.tsx";
+import { Button } from "@/components/Button.tsx";
+import { DevNavbar } from "@/components/DevNavbar.tsx";
+import { Footer } from "@/components/Layout.tsx";
+import { LinkButton } from "@/components/LinkButton.tsx";
+import { Navbar } from "@/components/Navbar.tsx";
 
 export default function Dev() {
   return (

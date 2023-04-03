@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
-import { Button } from "../../components/Button.tsx";
-import { Input } from "../../components/Input.tsx";
+import { Button } from "@/components/Button.tsx";
+import { Input } from "@/components/Input.tsx";
 
 type Data = {
   dev: boolean | null;
@@ -30,52 +30,59 @@ export const handler: Handlers<Data, WithSession> = {
     const dev = query.get("dev") === "true";
     const error = query.get("error");
     const redirect = query.get("redirect");
+    try {
+      const url = Deno.env.get("ENV") == "dev"
+        ? "http://localhost:8080/auth/email"
+        : "https://fync-api.deno.dev/auth/email";
 
-    const url = Deno.env.get("ENV") == "dev"
-      ? "http://localhost:8080/auth/email"
-      : "https://fync-api.deno.dev/auth/email";
+      const user = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(body),
+      });
 
-    const user = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
+      if (user.ok) {
+        console.log("ok");
+        const userBody = await user.json();
 
-    if (user.ok) {
-      console.log("ok");
-      const userBody = await user.json();
+        console.log(userBody, "userBody");
+        if (userBody.error) {
+          return ctx.render({ dev, error: userBody.error });
+        }
+        if (userBody.userData) {
+          session.set("user", userBody.userData);
 
-      console.log(userBody, "userBody");
-      if (userBody.error) {
-        return ctx.render({ dev, error: userBody.error });
-      }
-      if (userBody.user) {
-        session.set("user", userBody.user);
+          if (redirect) {
+            return new Response(null, {
+              status: 302,
+              headers: {
+                Location: redirect,
+              },
+            });
+          }
 
-        if (redirect) {
-          return new Response(null, {
+          if (dev) {
+            return new Response(null, {
+              status: 302,
+              headers: {
+                Location: "/dev/dashboard",
+              },
+            });
+          }
+
+          console.log("gogogo");
+
+          return new Response("", {
             status: 302,
             headers: {
-              Location: redirect,
+              Location: "/",
             },
           });
         }
-
-        if (dev) {
-          return new Response(null, {
-            status: 302,
-            headers: {
-              Location: "/dev/dashboard",
-            },
-          });
-        }
-
-        return new Response(null, {
-          status: 302,
-          headers: {
-            Location: "/",
-          },
-        });
       }
+    } catch (e) {
+      console.log(e);
+
+      return ctx.render({ dev, error: "Something went wrong" });
     }
 
     return ctx.render({ dev, error });

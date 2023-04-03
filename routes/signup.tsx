@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
-import { Button } from "../components/Button.tsx";
-import { Input } from "../components/Input.tsx";
+import { Button } from "@/components/Button.tsx";
+import { Input } from "@/components/Input.tsx";
 
 type Data = {
   dev: boolean | null;

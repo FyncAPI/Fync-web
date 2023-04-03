@@ -10,4 +10,24 @@ function sessionHandler(req: Request, ctx: MiddlewareHandlerContext<State>) {
   return session(req, ctx);
 }
 
-export const handler = [sessionHandler];
+async function protector(req: Request, ctx: MiddlewareHandlerContext<State>) {
+  const allowed = [
+    "/",
+    "/login",
+    "/signup",
+  ];
+  const { session } = ctx.state;
+
+  const path = new URL(req.url).pathname;
+  console.log("path", path);
+  if (!allowed.includes(path) && !session.get("user")) {
+    return new Response("Not allowed", {
+      status: 403,
+    });
+  }
+
+  const resp = await ctx.next();
+
+  return resp;
+}
+export const handler = [sessionHandler, protector];
