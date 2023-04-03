@@ -24,7 +24,7 @@ export default function Dev() {
         </div>
 
         {
-          /* <a href="/oauth2/login" class="text-blue-500">
+          /* <a href="/oauth2/auth" class="text-blue-500">
           <h2>login</h2>
         </a> */
         }

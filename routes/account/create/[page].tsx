@@ -14,7 +14,8 @@ import StoreData from "@/islands/StoreData.tsx";
 type Data = {
   // session: Record<string, string>;
   // userData: Object;
-  user: {
+  error?: string | null;
+  user?: {
     email: string;
     password: string;
   };
@@ -30,7 +31,9 @@ export const handler: Handlers<Data, WithSession> = {
 
   async POST(req, ctx) {
     const form = await req.formData();
-    console.log(form, "form");
+    const { session } = ctx.state;
+    const user = session.get("createUser");
+
     const body: PersonalInfo = {} as PersonalInfo;
 
     for (const [key, value] of form.entries()) {
@@ -42,7 +45,7 @@ export const handler: Handlers<Data, WithSession> = {
       }
     }
 
-    console.log(body);
+    console.log(body, form);
 
     const result = personalInfoParser.safeParse(body);
     if (!result.success) {
@@ -51,23 +54,79 @@ export const handler: Handlers<Data, WithSession> = {
         status: 400,
       });
     }
-    console.log(result.data, "res parse");
-    savePersonalInfo(result.data);
 
-    return new Response("", {
-      status: 302,
-      headers: { Location: "/account/create/2" },
-    });
+    console.log(result.data, "res parse");
+
+    try {
+      const url = Deno.env.get("ENV") == "dev"
+        ? "http://localhost:8080/auth/email/register"
+        : "https://fync-api.deno.dev/auth/email/register";
+
+      for (const field in user) {
+        form.append(field, user[field]);
+      }
+
+      const res = await fetch(url, {
+        method: "POST",
+        body: form,
+      });
+
+      console.log(res, "res");
+      if (res.ok) {
+        const resBody = await res.json();
+
+        console.log(resBody, "resBody");
+        if (resBody.fieldErrors) {
+          return ctx.render({
+            error: `${
+              Object.keys(resBody.fieldErrors).join(", ")
+            } are required`,
+          });
+        }
+
+        if (resBody.error) {
+          return ctx.render({ error: resBody.error });
+        }
+
+        session.set("user", resBody);
+
+        return new Response("", {
+          status: 302,
+          headers: { Location: "/home" },
+        });
+      }
+      return ctx.render({ error: null });
+
+      // savePersonalInfo(result.data);
+
+      // return new Response("", {
+      //   status: 302,
+      //   headers: { Location: "/account/create/2" },
+      // });
+    } catch (e) {
+      console.log(e);
+      return ctx.render({ error: "Something went wrong" });
+    }
   },
 };
 
 export default function CreateAccount(props: PageProps<Data>) {
-  const page = Number(props.params.page);
+  // const page = Number(props.params.page);
   return (
     <>
       <Navbar type="create" />
+      {props.data.error && (
+        <div
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          <strong class="font-bold">Error!</strong>
+          <span class="block sm:inline">{props.data.error}</span>
+        </div>
+      )}
 
-      <Stepper
+      {
+        /* <Stepper
         steps={[{
           number: 1,
           text: "Personal",
@@ -80,11 +139,15 @@ export default function CreateAccount(props: PageProps<Data>) {
           text: "Review",
         }]}
         step={page}
-      />
-      <StoreData />
+      /> */
+      }
       <div class=" pt-10 h-screen p-O mx-auto mr-auto m ">
         <div class="flex items-center self-start ml-auto mr-auto justify-center flex-col max-w-xl ">
-          {page == 1 ? <PersonalForm /> : <AccountForm />}
+          {/* {page == 1 ? <PersonalForm /> : <AccountForm />} */}
+          <h1 class="text-2xl font-extrabold text-transparent md:text-3xl lg:text-3xl max-w-2xl  bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-600">
+            Create Account
+          </h1>
+          <PersonalForm />
         </div>
       </div>
     </>

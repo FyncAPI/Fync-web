@@ -1,7 +1,7 @@
 // import { useState } from "preact/hooks";
 const LoginForm = () => {
   return (
-    <form class="space-y-6 mt-8" action="/oauth2/login" method="POST">
+    <form class="space-y-6 mt-8" action="/oauth2/auth" method="POST">
       {/* <input type="hidden" name="remember" value="true" /> */}
       <div class="rounded-md shadow-sm -space-y-px">
         <div>

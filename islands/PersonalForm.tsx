@@ -13,6 +13,7 @@ import { CreateEmailUser, CreateGoogleUser } from "@/utils/type.ts";
 
 export default function PersonalForm() {
   const { user, personalInfo: infoStore } = accountStore();
+  const [error, setError] = useState<string | null>(null);
   const [personalInfo, setPersonalInfo] = useState<
     PersonalInfo
   >(infoStore || {} as PersonalInfo);
@@ -20,21 +21,23 @@ export default function PersonalForm() {
   return (
     <div class="flex flex-col items-center justify-center w-full h-full">
       <div className="p-4 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 w-full max-w-md min-w-min m-4">
-        <div>
-          {JSON.stringify(infoStore)}
-        </div>
+        {error && (
+          <div class="bg-red-500 text-white p-2 rounded-md">
+            {error}
+          </div>
+        )}
         <form
           class="flex flex-col gap-4 space-y-5"
           method="POST"
           onSubmit={() => {
-            const result = personalInfoParser.safeParse(personalInfo);
-            console.log("hello");
-            if (!result.success) {
-              console.log(result.error);
-              return;
-            }
-            console.log(result.data, "res parse");
-            savePersonalInfo(result.data);
+            // const result = personalInfoParser.safeParse(personalInfo);
+            // console.log("hello");
+            // if (!result.success) {
+            //   console.log(result.error);
+            //   return;
+            // }
+            // console.log(result.data, "res parse");
+            // savePersonalInfo(result.data);
           }}
           encType="multipart/form-data"
         >
@@ -97,11 +100,42 @@ export default function PersonalForm() {
               name="name"
               placeholder="John Cena"
               required
+              onLoad={(e) => {
+                if ((e.target as HTMLInputElement).value) {
+                  setPersonalInfo({
+                    ...personalInfo,
+                    name: (e.target as HTMLInputElement).value,
+                  });
+                }
+              }}
               onChange={(e) => {
                 if ((e.target as HTMLInputElement).value) {
                   setPersonalInfo({
                     ...personalInfo,
                     name: (e.target as HTMLInputElement).value,
+                  });
+                }
+              }}
+            />
+            <FormInput
+              label="Username"
+              type="text"
+              name="username"
+              placeholder="jCena123"
+              required
+              onLoad={(e) => {
+                if ((e.target as HTMLInputElement).value) {
+                  setPersonalInfo({
+                    ...personalInfo,
+                    username: (e.target as HTMLInputElement).value,
+                  });
+                }
+              }}
+              onChange={(e) => {
+                if ((e.target as HTMLInputElement).value) {
+                  setPersonalInfo({
+                    ...personalInfo,
+                    username: (e.target as HTMLInputElement).value,
                   });
                 }
               }}
@@ -147,8 +181,21 @@ export default function PersonalForm() {
             />
           </div>
 
-          <Button type="submit">
-            Next
+          <Button
+            type="submit"
+            onClick={() => {
+              const result = personalInfoParser.safeParse(personalInfo);
+              console.log("hello");
+
+              if (!result.success) {
+                console.log(result.error);
+
+                return;
+              }
+              console.log(result.data, "res parse");
+            }}
+          >
+            Submit
           </Button>
         </form>
       </div>

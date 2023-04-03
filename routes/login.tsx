@@ -1,9 +1,36 @@
 import { Head } from "$fresh/runtime.ts";
-import { Button } from "../components/Button.tsx";
-import { Navbar } from "../components/Navbar.tsx";
-import Counter from "../islands/Counter.tsx";
+import { Handlers, PageProps } from "$fresh/server.ts";
+import { Navbar } from "@/components/Navbar.tsx";
+import { WithSession } from "fresh-session";
 
-export default function Login() {
+type Data = {
+  dev: boolean | null;
+  error?: string | null;
+};
+
+export const handler: Handlers<Data, WithSession> = {
+  GET(req, ctx) {
+    const query = new URL(req.url).searchParams;
+
+    const dev = query.get("dev") === "true";
+    const error = query.get("error");
+
+    return ctx.render({ dev, error });
+  },
+};
+export default function Login({
+  data,
+}: PageProps<Data>) {
+  {
+    data.error && (
+      <div
+        class="bg-red-100 text-red-700 px-4 py-3 rounded relative"
+        role="alert"
+      >
+        <span class="block sm:inline">{data.error}</span>
+      </div>
+    );
+  }
   return (
     <>
       <Navbar />
@@ -22,7 +49,7 @@ export default function Login() {
         </div>
 
         {
-          /* <a href="/oauth2/login" class="text-blue-500">
+          /* <a href="/oauth2/auth" class="text-blue-500">
           <h2>login</h2>
         </a> */
         }

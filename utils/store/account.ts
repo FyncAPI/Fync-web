@@ -12,6 +12,7 @@ export type AccountStore = {
 
 export const personalInfoParser = z.object({
   name: z.string(),
+  username: z.string(),
   phoneNumber: z.string(),
   profilePicture: z.custom<File>((value) => value instanceof File),
   birthDate: z.string(),
@@ -19,7 +20,6 @@ export const personalInfoParser = z.object({
 });
 export type PersonalInfo = z.infer<typeof personalInfoParser>;
 export type AccountInfo = {
-  username: string;
   email: string;
   password: string;
 };

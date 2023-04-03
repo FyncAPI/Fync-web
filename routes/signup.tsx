@@ -96,13 +96,13 @@ export default function Signup({
           </form>
 
           {
-            /* <a href="/oauth2/login" class="text-blue-500">
+            /* <a href="/oauth2/auth" class="text-blue-500">
                     <h2>login</h2>
                     </a> */
           }
 
           <div class="p-2">
-            <a href="/oauth2/login" class="text-blue-500">
+            <a href="/oauth2/auth" class="text-blue-500">
               <h2>already have an account?</h2>
             </a>
           </div>

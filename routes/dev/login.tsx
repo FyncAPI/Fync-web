@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import { DevNavbar } from "../../components/DevNavbar.tsx";
+import { DevNavbar } from "@/components/DevNavbar.tsx";
 
 export default function SignIn() {
   return (
@@ -7,23 +7,18 @@ export default function SignIn() {
       <DevNavbar />
       <div class="h-screen p-4 mx-auto ">
         <div class="flex items-center self-center ml-auto mr-auto justify-center h-800 flex-col max-w-xl ">
-          <h1 class="text-6xl font-extrabold text-transparent md:text-7xl lg:text-8xl max-w-2xl m-4  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          <h1 class="text-5xl font-extrabold text-transparent md:text-5xl lg:text-6xl max-w-2xl m-4  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
             Login to Fync Developer
           </h1>
-          <div class="self-start flex flex-col p-5">
+          <div class="self-start flex flex-col p-5 gap-2">
             {
               /* <Button href="/start">Get started</Button>
             <Button href="/learn" variant="secondary">learn more</Button> */
             }
-            {/* <GoogleLoginButton /> */}
+            <FyncLoginButton />
+            <GoogleLoginButton />
           </div>
         </div>
-
-        {
-          /* <a href="/oauth2/login" class="text-blue-500">
-          <h2>login</h2>
-        </a> */
-        }
       </div>
     </>
   );
@@ -42,6 +37,19 @@ const GoogleLoginButton = () => {
         />
       </span>
       Sign in with Google
+    </a>
+  );
+};
+
+const FyncLoginButton = () => {
+  return (
+    <a
+      href="/oauth2/auth"
+      class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md "
+    >
+      <h2 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-800 to-blue-600 hover:from-blue-500 hover:to-cyan-400 transition">
+        Sign in with Fync
+      </h2>
     </a>
   );
 };

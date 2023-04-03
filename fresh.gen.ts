@@ -9,14 +9,15 @@ import * as $2 from "./routes/_middleware.ts";
 import * as $3 from "./routes/account/_middleware.ts";
 import * as $4 from "./routes/account/create/[page].tsx";
 import * as $5 from "./routes/account/create/index.tsx";
-import * as $6 from "./routes/dev/index.tsx";
-import * as $7 from "./routes/dev/sign-in.tsx";
-import * as $8 from "./routes/index.tsx";
-import * as $9 from "./routes/login.tsx";
-import * as $10 from "./routes/oauth2/auth.tsx";
-import * as $11 from "./routes/oauth2/google/callback.tsx";
-import * as $12 from "./routes/oauth2/google/index.tsx";
-import * as $13 from "./routes/signup.tsx";
+import * as $6 from "./routes/dev/dashboard.tsx";
+import * as $7 from "./routes/dev/index.tsx";
+import * as $8 from "./routes/dev/login.tsx";
+import * as $9 from "./routes/index.tsx";
+import * as $10 from "./routes/login.tsx";
+import * as $11 from "./routes/oauth2/auth.tsx";
+import * as $12 from "./routes/oauth2/google/callback.tsx";
+import * as $13 from "./routes/oauth2/google/index.tsx";
+import * as $14 from "./routes/signup.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/Counter.tsx";
 import * as $$2 from "./islands/Input.tsx";
@@ -32,14 +33,15 @@ const manifest = {
     "./routes/account/_middleware.ts": $3,
     "./routes/account/create/[page].tsx": $4,
     "./routes/account/create/index.tsx": $5,
-    "./routes/dev/index.tsx": $6,
-    "./routes/dev/sign-in.tsx": $7,
-    "./routes/index.tsx": $8,
-    "./routes/login.tsx": $9,
-    "./routes/oauth2/auth.tsx": $10,
-    "./routes/oauth2/google/callback.tsx": $11,
-    "./routes/oauth2/google/index.tsx": $12,
-    "./routes/signup.tsx": $13,
+    "./routes/dev/dashboard.tsx": $6,
+    "./routes/dev/index.tsx": $7,
+    "./routes/dev/login.tsx": $8,
+    "./routes/index.tsx": $9,
+    "./routes/login.tsx": $10,
+    "./routes/oauth2/auth.tsx": $11,
+    "./routes/oauth2/google/callback.tsx": $12,
+    "./routes/oauth2/google/index.tsx": $13,
+    "./routes/signup.tsx": $14,
   },
   islands: {
     "./islands/AccountForm.tsx": $$0,
