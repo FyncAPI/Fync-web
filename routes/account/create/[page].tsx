@@ -90,10 +90,12 @@ export const handler: Handlers<Data, WithSession> = {
 
         session.set("user", resBody);
 
-        return new Response("", {
-          status: 302,
-          headers: { Location: "/home" },
-        });
+        if (dev) {
+          return new Response("", {
+            status: 302,
+            headers: { Location: "/home" },
+          });
+        }
       }
       return ctx.render({ error: null });
 

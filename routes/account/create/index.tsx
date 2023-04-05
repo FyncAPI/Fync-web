@@ -5,7 +5,7 @@ export const handler: Handlers = {
     return new Response("", {
       status: 302,
       headers: {
-        "Location": "/account/create/1",
+        "Location": "/account/create/1" + ctx.state.query,
       },
     });
   },

@@ -12,18 +12,21 @@ import * as $5 from "./routes/account/create/index.tsx";
 import * as $6 from "./routes/dev/dashboard.tsx";
 import * as $7 from "./routes/dev/index.tsx";
 import * as $8 from "./routes/dev/login.tsx";
-import * as $9 from "./routes/index.tsx";
-import * as $10 from "./routes/login.tsx";
-import * as $11 from "./routes/oauth2/auth.tsx";
-import * as $12 from "./routes/oauth2/google/callback.tsx";
-import * as $13 from "./routes/oauth2/google/index.tsx";
-import * as $14 from "./routes/signup.tsx";
+import * as $9 from "./routes/home.tsx";
+import * as $10 from "./routes/index.tsx";
+import * as $11 from "./routes/login.tsx";
+import * as $12 from "./routes/logout.tsx";
+import * as $13 from "./routes/oauth2/auth.tsx";
+import * as $14 from "./routes/oauth2/google/callback.tsx";
+import * as $15 from "./routes/oauth2/google/index.tsx";
+import * as $16 from "./routes/signup.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/Counter.tsx";
 import * as $$2 from "./islands/Input.tsx";
 import * as $$3 from "./islands/Login.tsx";
 import * as $$4 from "./islands/PersonalForm.tsx";
 import * as $$5 from "./islands/StoreData.tsx";
+import * as $$6 from "./islands/UserNavbar.tsx";
 
 const manifest = {
   routes: {
@@ -36,12 +39,14 @@ const manifest = {
     "./routes/dev/dashboard.tsx": $6,
     "./routes/dev/index.tsx": $7,
     "./routes/dev/login.tsx": $8,
-    "./routes/index.tsx": $9,
-    "./routes/login.tsx": $10,
-    "./routes/oauth2/auth.tsx": $11,
-    "./routes/oauth2/google/callback.tsx": $12,
-    "./routes/oauth2/google/index.tsx": $13,
-    "./routes/signup.tsx": $14,
+    "./routes/home.tsx": $9,
+    "./routes/index.tsx": $10,
+    "./routes/login.tsx": $11,
+    "./routes/logout.tsx": $12,
+    "./routes/oauth2/auth.tsx": $13,
+    "./routes/oauth2/google/callback.tsx": $14,
+    "./routes/oauth2/google/index.tsx": $15,
+    "./routes/signup.tsx": $16,
   },
   islands: {
     "./islands/AccountForm.tsx": $$0,
@@ -50,6 +55,7 @@ const manifest = {
     "./islands/Login.tsx": $$3,
     "./islands/PersonalForm.tsx": $$4,
     "./islands/StoreData.tsx": $$5,
+    "./islands/UserNavbar.tsx": $$6,
   },
   baseUrl: import.meta.url,
   config,

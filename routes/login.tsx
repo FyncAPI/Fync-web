@@ -15,6 +15,13 @@ export const handler: Handlers<Data, WithSession> = {
     const dev = query.get("dev") === "true";
     const error = query.get("error");
 
+    return new Response("", {
+      status: 302,
+      headers: {
+        "Location": "/oauth2/auth",
+      },
+    });
+
     return ctx.render({ dev, error });
   },
 };
@@ -39,11 +46,12 @@ export default function Login({
           <h1 class="text-6xl font-extrabold text-transparent md:text-7xl lg:text-8xl max-w-2xl m-4  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
             Login to Fync
           </h1>
-          <div class="self-start flex flex-col p-5">
+          <div class="self-start flex flex-col p-5 gap-2">
             {
               /* <Button href="/start">Get started</Button>
             <Button href="/learn" variant="secondary">learn more</Button> */
             }
+            <FyncLoginButton />
             <GoogleLoginButton />
           </div>
         </div>
@@ -71,6 +79,18 @@ const GoogleLoginButton = () => {
         />
       </span>
       Sign in with Google
+    </a>
+  );
+};
+const FyncLoginButton = () => {
+  return (
+    <a
+      href="/oauth2/auth"
+      class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md "
+    >
+      <h2 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-800 to-blue-600 hover:from-blue-500 hover:to-cyan-400 transition">
+        Sign in with Fync
+      </h2>
     </a>
   );
 };

@@ -11,20 +11,43 @@ function sessionHandler(req: Request, ctx: MiddlewareHandlerContext<State>) {
 }
 
 async function protector(req: Request, ctx: MiddlewareHandlerContext<State>) {
-  const allowed = [
-    "/",
-    "/login",
-    "/signup",
-  ];
+  // const protectedRoutes = [
+  //   "/",
+  //   "/signup",
+  //   "/dev",
+  // ];
   const { session } = ctx.state;
 
   const path = new URL(req.url).pathname;
   console.log("path", path);
-  if (!allowed.includes(path) && !session.get("user")) {
-    return new Response("Not allowed", {
-      status: 403,
-    });
+  if (path === "/") {
+    const user = session.get("user");
+    if (user) {
+      return new Response("Already logged in", {
+        status: 302,
+        headers: {
+          Location: "/home",
+        },
+      });
+    }
   }
+
+  if (path == "/login") {
+    const user = session.get("user");
+    if (user) {
+      return new Response("Already logged in", {
+        status: 302,
+        headers: {
+          Location: "/home",
+        },
+      });
+    }
+  }
+  // if (!allowed.includes(path) && !session.get("user")) {
+  //   return new Response("Not allowed", {
+  //     status: 403,
+  //   });
+  // }
 
   const resp = await ctx.next();
 
