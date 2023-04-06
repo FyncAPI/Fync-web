@@ -10,79 +10,47 @@ function sessionHandler(req: Request, ctx: MiddlewareHandlerContext<State>) {
   return session(req, ctx);
 }
 
-// export async function protector(
-//   req: Request,
-//   ctx: MiddlewareHandlerContext<State>,
-// ) {
-//   const protectedRoutes = [
-//     "today",
-//     "car",
-//     "work",
-//     "container",
-//     "customer",
-//     "driver",
-//     "summary",
-//   ];
-//   const paths = req.url.split("/");
-//   const inProtected = protectedRoutes.includes(
-//     paths[3],
-//   );
+async function protector(req: Request, ctx: MiddlewareHandlerContext<State>) {
+  // const protectedRoutes = [
+  //   "/",
+  //   "/signup",
+  //   "/dev",
+  // ];
+  const { session } = ctx.state;
 
-//   if (inProtected) {
-//     if (!ctx.state.session.has("sessionId")) {
-//       console.log("no session id");
-//       return new Response("Unauthorized", {
-//         status: 401,
-//         headers: {
-//           "content-type": "text/plain",
-//         },
-//       });
-//     }
+  const path = new URL(req.url).pathname;
+  console.log("path", path);
+  if (path === "/") {
+    const user = session.get("user");
+    if (user) {
+      return new Response("Already logged in", {
+        status: 302,
+        headers: {
+          Location: "/home",
+        },
+      });
+    }
+  }
 
-//     const sessionId = ctx.state.session.get("sessionId");
-//     // check if session is valid
-//     // if not, return 401
+  if (path == "/login") {
+    const user = session.get("user");
+    if (user) {
+      return new Response("Already logged in", {
+        status: 302,
+        headers: {
+          Location: "/home",
+        },
+      });
+    }
+  }
+  // if (!allowed.includes(path) && !session.get("user")) {
+  //   return new Response("Not allowed", {
+  //     status: 403,
+  //   });
+  // }
 
-//     const sessionData = await Sessions.findOne({
-//       _id: new ObjectId(sessionId),
-//     });
+  const resp = await ctx.next();
 
-//     if (!sessionData) {
-//       console.log("sessionId not found");
-//       return new Response("Unauthorized", {
-//         status: 401,
-//         headers: {
-//           "content-type": "text/plain",
-//         },
-//       });
-//     } else {
-//       const now = new Date();
-//       const expiresAt = sessionData.expiresAt;
-//       if (now > expiresAt) {
-//         console.log("session expired");
-//         return new Response("Unauthorized", {
-//           status: 401,
-//           headers: {
-//             "content-type": "text/plain",
-//           },
-//         });
-//       }
-
-//       // update session
-//       console.log("update session");
-//       await Sessions.updateOne(
-//         { _id: sessionId },
-//         {
-//           $set: {
-//             expiresAt: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
-//           },
-//         },
-//       );
-//     }
-//   }
-//   console.log("next");
-//   const resp = await ctx.next();
-//   // resp.headers.set("server", "fresh server");
-//   return resp;
-// }
-export const handler = [sessionHandler];
+  return resp;
+}
+export const handler = [sessionHandler, protector];

@@ -1,9 +1,43 @@
 import { Head } from "$fresh/runtime.ts";
-import { Button } from "../components/Button.tsx";
-import { Navbar } from "../components/Navbar.tsx";
-import Counter from "../islands/Counter.tsx";
+import { Handlers, PageProps } from "$fresh/server.ts";
+import { Navbar } from "@/components/Navbar.tsx";
+import { WithSession } from "fresh-session";
 
-export default function Login() {
+type Data = {
+  dev: boolean | null;
+  error?: string | null;
+};
+
+export const handler: Handlers<Data, WithSession> = {
+  GET(req, ctx) {
+    const query = new URL(req.url).searchParams;
+
+    const dev = query.get("dev") === "true";
+    const error = query.get("error");
+
+    return new Response("", {
+      status: 302,
+      headers: {
+        "Location": "/oauth2/auth",
+      },
+    });
+
+    return ctx.render({ dev, error });
+  },
+};
+export default function Login({
+  data,
+}: PageProps<Data>) {
+  {
+    data.error && (
+      <div
+        class="bg-red-100 text-red-700 px-4 py-3 rounded relative"
+        role="alert"
+      >
+        <span class="block sm:inline">{data.error}</span>
+      </div>
+    );
+  }
   return (
     <>
       <Navbar />
@@ -12,17 +46,18 @@ export default function Login() {
           <h1 class="text-6xl font-extrabold text-transparent md:text-7xl lg:text-8xl max-w-2xl m-4  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
             Login to Fync
           </h1>
-          <div class="self-start flex flex-col p-5">
+          <div class="self-start flex flex-col p-5 gap-2">
             {
               /* <Button href="/start">Get started</Button>
             <Button href="/learn" variant="secondary">learn more</Button> */
             }
+            <FyncLoginButton />
             <GoogleLoginButton />
           </div>
         </div>
 
         {
-          /* <a href="/oauth2/login" class="text-blue-500">
+          /* <a href="/oauth2/auth" class="text-blue-500">
           <h2>login</h2>
         </a> */
         }
@@ -44,6 +79,18 @@ const GoogleLoginButton = () => {
         />
       </span>
       Sign in with Google
+    </a>
+  );
+};
+const FyncLoginButton = () => {
+  return (
+    <a
+      href="/oauth2/auth"
+      class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md "
+    >
+      <h2 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-800 to-blue-600 hover:from-blue-500 hover:to-cyan-400 transition">
+        Sign in with Fync
+      </h2>
     </a>
   );
 };

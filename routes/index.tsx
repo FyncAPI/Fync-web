@@ -1,9 +1,8 @@
 import { Head } from "$fresh/runtime.ts";
-import { Button } from "../components/Button.tsx";
-import Hero from "../components/Hero.tsx";
-import { LinkButton } from "../components/LinkButton.tsx";
-import { Navbar } from "../components/Navbar.tsx";
-import Counter from "../islands/Counter.tsx";
+import { Button } from "@/components/Button.tsx";
+import Hero from "@/components/Hero.tsx";
+import { LinkButton } from "@/components/LinkButton.tsx";
+import { Navbar } from "@/components/Navbar.tsx";
 
 export default function Home() {
   return (
@@ -15,7 +14,7 @@ export default function Home() {
             Develop Friendships Everywhere
           </h1>
           <div class="self-start p-4">
-            <LinkButton href="/start">Get started</LinkButton>
+            <LinkButton href="/signup">Get started</LinkButton>
             {
               /* <LinkButton href="/learn" variant="secondary">
               learn more
@@ -23,6 +22,8 @@ export default function Home() {
             }
           </div>
         </div>
+
+        <div class="my-10" />
 
         <Hero />
       </div>

@@ -1,14 +1,14 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
-import { Button } from "../components/Button.tsx";
-import { Input } from "../components/Input.tsx";
+import { Button } from "@/components/Button.tsx";
+import { Input } from "@/components/Input.tsx";
 
 type Data = {
   dev: boolean | null;
   error?: string | null;
 };
 
-export const handler: Handlers<Data> = {
+export const handler: Handlers<Data, WithSession> = {
   GET(req, ctx) {
     const query = new URL(req.url).searchParams;
 
@@ -35,7 +35,18 @@ export const handler: Handlers<Data> = {
       return ctx.render({ dev, error: "Passwords do not match" });
     }
 
-    return new Response(JSON.stringify({ email, password, password2, dev }));
+    const { session } = ctx.state;
+    session.set("createUser", {
+      email,
+      password,
+    });
+
+    return new Response("", {
+      status: 302,
+      headers: {
+        Location: "/account/create",
+      },
+    });
   },
 };
 
@@ -77,6 +88,7 @@ export default function Signup({
               name="password2"
               placeholder="Confirm Password"
             />
+            <div class="mt-5" />
 
             <Button type="submit">
               Sign up
@@ -84,13 +96,13 @@ export default function Signup({
           </form>
 
           {
-            /* <a href="/oauth2/login" class="text-blue-500">
+            /* <a href="/oauth2/auth" class="text-blue-500">
                     <h2>login</h2>
                     </a> */
           }
 
           <div class="p-2">
-            <a href="/oauth2/login" class="text-blue-500">
+            <a href="/oauth2/auth" class="text-blue-500">
               <h2>already have an account?</h2>
             </a>
           </div>

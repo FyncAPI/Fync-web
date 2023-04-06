@@ -43,7 +43,7 @@ export function Layout({ children, ...customMeta }: Props) {
     <>
       <Meta {...customMeta} />
       {/* <Nav /> */}
-      <main class="flex-1 ">
+      <main class="flex-1 bg-slate-800 backdrop-brightness-50 ">
         {children}
       </main>
     </>

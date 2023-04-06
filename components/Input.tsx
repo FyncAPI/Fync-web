@@ -1,4 +1,5 @@
 import { JSX } from "preact";
+
 export function Input(
   props: JSX.HTMLAttributes<HTMLInputElement> & {
     variant?: "primary" | "secondary";

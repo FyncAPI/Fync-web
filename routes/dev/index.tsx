@@ -1,9 +1,9 @@
 import { Head } from "$fresh/runtime.ts";
-import { Button } from "../../components/Button.tsx";
-import { DevNavbar } from "../../components/DevNavbar.tsx";
-import { Footer } from "../../components/Layout.tsx";
-import { LinkButton } from "../../components/LinkButton.tsx";
-import { Navbar } from "../../components/Navbar.tsx";
+import { Button } from "@/components/Button.tsx";
+import { DevNavbar } from "@/components/DevNavbar.tsx";
+import { Footer } from "@/components/Layout.tsx";
+import { LinkButton } from "@/components/LinkButton.tsx";
+import { Navbar } from "@/components/Navbar.tsx";
 
 export default function Dev() {
   return (
@@ -24,7 +24,7 @@ export default function Dev() {
         </div>
 
         {
-          /* <a href="/oauth2/login" class="text-blue-500">
+          /* <a href="/oauth2/auth" class="text-blue-500">
           <h2>login</h2>
         </a> */
         }

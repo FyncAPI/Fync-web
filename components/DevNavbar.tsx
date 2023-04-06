@@ -34,7 +34,7 @@ export const DevNavbar = ({ bg }: { bg?: string }) => (
           text="github"
         />
         <NavButton href="/dev/docs" text="docs" />
-        <NavButton href="/dev/login" text="sign in" />
+        <NavButton href="/dev/login" text="login" />
         {/* <NavButton href="/sign-up" text="Sign up" /> */}
       </div>
     </nav>

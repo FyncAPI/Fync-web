@@ -23,7 +23,7 @@ const result = envParser.safeParse(Deno.env.toObject());
 
 if (!result.success) {
   console.log(result.error);
-  Deno.exit(1);
+  // Deno.exit(1);
 }
 
 await start(manifest, { plugins: [twindPlugin(twindConfig)] });
