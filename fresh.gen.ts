@@ -12,21 +12,26 @@ import * as $5 from "./routes/account/create/index.tsx";
 import * as $6 from "./routes/dev/dashboard.tsx";
 import * as $7 from "./routes/dev/index.tsx";
 import * as $8 from "./routes/dev/login.tsx";
-import * as $9 from "./routes/home.tsx";
-import * as $10 from "./routes/index.tsx";
-import * as $11 from "./routes/login.tsx";
-import * as $12 from "./routes/logout.tsx";
-import * as $13 from "./routes/oauth2/auth.tsx";
-import * as $14 from "./routes/oauth2/google/callback.tsx";
-import * as $15 from "./routes/oauth2/google/index.tsx";
-import * as $16 from "./routes/signup.tsx";
+import * as $9 from "./routes/docs/[...slug].tsx";
+import * as $10 from "./routes/docs/out.tsx";
+import * as $11 from "./routes/gfm.css.ts";
+import * as $12 from "./routes/home.tsx";
+import * as $13 from "./routes/index.tsx";
+import * as $14 from "./routes/login.tsx";
+import * as $15 from "./routes/logout.tsx";
+import * as $16 from "./routes/oauth2/auth.tsx";
+import * as $17 from "./routes/oauth2/google/callback.tsx";
+import * as $18 from "./routes/oauth2/google/index.tsx";
+import * as $19 from "./routes/signup.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/Counter.tsx";
 import * as $$2 from "./islands/Input.tsx";
 import * as $$3 from "./islands/Login.tsx";
 import * as $$4 from "./islands/PersonalForm.tsx";
-import * as $$5 from "./islands/StoreData.tsx";
-import * as $$6 from "./islands/UserNavbar.tsx";
+import * as $$5 from "./islands/ProfileNavButton.tsx";
+import * as $$6 from "./islands/SearchButton.tsx";
+import * as $$7 from "./islands/StoreData.tsx";
+import * as $$8 from "./islands/UserNavbar.tsx";
 
 const manifest = {
   routes: {
@@ -39,14 +44,17 @@ const manifest = {
     "./routes/dev/dashboard.tsx": $6,
     "./routes/dev/index.tsx": $7,
     "./routes/dev/login.tsx": $8,
-    "./routes/home.tsx": $9,
-    "./routes/index.tsx": $10,
-    "./routes/login.tsx": $11,
-    "./routes/logout.tsx": $12,
-    "./routes/oauth2/auth.tsx": $13,
-    "./routes/oauth2/google/callback.tsx": $14,
-    "./routes/oauth2/google/index.tsx": $15,
-    "./routes/signup.tsx": $16,
+    "./routes/docs/[...slug].tsx": $9,
+    "./routes/docs/out.tsx": $10,
+    "./routes/gfm.css.ts": $11,
+    "./routes/home.tsx": $12,
+    "./routes/index.tsx": $13,
+    "./routes/login.tsx": $14,
+    "./routes/logout.tsx": $15,
+    "./routes/oauth2/auth.tsx": $16,
+    "./routes/oauth2/google/callback.tsx": $17,
+    "./routes/oauth2/google/index.tsx": $18,
+    "./routes/signup.tsx": $19,
   },
   islands: {
     "./islands/AccountForm.tsx": $$0,
@@ -54,8 +62,10 @@ const manifest = {
     "./islands/Input.tsx": $$2,
     "./islands/Login.tsx": $$3,
     "./islands/PersonalForm.tsx": $$4,
-    "./islands/StoreData.tsx": $$5,
-    "./islands/UserNavbar.tsx": $$6,
+    "./islands/ProfileNavButton.tsx": $$5,
+    "./islands/SearchButton.tsx": $$6,
+    "./islands/StoreData.tsx": $$7,
+    "./islands/UserNavbar.tsx": $$8,
   },
   baseUrl: import.meta.url,
   config,

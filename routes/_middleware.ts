@@ -19,7 +19,8 @@ async function protector(req: Request, ctx: MiddlewareHandlerContext<State>) {
   const { session } = ctx.state;
 
   const path = new URL(req.url).pathname;
-  console.log("path", path);
+  // console.log("path", path);
+
   if (path === "/") {
     const user = session.get("user");
     if (user) {

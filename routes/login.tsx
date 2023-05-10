@@ -14,17 +14,19 @@ export const handler: Handlers<Data, WithSession> = {
 
     const dev = query.get("dev") === "true";
     const error = query.get("error");
+    console.log(query.toString(), "query");
 
     return new Response("", {
       status: 302,
       headers: {
-        "Location": "/oauth2/auth",
+        "Location": "/oauth2/auth" + "?" + query.toString(),
       },
     });
 
     return ctx.render({ dev, error });
   },
 };
+
 export default function Login({
   data,
 }: PageProps<Data>) {
