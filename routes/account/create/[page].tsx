@@ -4,12 +4,8 @@ import { WithSession } from "fresh-session";
 import { Navbar } from "@/components/Navbar.tsx";
 import PersonalForm from "@/islands/PersonalForm.tsx";
 import AccountForm from "@/islands/AccountForm.tsx";
-import {
-  PersonalInfo,
-  personalInfoParser,
-  savePersonalInfo,
-} from "@/utils/store/account.ts";
-import StoreData from "@/islands/StoreData.tsx";
+import { PersonalInfo, personalInfoParser } from "@/utils/store/account.ts";
+import { endpoints } from "../../../constants/endpoints.ts";
 
 type Data = {
   // session: Record<string, string>;
@@ -58,9 +54,7 @@ export const handler: Handlers<Data, WithSession> = {
     console.log(result.data, "res parse");
 
     try {
-      const url = Deno.env.get("ENV") == "dev"
-        ? "http://localhost:8080/auth/email/register"
-        : "https://fync-api.deno.dev/auth/email/register";
+      const url = endpoints.auth.email.register;
 
       for (const field in user) {
         form.append(field, user[field]);
@@ -114,6 +108,7 @@ export const handler: Handlers<Data, WithSession> = {
 
 export default function CreateAccount(props: PageProps<Data>) {
   // const page = Number(props.params.page);
+  console.log(props.data);
   return (
     <>
       <Navbar type="create" />

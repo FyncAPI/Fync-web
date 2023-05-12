@@ -2,6 +2,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
 import { Button } from "@/components/Button.tsx";
 import { Input } from "@/components/Input.tsx";
+import { endpoints } from "../../constants/endpoints.ts";
 
 type Data = {
   dev: boolean | null;
@@ -31,9 +32,7 @@ export const handler: Handlers<Data, WithSession> = {
     const error = query.get("error");
     const redirect = query.get("redirect");
     try {
-      const url = Deno.env.get("ENV") == "dev"
-        ? "http://localhost:8080/auth/email"
-        : "https://fync-api.deno.dev/auth/email";
+      const url = endpoints.auth.email.login;
 
       const user = await fetch(url, {
         method: "POST",
@@ -61,6 +60,11 @@ export const handler: Handlers<Data, WithSession> = {
           }
 
           if (dev) {
+            const devUser = await fetch(
+              endpoints.dev.login + userBody.userData._id,
+            );
+
+            console.log(devUser, "devUser");
             return new Response(null, {
               status: 302,
               headers: {

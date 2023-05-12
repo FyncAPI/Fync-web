@@ -1,15 +1,11 @@
-import { Head } from "$fresh/runtime.ts";
-import { Button } from "@/components/Button.tsx";
-import { DevNavbar } from "@/components/DevNavbar.tsx";
+import { DocsNavbar } from "@/components/DocsNavbar.tsx";
 import { Footer } from "@/components/Layout.tsx";
 import { LinkButton } from "@/components/LinkButton.tsx";
-import { Navbar } from "@/components/Navbar.tsx";
 
-export default function Dev() {
+export default function Docs() {
   return (
     <>
-      {/* <div class="h-52 w-screen bg-slate-400 -pt-52 absolute -z-20 "></div> */}
-      <DevNavbar bg="bg-slate-900" />
+      <DocsNavbar bg="bg-slate-900" />
       <div class="h-screen p-4 mx-auto bg-slate-900 pt-20 ">
         <div class="flex items-center self-center ml-auto mr-auto justify-center h-800 flex-col max-w-xl ">
           <h1 class="text-6xl font-extrabold text-transparent md:text-7xl lg:text-8xl max-w-2xl m-4  bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-100">

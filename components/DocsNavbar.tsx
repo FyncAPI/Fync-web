@@ -3,7 +3,7 @@ import { JSX } from "preact/jsx-runtime";
 import ProfileNavButton from "../islands/ProfileNavButton.tsx";
 import { User } from "../utils/type.ts";
 
-export const DevNavbar = ({ bg, user }: { bg?: string; user?: User }) => (
+export const DocsNavbar = ({ bg, user }: { bg?: string; user?: User }) => (
   <>
     {/* <div class="bg-grey-500"> */}
     <nav class="flex items-center justify-between flex-wrap h-full w-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 sticky top-0 z-10 -mb-16 ">
@@ -24,7 +24,7 @@ export const DevNavbar = ({ bg, user }: { bg?: string; user?: User }) => (
           </span> */
           }
           <h1 class="font-bold text-white  text-3xl ">
-            Fync Dev
+            Fync Docs
           </h1>
         </a>
       </div>
