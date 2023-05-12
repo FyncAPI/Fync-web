@@ -3,20 +3,14 @@ import { JSX } from "preact/jsx-runtime";
 import { Button } from "@/components/Button.tsx";
 import { Input } from "@/components/Input.tsx";
 import IconPlus from "tabler/plus.tsx";
-import {
-  accountStore,
-  PersonalInfo,
-  personalInfoParser,
-  savePersonalInfo,
-} from "@/utils/store/account.ts";
+import { PersonalInfo, personalInfoParser } from "@/utils/store/account.ts";
 import { CreateEmailUser, CreateGoogleUser } from "@/utils/type.ts";
 
 export default function PersonalForm() {
-  const { user, personalInfo: infoStore } = accountStore();
   const [error, setError] = useState<string | null>(null);
   const [personalInfo, setPersonalInfo] = useState<
     PersonalInfo
-  >(infoStore || {} as PersonalInfo);
+  >({} as PersonalInfo);
 
   return (
     <div class="flex flex-col items-center justify-center w-full h-full">

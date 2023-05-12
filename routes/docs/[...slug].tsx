@@ -58,8 +58,6 @@ export default function DocsPage(props: PageProps<Data>) {
     description = String(props.data.page.data.description);
   }
 
-  console.log(tw.config);
-
   return (
     <>
       <Head>

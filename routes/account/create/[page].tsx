@@ -4,12 +4,7 @@ import { WithSession } from "fresh-session";
 import { Navbar } from "@/components/Navbar.tsx";
 import PersonalForm from "@/islands/PersonalForm.tsx";
 import AccountForm from "@/islands/AccountForm.tsx";
-import {
-  PersonalInfo,
-  personalInfoParser,
-  savePersonalInfo,
-} from "@/utils/store/account.ts";
-import StoreData from "@/islands/StoreData.tsx";
+import { PersonalInfo, personalInfoParser } from "@/utils/store/account.ts";
 import { endpoints } from "../../../constants/endpoints.ts";
 
 type Data = {
@@ -113,6 +108,7 @@ export const handler: Handlers<Data, WithSession> = {
 
 export default function CreateAccount(props: PageProps<Data>) {
   // const page = Number(props.params.page);
+  console.log(props.data);
   return (
     <>
       <Navbar type="create" />

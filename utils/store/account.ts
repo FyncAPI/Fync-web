@@ -23,23 +23,3 @@ export type AccountInfo = {
   email: string;
   password: string;
 };
-
-const store = makeStore<AccountStore>({
-  user: {} as AccountStore["user"],
-  authUser: {} as AccountStore["authUser"],
-  personalInfo: {} as AccountStore["personalInfo"],
-  accountInfo: {} as AccountStore["accountInfo"],
-  provider: "",
-});
-
-export const savePersonalInfo = (info: PersonalInfo) => {
-  console.log("setting personal info", info);
-  store.set((state: AccountStore) => ({
-    personalInfo: {
-      ...state.personalInfo,
-      ...info,
-    },
-  }));
-};
-
-export const accountStore = () => useStore(store);
