@@ -1,10 +1,48 @@
 {
   "tasks": {
-    "start": "deno run -A --watch=static/,routes/ dev.ts"
+    "start": "deno run -A --watch=static/,routes/ dev.ts",
+    "build": "deno run -A dev.ts build",
+    "preview": "deno run -A main.ts"
   },
-  "importMap": "./import_map.json",
+  "imports": {
+    "@/": "./",
+    "$fresh/": "https://deno.land/x/fresh@1.4.3/",
+    "fresh-session": "https://deno.land/x/fresh_session@0.2.0/mod.ts",
+    "fresh-store": "https://deno.land/x/fresh_store@v1.0.2/mod.ts",
+    "deno_grant": "https://deno.land/x/deno_grant@v0.3.0/mod.ts",
+    "preact": "https://esm.sh/preact@10.15.1",
+    "preact/": "https://esm.sh/preact@10.15.1/",
+    "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.1",
+    "@preact/signals": "https://esm.sh/*@preact/signals@1.1.3",
+    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.2.3",
+    "tabler/": "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/",
+    "twind": "https://esm.sh/twind@0.16.19",
+    "twind-preset-autoprefix": "https://esm.sh/@twind/preset-autoprefix@1.0.7",
+    "twind-preset-tailwind": "https://esm.sh/@twind/preset-tailwind@1.1.4",
+    "twind_fresh_plugin/": "https://deno.land/x/fresh_twindv1_plugin@v1.3.0/",
+    "zod": "https://deno.land/x/zod@v3.16.1/mod.ts",
+    "$std/": "https://deno.land/std@0.178.0/",
+    "$ga4": "https://raw.githubusercontent.com/denoland/ga4/main/mod.ts",
+    "twind/": "https://esm.sh/twind@0.16.19/"
+  },
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
+  },
+  "lint": {
+    "rules": {
+      "tags": [
+        "fresh",
+        "recommended"
+      ]
+    },
+    "exclude": [
+      "_fresh"
+    ]
+  },
+  "fmt": {
+    "exclude": [
+      "_fresh"
+    ]
   }
 }
