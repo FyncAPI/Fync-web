@@ -5,6 +5,7 @@ export const endpoints = {
   // Auth
   auth: {
     email: {
+      check: `${url}/auth/email/check/`,
       login: `${url}/auth/email/`,
       register: `${url}/auth/email/register/`,
     },

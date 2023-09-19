@@ -75,7 +75,6 @@ export default function DocsPage(props: PageProps<Data>) {
 }
 
 import IconBooks from "tabler/books.tsx";
-import { inline, tw } from "twind";
 
 function Main(props: { path: string; page: Page }) {
   return (
@@ -160,7 +159,7 @@ function Content(props: { page: Page }) {
         class="mt-6 markdown-body "
         // style="color: gray; background-color: red"
         dangerouslySetInnerHTML={{
-          __html: inline(html),
+          __html: (html),
         }}
       />
 

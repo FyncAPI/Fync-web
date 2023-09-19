@@ -20,6 +20,14 @@ type Data = {
 export const handler: Handlers<Data, WithSession> = {
   GET(_req, ctx) {
     const { session } = ctx.state;
+    if (session.get("user")) {
+      return new Response("", {
+        status: 302,
+        headers: {
+          Location: "/home",
+        },
+      });
+    }
     const user = session.get("createUser");
     console.log(user, "getting session");
     return ctx.render({ user });
@@ -41,7 +49,7 @@ export const handler: Handlers<Data, WithSession> = {
       }
     }
 
-    console.log(body, form);
+    console.log(body, form, "gogs");
 
     const result = personalInfoParser.safeParse(body);
     if (!result.success) {
@@ -82,15 +90,14 @@ export const handler: Handlers<Data, WithSession> = {
           return ctx.render({ error: resBody.error });
         }
 
-        session.set("user", resBody);
-
-        if (dev) {
-          return new Response("", {
-            status: 302,
-            headers: { Location: "/home" },
-          });
-        }
+        session.set("user", resBody.user);
       }
+      return new Response("", {
+        status: 302,
+        headers: {
+          Location: "/home",
+        },
+      });
       return ctx.render({ error: null });
 
       // savePersonalInfo(result.data);

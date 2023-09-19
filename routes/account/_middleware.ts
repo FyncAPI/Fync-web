@@ -9,6 +9,14 @@ export async function handler(
 ) {
   const { session } = ctx.state;
   //   console.log(session.data, "zx");
+  if (session.get("user")) {
+    return new Response("", {
+      status: 302,
+      headers: {
+        Location: "/home",
+      },
+    });
+  }
 
   if (!session.data) {
     return new Response("", {

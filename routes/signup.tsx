@@ -2,6 +2,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
 import { Button } from "@/components/Button.tsx";
 import { Input } from "@/components/Input.tsx";
+import { endpoints } from "@/constants/endpoints.ts";
 
 type Data = {
   dev: boolean | null;
@@ -33,6 +34,27 @@ export const handler: Handlers<Data, WithSession> = {
 
     if (password !== password2) {
       return ctx.render({ dev, error: "Passwords do not match" });
+    }
+
+    // check email in db
+    // if exists, return error
+    const url = endpoints.auth.email.check;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await res.json();
+
+    if (!data.available) {
+      return ctx.render({
+        dev,
+        error: "Email already exists",
+      });
     }
 
     const { session } = ctx.state;

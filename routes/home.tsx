@@ -17,6 +17,7 @@ export const handler: Handlers<Data, WithSession> = {
     //   _id: ctx.state.session.get("userId"),
     // });
     const user = session.get("user");
+    console.log(user, "usdfd");
 
     if (!user) {
       return new Response(null, {
@@ -40,6 +41,10 @@ export default function HomePage(props: PageProps<Data>) {
           ? (
             <div>
               {JSON.stringify(props.data.user)}
+              <image src={props.data.user.profilePicture} />
+              <div>
+                <h2>{props.data.user.name}</h2>
+              </div>
             </div>
           )
           : (

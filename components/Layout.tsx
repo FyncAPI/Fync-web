@@ -29,8 +29,11 @@ const Meta = ({ ...customMeta }) => {
 };
 
 export const Footer = () => (
-  <footer class="bg-primary-900 ">
+  <footer class="bg-primary-900 brightness-10 ">
     <div class="max-w-screen-md mx-auto py-8 px-4 sm:px-6 lg:px-8 brightness-50 saturate-50 bg-opacity-30">
+      <a href="/dev" class="flex">
+        developer portal
+      </a>
       <p class="mt-8 text-center text-base text-white ">
         &copy; 2023 Fync, Inc. All rights reserved.
       </p>
@@ -46,6 +49,7 @@ export function Layout({ children, ...customMeta }: Props) {
       <main class="flex-1 bg-slate-800 backdrop-brightness-50 ">
         {children}
       </main>
+      <Footer />
     </>
   );
 }

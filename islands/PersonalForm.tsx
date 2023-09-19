@@ -179,7 +179,6 @@ export default function PersonalForm() {
             type="submit"
             onClick={() => {
               const result = personalInfoParser.safeParse(personalInfo);
-              console.log("hello");
 
               if (!result.success) {
                 console.log(result.error);
