@@ -4,6 +4,7 @@ import { createEmailUserParser, createGoogleUserParser } from "@/utils/type.ts";
 import { State } from "@/routes/_middleware.ts";
 
 export async function handler(
+  req: Request,
   ctx: MiddlewareHandlerContext<State>,
 ) {
   const { session } = ctx.state;

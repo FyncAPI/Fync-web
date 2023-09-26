@@ -4,6 +4,7 @@ import { endpoints } from "@/constants/endpoints.ts";
 import { App, User } from "@/utils/type.ts";
 import { DevNavbar } from "@/components/DevNavbar.tsx";
 import CopyText from "@/islands/CopyText.tsx";
+import { Input } from "@/components/Input.tsx";
 
 type Data = {
   user: User;
@@ -66,17 +67,30 @@ export default function AppData({ data }: PageProps<Data>) {
             </div>
             <div class="m-5 ">
               <h1 class="text-3xl font-medium text-white">App data</h1>
-              <div class="p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
+
+              <div class=" mt-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
                 <div class="flex flex-col">
-                  <h4 class="text-primary-200 text-lg m-4">
+                  <h4 class="text-primary-200 text-lg mt-4">
                     Client id
                   </h4>
                   <CopyText text={data.app.clientId} />
-                  <h4 class="text-primary-200 text-lg m-4">
+                  <h4 class="text-primary-200 text-lg mt-4">
                     Client secret
                   </h4>
                   <CopyText text={data.app.clientSecret} />
-                  C
+                </div>
+              </div>
+
+              <div class=" mt-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
+                <div class="flex flex-col">
+                  <h4 class="text-primary-200 text-lg mt-4">
+                    App name
+                  </h4>
+                  <Input value={data.app.name} disabled />
+                  <h4 class="text-primary-200 text-lg mt-4">
+                    App description
+                  </h4>
+                  <Input value={data.app.description} disabled />
                 </div>
               </div>
             </div>

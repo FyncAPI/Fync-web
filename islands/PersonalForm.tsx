@@ -2,6 +2,7 @@ import { useState } from "preact/hooks";
 import { Button } from "@/components/Button.tsx";
 import IconPlus from "tabler/plus.tsx";
 import { PersonalInfo, personalInfoParser } from "@/utils/store/account.ts";
+import { FormInput } from "@/components/FormInput.tsx";
 
 export default function PersonalForm() {
   const [error, setError] = useState<string | null>(null);

@@ -32,9 +32,9 @@ import * as $26 from "./routes/oauth2/login.tsx";
 import * as $27 from "./routes/signup.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/Banner.tsx";
-import * as $$2 from "./islands/CopyText.tsx";
-import * as $$3 from "./islands/Counter.tsx";
-import * as $$4 from "./islands/IconButton.tsx";
+import * as $$2 from "./islands/CopyButton.tsx";
+import * as $$3 from "./islands/CopyText.tsx";
+import * as $$4 from "./islands/Counter.tsx";
 import * as $$5 from "./islands/Input.tsx";
 import * as $$6 from "./islands/Login.tsx";
 import * as $$7 from "./islands/PersonalForm.tsx";
@@ -76,9 +76,9 @@ const manifest = {
   islands: {
     "./islands/AccountForm.tsx": $$0,
     "./islands/Banner.tsx": $$1,
-    "./islands/CopyText.tsx": $$2,
-    "./islands/Counter.tsx": $$3,
-    "./islands/IconButton.tsx": $$4,
+    "./islands/CopyButton.tsx": $$2,
+    "./islands/CopyText.tsx": $$3,
+    "./islands/Counter.tsx": $$4,
     "./islands/Input.tsx": $$5,
     "./islands/Login.tsx": $$6,
     "./islands/PersonalForm.tsx": $$7,
