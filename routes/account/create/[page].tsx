@@ -74,39 +74,35 @@ export const handler: Handlers<Data, WithSession> = {
       });
 
       console.log(res, "res");
-      if (res.ok) {
+      if (!res.ok) {
         const resBody = await res.json();
-
-        console.log(resBody, "resBody");
-        if (resBody.fieldErrors) {
-          return ctx.render({
-            error: `${
-              Object.keys(resBody.fieldErrors).join(", ")
-            } are required`,
-          });
-        }
-
-        if (resBody.error) {
-          return ctx.render({ error: resBody.error });
-        }
-
-        session.set("user", resBody.user);
+        return ctx.render({ error: JSON.stringify(resBody.error) });
       }
-      return new Response("", {
-        status: 302,
-        headers: {
-          Location: "/home",
-        },
-      });
+      const resBody = await res.json();
+
+      console.log(resBody, "resBody");
+      if (resBody.fieldErrors) {
+        return ctx.render({
+          error: `${Object.keys(resBody.fieldErrors).join(", ")} are required`,
+        });
+      }
+
+      if (resBody.error) {
+        return ctx.render({ error: resBody.error });
+      }
+
+      session.set("user", resBody.user);
+
+      session.set("createUser", null);
 
       // savePersonalInfo(result.data);
 
-      // return new Response("", {
-      //   status: 302,
-      //   headers: { Location: "/account/create/2" },
-      // });
+      return new Response("", {
+        status: 302,
+        headers: { Location: "/home" },
+      });
     } catch (e) {
-      console.log(e);
+      console.log(e, "eee");
       return ctx.render({ error: "Something went wrong" });
     }
   },

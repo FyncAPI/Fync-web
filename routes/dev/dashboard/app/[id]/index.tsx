@@ -47,9 +47,10 @@ export const handler: Handlers<Data, WithSession> = {
     return ctx.render({ app, user: session.get("user") });
   },
   async POST(req, ctx) {
-    console.log(await req.formData());
+    // console.log(await req.formData());
+    const form = await req.formData();
     console.log("hrer");
-    return ctx.render();
+    return new Response("ok");
   },
 };
 export default function AppData({ data }: PageProps<Data>) {

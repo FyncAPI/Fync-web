@@ -75,7 +75,7 @@ const GoogleLoginButton = () => {
 const FyncLoginButton = () => {
   return (
     <a
-      href="/oauth2/fync?dev=true"
+      href="/oauth2/fync"
       class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md "
     >
       <h2 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-800 to-blue-600 hover:from-blue-500 hover:to-cyan-400 transition">

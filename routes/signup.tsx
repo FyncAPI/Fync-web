@@ -124,7 +124,7 @@ export default function Signup({
           }
 
           <div class="p-2">
-            <a href="/oauth2/auth" class="text-blue-500">
+            <a href="/login" class="text-blue-500">
               <h2>already have an account?</h2>
             </a>
           </div>

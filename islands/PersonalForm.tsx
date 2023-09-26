@@ -3,12 +3,14 @@ import { Button } from "@/components/Button.tsx";
 import IconPlus from "tabler/plus.tsx";
 import { PersonalInfo, personalInfoParser } from "@/utils/store/account.ts";
 import { FormInput } from "@/components/FormInput.tsx";
+import { useSignal } from "@preact/signals";
 
 export default function PersonalForm() {
   const [error, setError] = useState<string | null>(null);
   const [personalInfo, setPersonalInfo] = useState<
     PersonalInfo
   >({} as PersonalInfo);
+  const loading = useSignal(false);
 
   return (
     <div class="flex flex-col items-center justify-center w-full h-full">

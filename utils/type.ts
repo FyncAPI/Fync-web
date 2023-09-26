@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z, ZodObject } from "zod";
 
 export const friendParser = z.object({
   _id: z.string(),
@@ -13,6 +13,20 @@ export const friendParser = z.object({
   markdown: z.string(),
   userId: z.string().optional(),
 });
+const HttpsUrlSchema = z.custom((value) => {
+  // Regular expressions to validate URLs
+  const httpRegex = /^http:\/\/[^\s/$.?#].[^\s]*$/;
+  const httpsRegex = /^https:\/\/[^\s/$.?#].[^\s]*$/;
+
+  if (
+    typeof value === "string" &&
+    (value.match(httpRegex) || value.match(httpsRegex))
+  ) {
+    return value; // Valid URL with "http://" or "https://"
+  } else {
+    throw new Error("Invalid URL (must start with 'http://' or 'https://')");
+  }
+});
 
 export const appParser = z.object({
   _id: z.string(),
@@ -24,9 +38,9 @@ export const appParser = z.object({
 
   appStoreId: z.string().optional(),
   androidPackageName: z.string().optional(),
-  url: z.string().optional(),
+  url: z.string().url().optional(),
 
-  redirectUrl: z.string().optional(),
+  redirectUrl: HttpsUrlSchema.optional(),
 
   image: z.string().optional(),
   users: z.array(z.string()),

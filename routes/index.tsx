@@ -14,7 +14,7 @@ export default function Home() {
             Develop Friendships Everywhere
           </h1>
           <div class="self-start p-4">
-            <LinkButton href="/signup">Get started</LinkButton>
+            <LinkButton href="/home">Get started</LinkButton>
             {
               /* <LinkButton href="/learn" variant="secondary">
               learn more
@@ -25,7 +25,7 @@ export default function Home() {
 
         <div class="my-10" />
 
-        <Hero />
+        {/* <Hero /> */}
       </div>
     </>
   );

@@ -1,4 +1,5 @@
 const url = Deno.env.get("ENV") == "dev"
+  // ? "https://fync-api-5jmm43qs87pw.deno.dev"
   ? "http://localhost:8080"
   : "https://fync-api.deno.dev";
 export const endpoints = {

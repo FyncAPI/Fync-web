@@ -43,6 +43,5 @@ export async function handler(
   console.log(result.data, "result.data", result);
 
   const resp = await ctx.next();
-  resp.headers.set("server", "fresh server");
   return resp;
 }

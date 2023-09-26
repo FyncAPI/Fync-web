@@ -59,9 +59,8 @@ export const handler: Handlers<Data, WithSession> = {
     };
     const query = new URL(req.url).searchParams;
 
-    const dev = query.get("dev") === "true";
     const error = query.get("error");
-    const redirect = query.get("redirect");
+    const redirectToAuth = query.get("authUrl");
     try {
       const url = endpoints.auth.email.login;
 
@@ -82,7 +81,8 @@ export const handler: Handlers<Data, WithSession> = {
           session.set("user", userBody.userData);
 
           const authUrl = session.get("authUrl");
-          if (authUrl) {
+          console.log("authUrl", authUrl);
+          if (redirectToAuth) {
             return new Response(null, {
               status: 302,
               headers: {
