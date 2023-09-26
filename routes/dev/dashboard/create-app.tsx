@@ -9,7 +9,6 @@ import { Input } from "@/components/Input.tsx";
 import { LinkButton } from "@/components/LinkButton.tsx";
 import Banner from "@/islands/Banner.tsx";
 import { endpoints } from "@/constants/endpoints.ts";
-import { d } from "@/_fresh/chunk-YC2TUGGU.js";
 
 type Data = {
   user?: User;

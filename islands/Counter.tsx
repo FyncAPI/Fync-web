@@ -1,17 +1,19 @@
-import { useState } from "preact/hooks";
-import { Button } from "@/components/Button.tsx";
+import { useSignal } from "@preact/signals";
 
-interface CounterProps {
-  start: number;
-}
+export default function Counter() {
+  const count = useSignal(0);
 
-export default function Counter(props: CounterProps) {
-  const [count, setCount] = useState(props.start);
   return (
-    <div class="flex gap-2 w-full">
-      <p class="flex-grow-1 font-bold text-xl">{count}</p>
-      <Button onClick={() => setCount(count - 1)}>-1</Button>
-      <Button onClick={() => setCount(count + 1)}>+1</Button>
+    <div>
+      Counter is at {count}.{" "}
+      <button
+        onClick={() => {
+          console.log("nooo", count.value);
+          count.value += 1;
+        }}
+      >
+        +
+      </button>
     </div>
   );
 }

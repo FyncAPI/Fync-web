@@ -19,13 +19,16 @@ export const appParser = z.object({
   name: z.string(),
   description: z.string(),
 
+  clientId: z.string(),
+  clientSecret: z.string(),
+
   appStoreId: z.string().optional(),
   androidPackageName: z.string().optional(),
-  url: z.string(),
+  url: z.string().optional(),
 
   redirectUrl: z.string().optional(),
 
-  image: z.string(),
+  image: z.string().optional(),
   users: z.array(z.string()),
   events: z.array(z.string()),
   interactions: z.array(z.string()),
@@ -93,3 +96,4 @@ export const userParser = z.object({
 });
 
 export type User = z.infer<typeof userParser>;
+export type App = z.infer<typeof appParser>;

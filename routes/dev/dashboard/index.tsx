@@ -1,18 +1,22 @@
 import { HandlerContext, Handlers, PageProps } from "$fresh/server.ts";
-import { User } from "@/utils/type.ts";
+import { App, User } from "@/utils/type.ts";
 import UserNavbar from "@/islands/UserNavbar.tsx";
 import * as cookie from "https://deno.land/std@0.182.0/http/cookie.ts";
 import { WithSession } from "fresh-session";
 import { DevNavbar } from "@/components/DevNavbar.tsx";
 import { Button } from "@/components/Button.tsx";
 import { LinkButton } from "@/components/LinkButton.tsx";
+import axios from "npm:axios";
+import { endpoints } from "@/constants/endpoints.ts";
+import { AppsList } from "@/components/AppsList.tsx";
 
 type Data = {
   user: User;
+  apps: App[];
 };
 
 export const handler: Handlers<Data, WithSession> = {
-  GET(req, ctx) {
+  async GET(req, ctx) {
     const cookies = cookie.getCookies(req.headers);
     const { session } = ctx.state;
 
@@ -31,7 +35,16 @@ export const handler: Handlers<Data, WithSession> = {
       });
     }
 
-    return ctx.render({ user });
+    const res = await axios.get(endpoints.dev.app.get, {
+      headers: {
+        Authorization: `Bearer ${session.get("accessToken")}`,
+      },
+    });
+
+    console.log(res, res.data, "res");
+    const apps = res.data;
+
+    return ctx.render({ user, apps });
   },
 };
 
@@ -49,6 +62,10 @@ export default function DashboardPage(props: PageProps<Data>) {
             Create app
           </LinkButton>
         </div>
+        {/* create a apps list */}
+
+        <AppsList apps={data.apps} />
+
         {props.data.user
           ? (
             <div>

@@ -20,7 +20,7 @@ export const endpoints = {
     profile: `${url}/dev/profile/`,
     app: {
       "create": `${url}/dev/app/create/`,
-      get: `${url}/dev/app/get/`,
+      get: `${url}/dev/apps/`,
     },
   },
   user: {

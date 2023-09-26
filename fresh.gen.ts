@@ -10,7 +10,7 @@ import * as $4 from "./routes/account/create/[page].tsx";
 import * as $5 from "./routes/account/create/index.tsx";
 import * as $6 from "./routes/api/oauth/token.tsx";
 import * as $7 from "./routes/dev/dashboard/_middleware.ts";
-import * as $8 from "./routes/dev/dashboard/app/[id].tsx";
+import * as $8 from "./routes/dev/dashboard/app/[id]/index.tsx";
 import * as $9 from "./routes/dev/dashboard/create-app.tsx";
 import * as $10 from "./routes/dev/dashboard/index.tsx";
 import * as $11 from "./routes/dev/index.tsx";
@@ -32,13 +32,15 @@ import * as $26 from "./routes/oauth2/login.tsx";
 import * as $27 from "./routes/signup.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/Banner.tsx";
-import * as $$2 from "./islands/Counter.tsx";
-import * as $$3 from "./islands/Input.tsx";
-import * as $$4 from "./islands/Login.tsx";
-import * as $$5 from "./islands/PersonalForm.tsx";
-import * as $$6 from "./islands/ProfileNavButton.tsx";
-import * as $$7 from "./islands/SearchButton.tsx";
-import * as $$8 from "./islands/UserNavbar.tsx";
+import * as $$2 from "./islands/CopyText.tsx";
+import * as $$3 from "./islands/Counter.tsx";
+import * as $$4 from "./islands/IconButton.tsx";
+import * as $$5 from "./islands/Input.tsx";
+import * as $$6 from "./islands/Login.tsx";
+import * as $$7 from "./islands/PersonalForm.tsx";
+import * as $$8 from "./islands/ProfileNavButton.tsx";
+import * as $$9 from "./islands/SearchButton.tsx";
+import * as $$10 from "./islands/UserNavbar.tsx";
 
 const manifest = {
   routes: {
@@ -50,7 +52,7 @@ const manifest = {
     "./routes/account/create/index.tsx": $5,
     "./routes/api/oauth/token.tsx": $6,
     "./routes/dev/dashboard/_middleware.ts": $7,
-    "./routes/dev/dashboard/app/[id].tsx": $8,
+    "./routes/dev/dashboard/app/[id]/index.tsx": $8,
     "./routes/dev/dashboard/create-app.tsx": $9,
     "./routes/dev/dashboard/index.tsx": $10,
     "./routes/dev/index.tsx": $11,
@@ -74,13 +76,15 @@ const manifest = {
   islands: {
     "./islands/AccountForm.tsx": $$0,
     "./islands/Banner.tsx": $$1,
-    "./islands/Counter.tsx": $$2,
-    "./islands/Input.tsx": $$3,
-    "./islands/Login.tsx": $$4,
-    "./islands/PersonalForm.tsx": $$5,
-    "./islands/ProfileNavButton.tsx": $$6,
-    "./islands/SearchButton.tsx": $$7,
-    "./islands/UserNavbar.tsx": $$8,
+    "./islands/CopyText.tsx": $$2,
+    "./islands/Counter.tsx": $$3,
+    "./islands/IconButton.tsx": $$4,
+    "./islands/Input.tsx": $$5,
+    "./islands/Login.tsx": $$6,
+    "./islands/PersonalForm.tsx": $$7,
+    "./islands/ProfileNavButton.tsx": $$8,
+    "./islands/SearchButton.tsx": $$9,
+    "./islands/UserNavbar.tsx": $$10,
   },
   baseUrl: import.meta.url,
 };
