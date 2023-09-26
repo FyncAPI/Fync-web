@@ -45,8 +45,9 @@ export function Layout({ children, ...customMeta }: Props) {
       {/* <Nav /> */}
       <main class="flex-1 bg-slate-800 backdrop-brightness-50 ">
         {children}
+
+        <Footer />
       </main>
-      <Footer />
     </>
   );
 }

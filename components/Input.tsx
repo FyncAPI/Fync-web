@@ -9,7 +9,9 @@ export function Input(
     <input
       {...props}
       class={`shadow-md hover:shadow-lg m-2 py-2 px-4 rounded-lg ${
-        props.variant == "secondary"
+        props.disabled
+          ? "bg-gray-800 text-yellow-100 bg-opacity-100"
+          : props.variant == "secondary"
           ? "bg-secondary-50 text-black"
           : "bg-primary-800 bg-opacity-30 text-white"
       }`}

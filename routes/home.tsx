@@ -42,7 +42,7 @@ export default function HomePage(props: PageProps<Data>) {
           ? (
             <div>
               {JSON.stringify(props.data.user)}
-              <image src={props.data.user.profilePicture} />
+              <image class={"w-20 h-20"} src={props.data.user.profilePicture} />
               <div>
                 <h2>{props.data.user.name}</h2>
               </div>

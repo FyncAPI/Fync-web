@@ -21,6 +21,7 @@ export const endpoints = {
     app: {
       "create": `${url}/dev/app/create/`,
       get: `${url}/dev/apps/`,
+      update: `${url}/dev/apps/`,
     },
   },
   user: {

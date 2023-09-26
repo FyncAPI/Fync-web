@@ -2,9 +2,10 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
 import { endpoints } from "@/constants/endpoints.ts";
 import { App, User } from "@/utils/type.ts";
-import { DevNavbar } from "@/components/DevNavbar.tsx";
 import CopyText from "@/islands/CopyText.tsx";
 import { Input } from "@/components/Input.tsx";
+import AppDataEditor from "@/islands/AppDataEditor.tsx";
+import { DevNavbar } from "@/components/DevNavbar.tsx";
 
 type Data = {
   user: User;
@@ -45,12 +46,17 @@ export const handler: Handlers<Data, WithSession> = {
 
     return ctx.render({ app, user: session.get("user") });
   },
+  async POST(req, ctx) {
+    console.log(await req.formData());
+    console.log("hrer");
+    return ctx.render();
+  },
 };
 export default function AppData({ data }: PageProps<Data>) {
   return (
     <>
       <DevNavbar user={data.user} />
-      <div class="h-screen">
+      <div>
         {data.app && (
           <>
             <div class="flex flex-row m-5 md:m-10 rounded-md items-center justify-between ">
@@ -81,18 +87,7 @@ export default function AppData({ data }: PageProps<Data>) {
                 </div>
               </div>
 
-              <div class=" mt-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
-                <div class="flex flex-col">
-                  <h4 class="text-primary-200 text-lg mt-4">
-                    App name
-                  </h4>
-                  <Input value={data.app.name} disabled />
-                  <h4 class="text-primary-200 text-lg mt-4">
-                    App description
-                  </h4>
-                  <Input value={data.app.description} disabled />
-                </div>
-              </div>
+              <AppDataEditor app={data.app} />
             </div>
           </>
         )}
