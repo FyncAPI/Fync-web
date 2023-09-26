@@ -1,5 +1,6 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { ComponentChildren } from "preact";
+import Counter from "@/islands/Counter.tsx";
 
 type Props = {
   children: ComponentChildren;

@@ -159,7 +159,7 @@ function Content(props: { page: Page }) {
         class="mt-6 markdown-body "
         // style="color: gray; background-color: red"
         dangerouslySetInnerHTML={{
-          __html: (html),
+          __html: html,
         }}
       />
 

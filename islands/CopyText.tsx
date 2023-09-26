@@ -1,9 +1,8 @@
-import { IconButton } from "@/islands/IconButton.tsx";
+import IconButton from "@/islands/IconButton.tsx";
 
-export const CopyText = (props: { text: string }) => {
+export default function CopyText(props: { text: string }) {
   const copyText = () => {
     navigator.clipboard.writeText(props.text);
-    alert("Copied to clipboard!");
   };
   return (
     <div class="p-2 rounded-md items-center justify-between h-full bg-gray-800 bg-clip-padding backdrop-filter backdrop-blur-sm ">
@@ -18,4 +17,4 @@ export const CopyText = (props: { text: string }) => {
       </div>
     </div>
   );
-};
+}

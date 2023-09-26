@@ -22,8 +22,6 @@ export const handler: Handlers<Data, WithSession> = {
         "Location": "/oauth2/auth" + "?" + query.toString(),
       },
     });
-
-    return ctx.render({ dev, error });
   },
 };
 

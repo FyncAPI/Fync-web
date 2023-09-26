@@ -8,7 +8,7 @@ export const handler: Handlers<
   Data,
   WithSession // indicate with Typescript that the session is in the `ctx.state`
 > = {
-  async GET(req, ctx) {
+  GET(req, ctx) {
     const uri = googleAuthorizationURI!;
     console.log(uri, "uu");
 

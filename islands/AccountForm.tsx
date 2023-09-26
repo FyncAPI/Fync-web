@@ -1,5 +1,5 @@
 import { Button } from "@/components/Button.tsx";
-import { FormInput } from "@/islands/PersonalForm.tsx";
+import { FormInput } from "@/components/FormInput.tsx";
 
 export default function AccountForm() {
   return (

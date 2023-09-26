@@ -98,7 +98,6 @@ export const handler: Handlers<Data, WithSession> = {
           Location: "/home",
         },
       });
-      return ctx.render({ error: null });
 
       // savePersonalInfo(result.data);
 

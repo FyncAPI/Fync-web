@@ -1,10 +1,7 @@
 import { useState } from "preact/hooks";
-import { JSX } from "preact/jsx-runtime";
 import { Button } from "@/components/Button.tsx";
-import { Input } from "@/components/Input.tsx";
 import IconPlus from "tabler/plus.tsx";
 import { PersonalInfo, personalInfoParser } from "@/utils/store/account.ts";
-import { CreateEmailUser, CreateGoogleUser } from "@/utils/type.ts";
 
 export default function PersonalForm() {
   const [error, setError] = useState<string | null>(null);
@@ -195,25 +192,3 @@ export default function PersonalForm() {
     </div>
   );
 }
-
-export const FormInput = (
-  props: {
-    label: string;
-    type: string;
-    name: string;
-    placeholder: string;
-  } & JSX.HTMLAttributes<HTMLInputElement>,
-) => {
-  return (
-    <div class="flex flex-col gap-2">
-      <label class="text-white" for={props.name}>{props.label}</label>
-      <input
-        {...props}
-        class="p-2 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10"
-        type={props.type}
-        name={props.name}
-        placeholder={props.placeholder}
-      />
-    </div>
-  );
-};

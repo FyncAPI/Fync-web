@@ -3,6 +3,7 @@ import { WithSession } from "fresh-session";
 import { Button } from "@/components/Button.tsx";
 import { Input } from "@/components/Input.tsx";
 import { endpoints } from "../../constants/endpoints.ts";
+import { App } from "@/utils/type.ts";
 
 type Data = {
   error?: string | null;
@@ -11,7 +12,7 @@ type Data = {
   clientId?: string | null;
   scope?: string | null;
   state?: string | null;
-  app?: any | null;
+  app?: App | null;
   ownsite?: boolean;
   dev?: boolean;
 };

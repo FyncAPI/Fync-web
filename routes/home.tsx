@@ -3,6 +3,7 @@ import { User } from "@/utils/type.ts";
 import UserNavbar from "@/islands/UserNavbar.tsx";
 import * as cookie from "https://deno.land/std@0.182.0/http/cookie.ts";
 import { WithSession } from "fresh-session";
+import Counter from "@/islands/Counter.tsx";
 
 type Data = {
   user: User;

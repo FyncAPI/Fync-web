@@ -3,8 +3,7 @@ import { WithSession } from "fresh-session";
 import { endpoints } from "@/constants/endpoints.ts";
 import { App, User } from "@/utils/type.ts";
 import { DevNavbar } from "@/components/DevNavbar.tsx";
-import { CopyText } from "@/islands/CopyText.tsx";
-import Counter from "@/islands/Counter.tsx";
+import CopyText from "@/islands/CopyText.tsx";
 
 type Data = {
   user: User;
@@ -50,7 +49,6 @@ export default function AppData({ data }: PageProps<Data>) {
   return (
     <>
       <DevNavbar user={data.user} />
-      <Counter />
       <div class="h-screen">
         {data.app && (
           <>

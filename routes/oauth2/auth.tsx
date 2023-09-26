@@ -3,7 +3,7 @@ import { WithSession } from "fresh-session";
 import { Button } from "@/components/Button.tsx";
 import { Input } from "@/components/Input.tsx";
 import { endpoints } from "../../constants/endpoints.ts";
-import { User } from "@/utils/type.ts";
+import { App, User } from "@/utils/type.ts";
 import { LinkButton } from "@/components/LinkButton.tsx";
 
 type Data = {
@@ -13,7 +13,7 @@ type Data = {
   clientId?: string | null;
   scope?: string | null;
   state?: string | null;
-  app?: any | null;
+  app?: App | null;
   user?: User;
 };
 

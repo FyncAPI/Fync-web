@@ -1,5 +1,4 @@
 import { Handlers } from "$fresh/server.ts";
-import { tw } from "twind";
 import { gfm } from "../utils/markdown.ts";
 
 // TODO(lucacasonato): hash the file and use the hash as the filename, and serve
