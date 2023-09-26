@@ -1,20 +1,29 @@
 import { Options } from "twind_fresh_plugin/twind.ts";
-import { defineConfig } from "twind";
+import { apply, defineConfig } from "twind";
 // twind preset
 import presetAutoPrefix from "twind-preset-autoprefix";
 import presetTailWind from "twind-preset-tailwind";
 
 export default {
   selfURL: import.meta.url,
+
   ...defineConfig({
     presets: [
       presetAutoPrefix(),
       presetTailWind(),
     ],
+    preflight: {
+      "@import":
+        `@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');`,
+      h1: apply`text(white)`, // Grouping syntax
+    },
     theme: {
       extend: {
         fontFamily: {
           sans: ["Outfit", "sans-serif"],
+        },
+        textColor: {
+          default: "#1c358c",
         },
         colors: {
           "primary": {

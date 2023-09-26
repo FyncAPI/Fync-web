@@ -1,5 +1,36 @@
 import { Head } from "$fresh/runtime.ts";
 import { DevNavbar } from "@/components/DevNavbar.tsx";
+import { Handlers } from "$fresh/server.ts";
+import { User } from "@/utils/type.ts";
+import { WithSession } from "fresh-session";
+
+type Data = {
+  user: User;
+};
+
+export const handler: Handlers<Data, WithSession> = {
+  GET(req, ctx) {
+    const { session } = ctx.state;
+
+    console.log(session.data, "session");
+    // const user = await ctx.state.db.collection("users").findOne({
+    //   _id: ctx.state.session.get("userId"),
+    // });
+    const user = session.get("user");
+    const token = session.get("accessToken");
+
+    if (token) {
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: "/dev/dashboard",
+        },
+      });
+    }
+
+    return ctx.render({ user });
+  },
+};
 
 export default function SignIn() {
   return (
@@ -16,7 +47,7 @@ export default function SignIn() {
             <Button href="/learn" variant="secondary">learn more</Button> */
             }
             <FyncLoginButton />
-            <GoogleLoginButton />
+            {/* <GoogleLoginButton /> */}
           </div>
         </div>
       </div>
@@ -44,7 +75,7 @@ const GoogleLoginButton = () => {
 const FyncLoginButton = () => {
   return (
     <a
-      href="/oauth2/auth"
+      href="/oauth2/fync?dev=true"
       class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md "
     >
       <h2 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-800 to-blue-600 hover:from-blue-500 hover:to-cyan-400 transition">

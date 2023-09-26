@@ -3,145 +3,190 @@ import { WithSession } from "fresh-session";
 import { Button } from "@/components/Button.tsx";
 import { Input } from "@/components/Input.tsx";
 import { endpoints } from "../../constants/endpoints.ts";
+import { User } from "@/utils/type.ts";
+import { LinkButton } from "@/components/LinkButton.tsx";
 
 type Data = {
-  dev: boolean | null;
   error?: string | null;
+  redirectUri?: string | null;
+  responseType?: string | null;
+  clientId?: string | null;
+  scope?: string | null;
+  state?: string | null;
+  app?: any | null;
+  user?: User;
 };
 
 export const handler: Handlers<Data, WithSession> = {
-  GET(req, ctx) {
+  async GET(req, ctx) {
+    const user = ctx.state.session.get("user");
+    ctx.state.session.set("authUrl", req.url);
+
+    if (!user) {
+      return new Response("", {
+        status: 302,
+        headers: {
+          Location: "/oauth2/login?" + "ownsite=true",
+        },
+      });
+    }
+
     const query = new URL(req.url).searchParams;
+    console.log(query.toString(), "query");
+    // follo oauth2 query params
+    const redirectUri = query.get("redirect_uri");
+    const responseType = query.get("response_type");
+    const clientId = query.get("client_id");
+    const scope = query.get("scope");
+    const state = query.get("state");
 
-    const dev = query.get("dev") === "true";
-    const error = query.get("error");
+    if (!clientId) return ctx.render({ error: "Invalid client id" });
+    if (!redirectUri) return ctx.render({ error: "Invalid redirect uri" });
+    if (!responseType) return ctx.render({ error: "Invalid response type" });
+    if (!scope) return ctx.render({ error: "Invalid scope" });
 
-    return ctx.render({ dev, error });
+    const app = await fetch(endpoints.apps.clientId + clientId);
+
+    if (!app.ok) {
+      return ctx.render({ error: "Invalid client id" });
+    }
+
+    return ctx.render({
+      redirectUri,
+      responseType,
+      clientId,
+
+      scope,
+      state,
+      app: await app.json(),
+      user,
+    });
   },
+
   async POST(req, ctx) {
-    const form = await req.formData();
+    const query = new URL(req.url).searchParams;
+    const clientId = query.get("client_id");
+    const scope = query.get("scope");
+    const redirectUri = query.get("redirect_uri");
+    const responseType = query.get("response_type");
+
+    if (!clientId) return ctx.render({ error: "Invalid client id" });
+    if (!redirectUri) return ctx.render({ error: "Invalid redirect uri" });
+    if (!responseType) return ctx.render({ error: "Invalid response type" });
+    if (!scope) return ctx.render({ error: "Invalid scope" });
+
     const { session } = ctx.state;
 
+    const { _id: userId } = session.get("user") as User;
     const body = {
-      email: form.get("email") as string,
-      password: form.get("password") as string,
+      clientId,
+      userId,
+      scopes: scope?.split(","),
     };
-    const query = new URL(req.url).searchParams;
 
-    const dev = query.get("dev") === "true";
-    const error = query.get("error");
-    const redirect = query.get("redirect");
     try {
-      const url = endpoints.auth.email.login;
+      const url = endpoints.auth.authorize;
 
-      const user = await fetch(url, {
+      const res = await fetch(url, {
         method: "POST",
         body: JSON.stringify(body),
       });
 
-      if (user.ok) {
+      console.log(res);
+
+      if (res.ok) {
         console.log("ok");
-        const userBody = await user.json();
+        const { code } = await res.json();
 
-        console.log(userBody, "userBody");
-        if (userBody.error) {
-          return ctx.render({ dev, error: userBody.error });
+        if (!code) {
+          return ctx.render({ error: "Something went wrong" });
         }
-        if (userBody.userData) {
-          session.set("user", userBody.userData);
+        // add code to redirect uri
+        const url = new URL(redirectUri);
+        url.searchParams.append("code", code);
 
-          if (redirect) {
-            return new Response(null, {
-              status: 302,
-              headers: {
-                Location: redirect,
-              },
-            });
-          }
-
-          if (dev) {
-            const devUser = await fetch(
-              endpoints.dev.login + userBody.userData._id,
-            );
-
-            console.log(devUser, "devUser");
-            return new Response(null, {
-              status: 302,
-              headers: {
-                Location: "/dev/dashboard",
-              },
-            });
-          }
-
-          console.log("gogogo");
-
-          return new Response("", {
-            status: 302,
-            headers: {
-              Location: "/",
-            },
-          });
-        }
+        return new Response(null, {
+          status: 302,
+          headers: {
+            Location: url.toString(),
+          },
+        });
       }
+
+      return ctx.render({ error: "Something went wrong" });
     } catch (e) {
       console.log(e);
 
-      return ctx.render({ dev, error: "Something went wrong" });
+      return ctx.render({ error: "Something wrong" });
     }
-
-    return ctx.render({ dev, error });
   },
 };
+
 export default function AuthScreen({
-  data: { dev, error },
+  data: { app, error, scope, user, redirectUri },
 }: PageProps<Data>) {
   return (
     <>
-      <div class="h-screen p-4 mx-auto bg-gradient-to-br from-gray-900 via-fuchsia-950 to-secondary-900 hue-rotate-15 bg-opacity-40 pt-20 flex items-center justify-center">
-        <div className="p-4 -mt-56 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-brightness-25 bg-opacity-10  w-full max-w-md min-w-min">
-          {error && (
-            <div
-              class="bg-red-100 text-red-700 px-4 py-3 rounded relative"
-              role="alert"
-            >
-              <span class="block sm:inline">{error}</span>
-            </div>
-          )}
-          <div class=" ">
-            <h1 class="text-3xl font-bold lg:text-4xl m-4 text-white overflow-visible">
-              Sign in to Fync
-            </h1>
-            <p class="text-gray-400 text-md m-4">
-              using your Fync account
-            </p>
-
-            <form method="POST" class="grid grid-cols-1 ">
-              <Input
-                type="email"
-                name="email"
-                placeholder="Email"
-              />
-              <Input
-                type="password"
-                name="password"
-                placeholder="Password"
-              />
-
-              <a href="/account/forgot" class="text-primary-400 text-md m-4">
-                Forgot your password?
-              </a>
-              <div class="mt-5" />
-              <div class="flex flex-row justify-between">
-                <a href="/signup" class="text-primary-400 text-md m-4">
-                  Create an account
-                </a>
-
-                <Button type="submit" class="hover:brightness-75 p-2">
-                  Next
-                </Button>
+      <div class="h-screen p-4 bg-gradient-to-br from-gray-900 via-fuchsia-950 to-secondary-900 hue-rotate-15 bg-opacity-40 pt-20 flex items-center justify-center">
+        <div className="p-4 -mt-56 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-brightness-25 bg-opacity-10  w-full max-w-lg min-w-min">
+          {error == "Invalid client id"
+            ? (
+              <div class=" ">
+                <h1 class="text-3xl font-bold lg:text-4xl m-4 text-white overflow-visible">
+                  Invalid client id
+                </h1>
+                <p class="text-gray-400 text-md m-4">
+                  The client id you provided is invalid
+                </p>
               </div>
-            </form>
-          </div>
+            )
+            : (
+              <>
+                {error && (
+                  <div
+                    class="bg-red-100 text-red-700 px-4 py-3 rounded relative"
+                    role="alert"
+                  >
+                    <span class="block sm:inline">{error}</span>
+                  </div>
+                )}
+                <>
+                  <h1 class="text-2xl font-medium lg:text-4xl m-4 text-white overflow-visible">
+                    Authorize {app?.name}
+                  </h1>
+                  <p class="text-gray-400 text-md m-4">
+                    {app?.name} will be able to:
+                  </p>
+                  <ul class="text-primary-200 text-lg m-4">
+                    {scope?.split(",").map((s) => {
+                      return <li>{s}</li>;
+                    })}
+                  </ul>
+
+                  <form method="POST" class="grid grid-cols-1 ">
+                    <div class="flex flex-row justify-between">
+                      <LinkButton
+                        type="button"
+                        variant="cancel"
+                        class="hover:brightness-75 p-2"
+                        href={redirectUri!}
+                      >
+                        Cancel
+                      </LinkButton>
+                      <Button type="submit" class="hover:brightness-75 p-2">
+                        Authorize {app?.owner}
+                      </Button>
+                    </div>
+                  </form>
+                  <p class="self-center text-gray-400 text-center">
+                    authorizing will redirect you to{"  "}
+                    <strong>
+                      {redirectUri}
+                    </strong>
+                  </p>
+                </>
+              </>
+            )}
         </div>
       </div>
     </>

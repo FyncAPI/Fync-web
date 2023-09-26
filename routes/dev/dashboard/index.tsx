@@ -3,7 +3,9 @@ import { User } from "@/utils/type.ts";
 import UserNavbar from "@/islands/UserNavbar.tsx";
 import * as cookie from "https://deno.land/std@0.182.0/http/cookie.ts";
 import { WithSession } from "fresh-session";
-import { DevNavbar } from "../../components/DevNavbar.tsx";
+import { DevNavbar } from "@/components/DevNavbar.tsx";
+import { Button } from "@/components/Button.tsx";
+import { LinkButton } from "@/components/LinkButton.tsx";
 
 type Data = {
   user: User;
@@ -24,7 +26,7 @@ export const handler: Handlers<Data, WithSession> = {
       return new Response(null, {
         status: 302,
         headers: {
-          Location: "/",
+          Location: "/dev/login",
         },
       });
     }
@@ -39,6 +41,14 @@ export default function DashboardPage(props: PageProps<Data>) {
     <>
       <DevNavbar user={data.user} />
       <div class="h-screen">
+        <div class="p-6 gap-3 flex flex-row align-middle justify-between">
+          <h1 class="text-3xl font-medium text-white text-center self-center">
+            Dashboard
+          </h1>
+          <LinkButton variant="primary" href="/dev/dashboard/create-app">
+            Create app
+          </LinkButton>
+        </div>
         {props.data.user
           ? (
             <div>

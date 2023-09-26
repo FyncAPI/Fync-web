@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 
 export default function ProfileNavButton(props: {
   profilePicture?: string;
@@ -9,8 +9,30 @@ export default function ProfileNavButton(props: {
   const [showDropdown, setShowDropdown] = useState(false);
   const toggleDropdown = () => setShowDropdown(!showDropdown);
 
+  const dropdownRef = useRef<HTMLDivElement>();
+
+  useEffect(() => {
+    // Function to handle click outside the dropdown
+    function handleClickOutside(event: Event) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current?.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    }
+
+    // Attach the event listener when the component mounts
+    document.addEventListener("click", handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative mx-5">
+    <div className="relative mx-5" ref={dropdownRef}>
       <div className="flex items-center" onClick={toggleDropdown}>
         <p className="text-white font-semibold mr-2">{props.name}</p>
 

@@ -1,6 +1,6 @@
 import { Handlers } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
-import { googleAuthorizationURI } from "../../../denoGrant.ts";
+import { fyncOauthClient, scopes } from "@/oauthClient.ts";
 
 export type Data = { session: Record<string, string> };
 
@@ -9,12 +9,15 @@ export const handler: Handlers<
   WithSession // indicate with Typescript that the session is in the `ctx.state`
 > = {
   async GET(req, ctx) {
-    const uri = googleAuthorizationURI!;
+    const { uri, codeVerifier } = await fyncOauthClient.code
+      .getAuthorizationUri({
+        scope: [scopes.dev.admin],
+      });
     console.log(uri, "uu");
 
     return new Response("", {
       status: 302,
-      headers: { Location: uri },
+      headers: { Location: uri.toString() },
     });
   },
   async POST(req, ctx) {
