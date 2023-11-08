@@ -1,0 +1,124 @@
+.gradient-grid {
+  background-image: radial-gradient(
+      circle at center center,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 99%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(205, 205, 205, 0.2) 0px,
+      rgba(205, 205, 205, 0.2) 1px,
+      transparent 1px,
+      transparent 10px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(205, 205, 205, 0.2) 0px,
+      rgba(205, 205, 205, 0.2) 1px,
+      transparent 1px,
+      transparent 10px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+}
+.magicpattern { 
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 2000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cmask id=%22b%22 x=%220%22 y=%220%22 width=%222000%22 height=%221000%22%3E%3Cpath fill=%22url(%23a)%22 d=%22M0 0h2000v1000H0z%22%2F%3E%3C%2Fmask%3E%3Cpath fill=%22%23000336%22 d=%22M0 0h2000v1000H0z%22%2F%3E%3Cg style=%22transform-origin:center center%22 stroke=%22%23b7baff%22 stroke-width=%222.2%22 mask=%22url(%23b)%22%3E%3Cpath fill=%22none%22 d=%22M0 0h104.4v104.4H0zM208.8 0h104.4v104.4H208.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff14%22 d=%22M313.2 0h104.4v104.4H313.2z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M522 0h104.4v104.4H522zM626.4 0h104.4v104.4H626.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff7d%22 d=%22M730.8 0h104.4v104.4H730.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1252.8 0h104.4v104.4h-104.4zM1461.6 0H1566v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff68%22 d=%22M1566 0h104.4v104.4H1566z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1670.4 0h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff35%22 d=%22M1774.8 0h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1879.2 0h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff4b%22 d=%22M2088 0h104.4v104.4H2088z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M2192.4 0h104.4v104.4h-104.4zM2296.8 0h104.4v104.4h-104.4zM0 104.4h104.4v104.4H0z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffe5%22 d=%22M208.8 104.4h104.4v104.4H208.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M522 104.4h104.4v104.4H522z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffe8%22 d=%22M626.4 104.4h104.4v104.4H626.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M730.8 104.4h104.4v104.4H730.8zM835.2 104.4h104.4v104.4H835.2zM939.6 104.4H1044v104.4H939.6z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff63%22 d=%22M1044 104.4h104.4v104.4H1044z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1148.4 104.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1252.8 104.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7bafff6%22 d=%22M1357.2 104.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1461.6 104.4H1566v104.4h-104.4zM1566 104.4h104.4v104.4H1566z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff4d%22 d=%22M1670.4 104.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1774.8 104.4h104.4v104.4h-104.4zM1879.2 104.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1983.6 104.4H2088v104.4h-104.4zM2192.4 104.4h104.4v104.4h-104.4zM2296.8 104.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffbf%22 d=%22M104.4 208.8h104.4v104.4H104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M313.2 208.8h104.4v104.4H313.2z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7bafff3%22 d=%22M417.6 208.8H522v104.4H417.6z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffe9%22 d=%22M522 208.8h104.4v104.4H522z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff62%22 d=%22M626.4 208.8h104.4v104.4H626.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M730.8 208.8h104.4v104.4H730.8zM835.2 208.8h104.4v104.4H835.2z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffea%22 d=%22M939.6 208.8H1044v104.4H939.6z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1044 208.8h104.4v104.4H1044z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffb0%22 d=%22M1461.6 208.8H1566v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff85%22 d=%22M1566 208.8h104.4v104.4H1566z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1670.4 208.8h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1774.8 208.8h104.4v104.4h-104.4zM1983.6 208.8H2088v104.4h-104.4zM2192.4 208.8h104.4v104.4h-104.4zM2296.8 208.8h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffb2%22 d=%22M0 313.2h104.4v104.4H0z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M208.8 313.2h104.4v104.4H208.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffb7%22 d=%22M313.2 313.2h104.4v104.4H313.2z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M417.6 313.2H522v104.4H417.6zM522 313.2h104.4v104.4H522z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff03%22 d=%22M730.8 313.2h104.4v104.4H730.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M835.2 313.2h104.4v104.4H835.2zM1044 313.2h104.4v104.4H1044zM1148.4 313.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffe1%22 d=%22M1252.8 313.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1357.2 313.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff68%22 d=%22M1461.6 313.2H1566v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffa5%22 d=%22M1566 313.2h104.4v104.4H1566z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1670.4 313.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1774.8 313.2h104.4v104.4h-104.4zM1879.2 313.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1983.6 313.2H2088v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff07%22 d=%22M2296.8 313.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff3f%22 d=%22M0 417.6h104.4V522H0z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M104.4 417.6h104.4V522H104.4zM208.8 417.6h104.4V522H208.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff8a%22 d=%22M313.2 417.6h104.4V522H313.2z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M522 417.6h104.4V522H522zM626.4 417.6h104.4V522H626.4zM730.8 417.6h104.4V522H730.8zM939.6 417.6H1044V522H939.6zM1044 417.6h104.4V522H1044zM1252.8 417.6h104.4V522h-104.4zM1566 417.6h104.4V522H1566z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff95%22 d=%22M1670.4 417.6h104.4V522h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1774.8 417.6h104.4V522h-104.4zM1983.6 417.6H2088V522h-104.4zM2088 417.6h104.4V522H2088zM2192.4 417.6h104.4V522h-104.4zM2296.8 417.6h104.4V522h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffb3%22 d=%22M0 522h104.4v104.4H0z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M104.4 522h104.4v104.4H104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff67%22 d=%22M208.8 522h104.4v104.4H208.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff24%22 d=%22M313.2 522h104.4v104.4H313.2z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M522 522h104.4v104.4H522zM626.4 522h104.4v104.4H626.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff8f%22 d=%22M730.8 522h104.4v104.4H730.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M939.6 522H1044v104.4H939.6zM1044 522h104.4v104.4H1044zM1148.4 522h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1252.8 522h104.4v104.4h-104.4zM1357.2 522h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff4a%22 d=%22M1461.6 522H1566v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff3d%22 d=%22M1566 522h104.4v104.4H1566z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1670.4 522h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1774.8 522h104.4v104.4h-104.4zM1879.2 522h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1983.6 522H2088v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffb6%22 d=%22M2192.4 522h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M2296.8 522h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff31%22 d=%22M0 626.4h104.4v104.4H0z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M104.4 626.4h104.4v104.4H104.4zM522 626.4h104.4v104.4H522zM626.4 626.4h104.4v104.4H626.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffa0%22 d=%22M730.8 626.4h104.4v104.4H730.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff4a%22 d=%22M835.2 626.4h104.4v104.4H835.2z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M939.6 626.4H1044v104.4H939.6zM1044 626.4h104.4v104.4H1044zM1148.4 626.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1252.8 626.4h104.4v104.4h-104.4zM1461.6 626.4H1566v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff90%22 d=%22M1566 626.4h104.4v104.4H1566z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1670.4 626.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1774.8 626.4h104.4v104.4h-104.4zM1879.2 626.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1983.6 626.4H2088v104.4h-104.4zM2088 626.4h104.4v104.4H2088z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff8d%22 d=%22M2192.4 626.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M2296.8 626.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffa9%22 d=%22M104.4 730.8h104.4v104.4H104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M313.2 730.8h104.4v104.4H313.2zM417.6 730.8H522v104.4H417.6zM522 730.8h104.4v104.4H522zM835.2 730.8h104.4v104.4H835.2zM939.6 730.8H1044v104.4H939.6zM1252.8 730.8h104.4v104.4h-104.4zM1357.2 730.8h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1461.6 730.8H1566v104.4h-104.4zM1566 730.8h104.4v104.4H1566zM1670.4 730.8h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffc3%22 d=%22M1774.8 730.8h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff5a%22 d=%22M1879.2 730.8h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1983.6 730.8H2088v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff64%22 d=%22M2088 730.8h104.4v104.4H2088z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff74%22 d=%22M2192.4 730.8h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff33%22 d=%22M2296.8 730.8h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M0 835.2h104.4v104.4H0zM104.4 835.2h104.4v104.4H104.4zM208.8 835.2h104.4v104.4H208.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff1b%22 d=%22M417.6 835.2H522v104.4H417.6z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M522 835.2h104.4v104.4H522zM626.4 835.2h104.4v104.4H626.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff7d%22 d=%22M730.8 835.2h104.4v104.4H730.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffd1%22 d=%22M835.2 835.2h104.4v104.4H835.2z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M939.6 835.2H1044v104.4H939.6zM1044 835.2h104.4v104.4H1044zM1148.4 835.2h104.4v104.4h-104.4zM1357.2 835.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1461.6 835.2H1566v104.4h-104.4zM1566 835.2h104.4v104.4H1566zM1670.4 835.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1774.8 835.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff3b%22 d=%22M1983.6 835.2H2088v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M2088 835.2h104.4v104.4H2088zM2192.4 835.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff81%22 d=%22M2296.8 835.2h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M0 939.6h104.4V1044H0zM104.4 939.6h104.4V1044H104.4zM313.2 939.6h104.4V1044H313.2zM417.6 939.6H522V1044H417.6zM522 939.6h104.4V1044H522z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff9f%22 d=%22M730.8 939.6h104.4V1044H730.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M835.2 939.6h104.4V1044H835.2zM939.6 939.6H1044V1044H939.6zM1044 939.6h104.4V1044H1044zM1357.2 939.6h104.4V1044h-104.4zM1566 939.6h104.4V1044H1566zM1774.8 939.6h104.4V1044h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff7f%22 d=%22M2088 939.6h104.4V1044H2088z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff61%22 d=%22M2296.8 939.6h104.4V1044h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M0 1044h104.4v104.4H0zM208.8 1044h104.4v104.4H208.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff50%22 d=%22M417.6 1044H522v104.4H417.6z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M522 1044h104.4v104.4H522zM939.6 1044H1044v104.4H939.6z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff13%22 d=%22M1044 1044h104.4v104.4H1044z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1148.4 1044h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1252.8 1044h104.4v104.4h-104.4zM1357.2 1044h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1461.6 1044H1566v104.4h-104.4zM1566 1044h104.4v104.4H1566zM1670.4 1044h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff9f%22 d=%22M1774.8 1044h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baffb0%22 d=%22M1879.2 1044h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M2088 1044h104.4v104.4H2088zM2192.4 1044h104.4v104.4h-104.4zM2296.8 1044h104.4v104.4h-104.4zM0 1148.4h104.4v104.4H0zM104.4 1148.4h104.4v104.4H104.4zM208.8 1148.4h104.4v104.4H208.8z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M313.2 1148.4h104.4v104.4H313.2z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff15%22 d=%22M417.6 1148.4H522v104.4H417.6z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7baff4e%22 d=%22M522 1148.4h104.4v104.4H522z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M835.2 1148.4h104.4v104.4H835.2zM939.6 1148.4H1044v104.4H939.6zM1044 1148.4h104.4v104.4H1044z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22%23b7bafff5%22 d=%22M1148.4 1148.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1252.8 1148.4h104.4v104.4h-104.4zM1357.2 1148.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1461.6 1148.4H1566v104.4h-104.4zM1566 1148.4h104.4v104.4H1566zM1670.4 1148.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3Cpath fill=%22none%22 d=%22M1774.8 1148.4h104.4v104.4h-104.4zM1879.2 1148.4h104.4v104.4h-104.4zM2088 1148.4h104.4v104.4H2088zM2192.4 1148.4h104.4v104.4h-104.4zM2296.8 1148.4h104.4v104.4h-104.4z%22 stroke-width=%222.64%22%2F%3E%3C%2Fg%3E%3Cpath fill=%22%23f3f3f3%22 filter=%22url(%23c)%22 opacity=%22.8%22 d=%22M0 0h2000v1000H0z%22%2F%3E%3Cdefs%3E%3CradialGradient id=%22a%22%3E%3Cstop offset=%2250%25%22 stop-color=%22%23fff%22 stop-opacity=%220%22%2F%3E%3Cstop offset=%221%22 stop-color=%22%23fff%22 stop-opacity=%22.5%22%2F%3E%3C%2FradialGradient%3E%3Cfilter id=%22c%22 x=%22-800%22 y=%22-400%22 width=%222800%22 height=%221400%22 filterUnits=%22userSpaceOnUse%22 primitiveUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22linearRGB%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.115%22 numOctaves=%224%22 seed=%2215%22 stitchTiles=%22no-stitch%22 x=%220%22 y=%220%22 width=%222000%22 height=%221000%22 result=%22turbulence%22%2F%3E%3CfeSpecularLighting surfaceScale=%2210%22 specularConstant=%22.19%22 specularExponent=%2220%22 lighting-color=%22%23fff%22 x=%220%22 y=%220%22 width=%222000%22 height=%221000%22 in=%22turbulence%22 result=%22specularLighting%22%3E%3CfeDistantLight azimuth=%223%22 elevation=%22100%22%2F%3E%3C%2FfeSpecularLighting%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E");
+}
+
+.cool-gradient-grid {
+  background-image: 
+    radial-gradient(
+      circle at center center,
+      rgba(102, 0, 255, 0.219) 5%,
+      transparent 80%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 0, 0, 0.3) 0,
+      rgba(255, 0, 0, 0.3) 2px,
+      transparent 2px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      135deg,
+      rgba(0, 255, 0, 0.3) 0,
+      rgba(0, 255, 0, 0.3) 2px,
+      transparent 2px,
+      transparent 20px
+    );
+  background-color: #333;
+}
+
+#cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;  
+  max-width: 916px;
+  width: calc(100% - 20px);
+}
+
+#cards:hover > .card::after {
+  opacity: 1;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  height: 260px;
+  flex-direction: column;
+  position: relative;
+  width: 300px;  
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card::before,
+.card::after {
+  border-radius: inherit;
+  content: "";
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  transition: opacity 500ms;
+  width: 100%;
+}
+
+.card::before {
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y), 
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+  z-index: 3;
+}
+
+.card::after {  
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y), 
+    rgba(255, 255, 255, 0.4),
+    transparent 40%
+  );
+  z-index: 1;
+}
+
+.card > .card-content {
+  background-color: var(--card-color);
+  border-radius: inherit;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  inset: 1px;
+  padding: 10px;
+  position: absolute;
+  z-index: 2;
+}

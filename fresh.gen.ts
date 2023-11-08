@@ -33,16 +33,18 @@ import * as $27 from "./routes/oauth2/login.tsx";
 import * as $28 from "./routes/signup.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/AppDataEditor.tsx";
-import * as $$2 from "./islands/Banner.tsx";
-import * as $$3 from "./islands/CopyButton.tsx";
-import * as $$4 from "./islands/CopyText.tsx";
-import * as $$5 from "./islands/Counter.tsx";
-import * as $$6 from "./islands/Input.tsx";
-import * as $$7 from "./islands/Login.tsx";
-import * as $$8 from "./islands/PersonalForm.tsx";
-import * as $$9 from "./islands/ProfileNavButton.tsx";
-import * as $$10 from "./islands/SearchButton.tsx";
-import * as $$11 from "./islands/UserNavbar.tsx";
+import * as $$2 from "./islands/ArrayInput.tsx";
+import * as $$3 from "./islands/Banner.tsx";
+import * as $$4 from "./islands/CopyButton.tsx";
+import * as $$5 from "./islands/CopyText.tsx";
+import * as $$6 from "./islands/Counter.tsx";
+import * as $$7 from "./islands/DataInput.tsx";
+import * as $$8 from "./islands/Input.tsx";
+import * as $$9 from "./islands/Login.tsx";
+import * as $$10 from "./islands/PersonalForm.tsx";
+import * as $$11 from "./islands/ProfileNavButton.tsx";
+import * as $$12 from "./islands/SearchButton.tsx";
+import * as $$13 from "./islands/UserNavbar.tsx";
 
 const manifest = {
   routes: {
@@ -79,16 +81,18 @@ const manifest = {
   islands: {
     "./islands/AccountForm.tsx": $$0,
     "./islands/AppDataEditor.tsx": $$1,
-    "./islands/Banner.tsx": $$2,
-    "./islands/CopyButton.tsx": $$3,
-    "./islands/CopyText.tsx": $$4,
-    "./islands/Counter.tsx": $$5,
-    "./islands/Input.tsx": $$6,
-    "./islands/Login.tsx": $$7,
-    "./islands/PersonalForm.tsx": $$8,
-    "./islands/ProfileNavButton.tsx": $$9,
-    "./islands/SearchButton.tsx": $$10,
-    "./islands/UserNavbar.tsx": $$11,
+    "./islands/ArrayInput.tsx": $$2,
+    "./islands/Banner.tsx": $$3,
+    "./islands/CopyButton.tsx": $$4,
+    "./islands/CopyText.tsx": $$5,
+    "./islands/Counter.tsx": $$6,
+    "./islands/DataInput.tsx": $$7,
+    "./islands/Input.tsx": $$8,
+    "./islands/Login.tsx": $$9,
+    "./islands/PersonalForm.tsx": $$10,
+    "./islands/ProfileNavButton.tsx": $$11,
+    "./islands/SearchButton.tsx": $$12,
+    "./islands/UserNavbar.tsx": $$13,
   },
   baseUrl: import.meta.url,
 };

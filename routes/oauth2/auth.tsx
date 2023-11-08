@@ -20,13 +20,14 @@ type Data = {
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
     const user = ctx.state.session.get("user");
-    ctx.state.session.set("authUrl", req.url);
+    console.log(req, "reqrqwere");
+    // ctx.state.session.set("authUrl", req.url);
 
     if (!user) {
       return new Response("", {
         status: 302,
         headers: {
-          Location: "/oauth2/login?authUrl=true",
+          Location: "/oauth2/login",
         },
       });
     }
@@ -152,14 +153,25 @@ export default function AuthScreen({
                 )}
                 <>
                   <h1 class="text-2xl font-medium lg:text-4xl m-4 text-white overflow-visible">
-                    Authorize {app?.name}
+                    Authorize{" "}
+                    <strong>
+                      {app?.name}
+                    </strong>
                   </h1>
+                  <h3 class="text-gray-400 text-md m-4">
+                    by <strong>{app?.owner}</strong>
+                  </h3>
                   <p class="text-gray-400 text-md m-4">
-                    {app?.name} will be able to:
+                    <strong class={"text-white"}>{app?.name}</strong>{" "}
+                    will be able to:
                   </p>
                   <ul class="text-primary-200 text-lg m-4">
                     {scope?.split(",").map((s) => {
-                      return <li>{s}</li>;
+                      s = s.trim();
+                      const text = s == "dev:admin"
+                        ? "turn you into a developer"
+                        : s;
+                      return <li>{text}</li>;
                     })}
                   </ul>
 
@@ -174,7 +186,7 @@ export default function AuthScreen({
                         Cancel
                       </LinkButton>
                       <Button type="submit" class="hover:brightness-75 p-2">
-                        Authorize {app?.owner}
+                        Authorize {app?.name}
                       </Button>
                     </div>
                   </form>

@@ -1,44 +1,103 @@
 import { App, appParser } from "@/utils/type.ts";
-import { Input } from "@/components/Input.tsx";
-import { useSignal } from "@preact/signals";
+import { effect, useSignal } from "@preact/signals";
 import { Button } from "@/components/Button.tsx";
 import { endpoints } from "@/constants/endpoints.ts";
+import Banner from "@/islands/Banner.tsx";
+import ArrayInput from "@/islands/ArrayInput.tsx";
+import DataInput from "@/islands/DataInput.tsx";
 
-export default function AppDataEditor({ app }: { app: App }) {
+export default function AppDataEditor(
+  { app, url }: { app: App; url: string },
+) {
   const editing = useSignal(false);
+  const error = useSignal("");
   const appData = useSignal<App>(app);
   const changedData = useSignal<Partial<App>>({});
+  const validated = useSignal(false);
 
-  // const saveApp = async (changed: Partial<App>) => {
-  //   // const res = await fetch(endpoints.dev.app.update + app._id, {
-  //   //   method: "POST",
-  //   //   headers: {
-  //   //     "Content-Type": "application/json",
-  //   //   },
-  //   //   body: JSON.stringify(changed),
-  //   // });
-
-  //   if (!res.ok) {
-  //     console.log("error");
-  //   }
-  //   const data = await res.json();
-  //   console.log(data);
-  // };
-
-  const update = (field: keyof App) => (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    if (typeof appData.value[field] === "string") {
-      appData.value[field] = target.value as string;
+  const update = <T extends string[] | Event>(
+    field: keyof App,
+  ) =>
+  (value: T) => {
+    if (field === "redirects") {
+      changedData.value[field] = value as string[];
+    } else if (
+      field !== "interactions" &&
+      field !== "users" &&
+      field !== "createdAt" &&
+      field !== "events" &&
+      value instanceof Event
+    ) {
+      const target = value.target as HTMLInputElement;
       changedData.value[field] = target.value as string;
     }
   };
 
+  // effect(() => {
+  //   if (changedData.value) {
+  //     try {
+  //       const result = appParser.partial().parse(changedData.value);
+
+  //       console.log(result, "res");
+  //       validated.value = true;
+  //       return result;
+  //     } catch (e) {
+  //       console.log(e.message);
+  //       error.value = e.message;
+  //       validated.value = false;
+  //       return;
+  //     }
+  //   }
+  // });
+
   return (
     <div class=" mt-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
-      <form class="flex flex-col" type="POST">
-        <DataInput
+      {error.value && (
+        <Banner text={JSON.stringify(error.value)} type={"error"} />
+      )}
+      <form
+        class="flex flex-col gap-4"
+        method="PUT"
+      >
+        <input
+          type="hidden"
+          name="changes"
+          value={JSON.stringify(changedData.value)}
+        />
+        {[
+          { name: "name", label: "App Name" },
+          { name: "description", label: "App Description" },
+          { name: "url", label: "App Website" },
+          { name: "redirects", label: "App Redirects", type: "array" },
+          { name: "androidPackageName", label: "Android Package Name" },
+          { name: "appStoreId", label: "iOS Bundle ID" },
+        ].map((item) =>
+          item.type == "array"
+            ? (
+              <ArrayInput
+                label={item.label}
+                value={changedData.value.redirects || appData.value.redirects}
+                name={item.name}
+                disabled={!editing.value}
+                onChange={update(item.name)}
+              />
+            )
+            : (
+              <DataInput
+                label={item.label}
+                value={changedData.value[item.name as keyof App] ||
+                  appData.value[item.name as keyof App]}
+                name={item.name}
+                disabled={!editing.value}
+                type={item.type}
+                onChange={update(item.name)}
+              />
+            )
+        )}
+        {
+          /* <DataInput
           label="App name"
-          value={appData.value.name}
+          value={changedData.value.name || appData.value.name}
           name="name"
           disabled={!editing.value}
           onChange={update("name")}
@@ -57,12 +116,12 @@ export default function AppDataEditor({ app }: { app: App }) {
           disabled={!editing.value}
           onChange={update("url")}
         />
-        <DataInput
-          label="redirect url"
-          value={appData.value.redirectUrl}
-          name="redirectUrl"
+        <ArrayInput
+          label="redirects"
+          value={appData.value.redirects}
+          name="redirects"
           disabled={!editing.value}
-          onChange={update("redirectUrl")}
+          onChange={update("redirects")}
         />
         <DataInput
           label="android package name"
@@ -77,64 +136,45 @@ export default function AppDataEditor({ app }: { app: App }) {
           name="appStoreId"
           disabled={!editing.value}
           onChange={update("appStoreId")}
-        />
+        /> */
+        }
+        <Button
+          type="button"
+          onClick={() => {
+            editing.value = !editing.value;
+            if (editing.value) {
+              changedData.value = {};
+              appData.value = app;
+            }
+          }}
+          variant={editing.value ? "cancel" : "secondary"}
+        >
+          {editing.value ? "Cancel" : "Edit"}
+        </Button>
         {editing.value && (
           <Button
-            type="submit" // onClick={() => {
+            type={validated.value ? "submit" : "button"} // onClick={() => {
+            // type="button"
             onClick={(e) => {
-              e.preventDefault();
-              const result = appParser.partial().safeParse(changedData.value);
+              console.log(changedData.value);
+              // e.preventDefault();
+              try {
+                const result = appParser.partial().parse(changedData.value);
 
-              if (!result.success) {
-                console.log(result.error);
+                console.log(result, "res");
+                return result;
+              } catch (e) {
+                console.log(e.message);
+                error.value = e.message;
 
                 return;
               }
-              console.log(result.data, "res parse");
             }}
-            //   // saveApp(changedData.value);
-            // }}
           >
             Save
           </Button>
         )}
       </form>
-      <Button
-        onClick={() => {
-          editing.value = !editing.value;
-          if (editing.value) {
-            changedData.value = {};
-            appData.value = app;
-          }
-        }}
-      >
-        {editing.value ? "Cancel" : "Edit"}
-      </Button>
     </div>
   );
 }
-
-const DataInput = (
-  { label, value, disabled, name, onChange }: {
-    label: string;
-    value: string | undefined;
-    disabled?: boolean;
-    name: string;
-    onChange?: (e: Event) => void;
-  },
-) => {
-  return (
-    <>
-      <h4 class="text-primary-200 text-lg mt-4">
-        {label}
-      </h4>
-      <Input
-        label={label}
-        name={name}
-        value={value}
-        disabled={disabled}
-        onChange={onChange}
-      />
-    </>
-  );
-};

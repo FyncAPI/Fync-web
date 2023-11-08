@@ -15,6 +15,7 @@ export const endpoints = {
   },
   apps: {
     clientId: `${url}/apps/clientId/`,
+    update: `${url}/apps/`,
   },
   dev: {
     login: `${url}/dev/login/`,

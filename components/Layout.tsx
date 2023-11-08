@@ -21,6 +21,7 @@ const Meta = ({ ...customMeta }) => {
       <title>{meta.title}</title>
       <meta content={meta.description} name="description" />
       <link rel="icon" href="/favicon.ico" />
+      <link rel="stylesheet" href="/styles.css" />
     </Head>
   );
 };

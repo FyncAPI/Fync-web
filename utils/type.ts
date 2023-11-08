@@ -13,6 +13,7 @@ export const friendParser = z.object({
   markdown: z.string(),
   userId: z.string().optional(),
 });
+
 const HttpsUrlSchema = z.custom((value) => {
   // Regular expressions to validate URLs
   const httpRegex = /^http:\/\/[^\s/$.?#].[^\s]*$/;
@@ -38,9 +39,10 @@ export const appParser = z.object({
 
   appStoreId: z.string().optional(),
   androidPackageName: z.string().optional(),
-  url: z.string().url().optional(),
+  url: z.string().regex(/^(http:\/\/|https:\/\/)[^\s/$.?#].[^\s]*$/)
+    .optional(),
 
-  redirectUrl: HttpsUrlSchema.optional(),
+  redirects: z.array(z.string().url()).optional(),
 
   image: z.string().optional(),
   users: z.array(z.string()),

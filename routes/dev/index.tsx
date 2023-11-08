@@ -16,7 +16,7 @@ export default function Dev() {
             Upgrade friendships with Fync API
           </h1>
           <div class="self-start mt-8">
-            <LinkButton href="/login?dev=true">Get Started</LinkButton>
+            <LinkButton href="/dev/login">Get Started</LinkButton>
             <LinkButton href="/docs" variant="secondary">
               Read Docs
             </LinkButton>

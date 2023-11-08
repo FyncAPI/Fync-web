@@ -60,7 +60,7 @@ export const handler: Handlers<Data, WithSession> = {
     const query = new URL(req.url).searchParams;
 
     const error = query.get("error");
-    const redirectToAuth = query.get("authUrl");
+    // const authUrl = query.get("authUrl");
     try {
       const url = endpoints.auth.email.login;
 
@@ -80,16 +80,17 @@ export const handler: Handlers<Data, WithSession> = {
         if (userBody.userData) {
           session.set("user", userBody.userData);
 
-          const authUrl = session.get("authUrl");
-          console.log("authUrl", authUrl);
-          if (redirectToAuth) {
-            return new Response(null, {
-              status: 302,
-              headers: {
-                Location: authUrl,
-              },
-            });
-          }
+          // const authUrl = session.get("authUrl");
+          // console.log("authUrl", authUrl);
+          // if (authUrl) {
+          //   console.log(authUrl);
+          //   return new Response(null, {
+          //     status: 302,
+          //     headers: {
+          //       Location: authUrl,
+          //     },
+          //   });
+          // }
           console.log("gogogo");
 
           return new Response("", {
