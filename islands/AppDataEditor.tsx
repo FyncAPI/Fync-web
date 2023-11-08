@@ -1,10 +1,11 @@
 import { App, appParser } from "@/utils/type.ts";
-import { effect, useSignal } from "@preact/signals";
+import { computed, effect, useSignal } from "@preact/signals";
 import { Button } from "@/components/Button.tsx";
 import { endpoints } from "@/constants/endpoints.ts";
 import Banner from "@/islands/Banner.tsx";
 import ArrayInput from "@/islands/ArrayInput.tsx";
 import DataInput from "@/islands/DataInput.tsx";
+import { string } from "zod";
 
 export default function AppDataEditor(
   { app, url }: { app: App; url: string },
@@ -14,13 +15,17 @@ export default function AppDataEditor(
   const appData = useSignal<App>(app);
   const changedData = useSignal<Partial<App>>({});
   const validated = useSignal(false);
+  const strigified = computed(() => JSON.stringify(changedData.value));
 
   const update = <T extends string[] | Event>(
     field: keyof App,
   ) =>
   (value: T) => {
     if (field === "redirects") {
-      changedData.value[field] = value as string[];
+      changedData.value = {
+        ...changedData.value,
+        [field]: value as string[],
+      };
     } else if (
       field !== "interactions" &&
       field !== "users" &&
@@ -29,26 +34,30 @@ export default function AppDataEditor(
       value instanceof Event
     ) {
       const target = value.target as HTMLInputElement;
-      changedData.value[field] = target.value as string;
+      console.log(target.value, "target", field);
+      changedData.value = {
+        ...changedData.value,
+        [field]: target.value,
+      };
     }
   };
 
-  // effect(() => {
-  //   if (changedData.value) {
-  //     try {
-  //       const result = appParser.partial().parse(changedData.value);
+  effect(() => {
+    if (changedData.value) {
+      try {
+        const result = appParser.partial().parse(changedData.value);
 
-  //       console.log(result, "res");
-  //       validated.value = true;
-  //       return result;
-  //     } catch (e) {
-  //       console.log(e.message);
-  //       error.value = e.message;
-  //       validated.value = false;
-  //       return;
-  //     }
-  //   }
-  // });
+        console.log(result, "res");
+        validated.value = true;
+        return result;
+      } catch (e) {
+        console.log(e.message);
+        error.value = e.message;
+        validated.value = false;
+        return;
+      }
+    }
+  });
 
   return (
     <div class=" mt-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
@@ -57,12 +66,12 @@ export default function AppDataEditor(
       )}
       <form
         class="flex flex-col gap-4"
-        method="PUT"
+        method={"POST"}
       >
         <input
           type="hidden"
           name="changes"
-          value={JSON.stringify(changedData.value)}
+          value={strigified.value}
         />
         {[
           { name: "name", label: "App Name" },
@@ -79,7 +88,7 @@ export default function AppDataEditor(
                 value={changedData.value.redirects || appData.value.redirects}
                 name={item.name}
                 disabled={!editing.value}
-                onChange={update(item.name)}
+                onChange={update(item.name as keyof App)}
               />
             )
             : (
@@ -89,8 +98,8 @@ export default function AppDataEditor(
                   appData.value[item.name as keyof App]}
                 name={item.name}
                 disabled={!editing.value}
-                type={item.type}
-                onChange={update(item.name)}
+                type={"string"}
+                onChange={update(item.name as keyof App)}
               />
             )
         )}
@@ -136,7 +145,7 @@ export default function AppDataEditor(
           name="appStoreId"
           disabled={!editing.value}
           onChange={update("appStoreId")}
-        /> */
+        />{" "} */
         }
         <Button
           type="button"

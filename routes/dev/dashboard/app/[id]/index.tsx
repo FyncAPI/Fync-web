@@ -7,13 +7,33 @@ import { Input } from "@/components/Input.tsx";
 import AppDataEditor from "@/islands/AppDataEditor.tsx";
 import { DevNavbar } from "@/components/DevNavbar.tsx";
 import axios from "npm:axios";
+import Banner from "@/islands/Banner.tsx";
 
 type Data = {
   user: User;
   app?: App;
   updateUrl?: string;
+  error?: string;
 };
+const getApp = async (id: string, token: string) => {
+  const res = await fetch(endpoints.dev.app.get + id, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
+  if (!res.ok) {
+    return new Response("", {
+      status: 302,
+      headers: {
+        Location: "/dev/dashboard",
+      },
+    });
+  }
+
+  const app = await res.json();
+  return app;
+};
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
     const id = ctx.params.id;
@@ -53,23 +73,16 @@ export const handler: Handlers<Data, WithSession> = {
     });
   },
   async POST(req, ctx) {
-    // console.log(await req.formData());
-    const form = await req.formData();
-    console.log("hrer");
-    return new Response("ok");
-  },
-
-  async PUT(req, ctx) {
     const id = ctx.params.id;
     console.log("putshit", id);
+
     // return new Response("ok");
     const { session } = ctx.state;
     const token = session.get("accessToken");
 
-    const body = await req.json();
-    console.log(body, "body");
-    // console.log("outings", (await req.formData()).values());
-    // const result = appParser.partial().parse(.value);
+    const form = await req.formData();
+    const data = form.get("changes");
+    console.log(data);
 
     if (!token) {
       return new Response("", {
@@ -80,27 +93,42 @@ export const handler: Handlers<Data, WithSession> = {
       });
     }
 
-    const res = await fetch(endpoints.dev.app.update + id, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: body,
-    });
-
-    if (!res.ok) {
-      return new Response("", {
-        status: 302,
+    // const res = await fetch(endpoints.dev.app.update + id, {
+    //   method: "PUT",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   body: data,
+    // });
+    try {
+      const res = await axios.put(endpoints.dev.app.update + id, data, {
         headers: {
-          Location: "/dev/dashboard",
+          Authorization: `Bearer ${token}`,
         },
       });
+
+      console.log(res.statusText, "response update");
+
+      if (!res.data) {
+        const app = await getApp(id, token);
+        return ctx.render({
+          app,
+          user: session.get("user"),
+          error: "error updating ",
+        });
+      }
+
+      console.log(res.data, "should beok");
+
+      return ctx.render({ app: res.data, user: session.get("user") });
+    } catch (e) {
+      console.log(e);
+      return ctx.render({
+        app: await getApp(id, token),
+        user: session.get("user"),
+        error: e.message,
+      });
     }
-
-    const app = await res.json();
-    console.log(app, "should beok");
-
-    return ctx.render({ app, user: session.get("user") });
   },
 };
 export default function AppData({ data }: PageProps<Data>) {
@@ -116,6 +144,12 @@ export default function AppData({ data }: PageProps<Data>) {
       <DevNavbar user={data.user} />
       <div>
         <div class="magicpattern -z-10 top-0 absolute w-full h-full  bg-gradient-to-b from-current to-transparent" />
+        {data.error && (
+          <Banner
+            text={JSON.stringify(data.error)}
+            type={"error"}
+          />
+        )}
         {data.app && (
           <>
             <div class="flex flex-row m-5 md:m-10 rounded-md items-center justify-between ">

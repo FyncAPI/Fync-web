@@ -13,12 +13,15 @@ export default function ArrayInput(
   },
 ) {
   const data = useSignal(value || []);
-  effect(() => data.value && onChange(data.value));
+  // effect(() => data.value.length && onChange(data.value));
 
   const update = (i: number) => (e: Event) => {
+    console.log("updating array input");
     const target = e.target as HTMLInputElement;
-    const value = target.value;
-    data.value[i] = value;
+    const temp = [...data.value];
+    temp[i] = target.value;
+    data.value = temp;
+    onChange(temp);
     // onChange?.(e);
   };
 
@@ -40,7 +43,7 @@ export default function ArrayInput(
       {data.value?.map((item, i) => {
         return (
           <Input
-            name={name}
+            name={name + i}
             value={item}
             disabled={disabled}
             onChange={update(i)}
