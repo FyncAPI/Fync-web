@@ -1,14 +1,15 @@
 import { Input } from "@/components/Input.tsx";
+import { JSX } from "preact";
 
 const DataInput = (
-  { label, value, disabled, name, type, onChange }: {
+  { label, value, disabled, name, type, onChange, ...rest }: {
     label: string;
     value: string | undefined;
     disabled?: boolean;
-    type?: "string" | "number" | "array" | "object";
+    type?: "string" | "number" | "array" | "object" | "checkbox";
     name: string;
     onChange?: (e: Event) => void;
-  },
+  } & JSX.HTMLAttributes<HTMLInputElement>,
 ) => {
   return (
     <>
@@ -19,8 +20,10 @@ const DataInput = (
         label={label}
         name={name}
         value={value}
+        type={type}
         disabled={disabled}
         onChange={onChange}
+        {...rest}
       />
     </>
   );

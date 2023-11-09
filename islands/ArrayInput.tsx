@@ -1,6 +1,7 @@
 import { Input } from "@/components/Input.tsx";
 import { effect, useSignal } from "@preact/signals";
 import { Button } from "@/components/Button.tsx";
+import IconX from "tabler/x.tsx";
 
 export default function ArrayInput(
   { label, value, disabled, name, type, onChange }: {
@@ -27,27 +28,43 @@ export default function ArrayInput(
 
   return (
     <>
-      <h4 class="text-primary-200 text-lg">
-        {label}
-      </h4>
-      {!disabled && (
-        <Button
-          type={"button"}
-          onClick={() => {
-            data.value = [...data.value, ""];
-          }}
-        >
-          {"add"}
-        </Button>
-      )}
+      <div class={"flex items-center  flex-1 grow justify-between"}>
+        <h4 class="text-primary-200 text-lg">
+          {label}
+        </h4>
+        {!disabled && (
+          <Button
+            type={"button"}
+            onClick={() => {
+              data.value = [...data.value, ""];
+            }}
+          >
+            {"add"}
+          </Button>
+        )}
+      </div>
       {data.value?.map((item, i) => {
         return (
-          <Input
-            name={name + i}
-            value={item}
-            disabled={disabled}
-            onChange={update(i)}
-          />
+          <div class={"flex items-center  flex-1 grow"}>
+            <Input
+              class={"flex-1"}
+              name={name + i}
+              value={item}
+              disabled={disabled}
+              onChange={update(i)}
+            />
+            {!disabled && (
+              <IconX
+                class="cursor-pointer w-5 h-5 text-red-500 flex-grow-0"
+                onClick={() => {
+                  const temp = [...data.value];
+                  temp.splice(i, 1);
+                  data.value = temp;
+                  onChange(temp);
+                }}
+              />
+            )}
+          </div>
         );
       })}
     </>

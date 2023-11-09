@@ -8,7 +8,7 @@ import DataInput from "@/islands/DataInput.tsx";
 import { string } from "zod";
 
 export default function AppDataEditor(
-  { app, url }: { app: App; url: string },
+  { app }: { app: App },
 ) {
   const editing = useSignal(false);
   const error = useSignal("");

@@ -8,6 +8,8 @@ import AppDataEditor from "@/islands/AppDataEditor.tsx";
 import { DevNavbar } from "@/components/DevNavbar.tsx";
 import axios from "npm:axios";
 import Banner from "@/islands/Banner.tsx";
+import { Button } from "@/components/Button.tsx";
+import AuthUrlGenerator from "@/islands/AuthUrlGenerator.tsx";
 
 type Data = {
   user: User;
@@ -49,28 +51,35 @@ export const handler: Handlers<Data, WithSession> = {
       });
     }
 
-    const res = await fetch(endpoints.dev.app.get + id, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!res.ok) {
-      return new Response("", {
-        status: 302,
+    try {
+      const res = await fetch(endpoints.dev.app.get + id, {
         headers: {
-          Location: "/dev/dashboard",
+          Authorization: `Bearer ${token}`,
         },
       });
+
+      if (!res.ok) {
+        return new Response("", {
+          status: 302,
+          headers: {
+            Location: "/dev/dashboard",
+          },
+        });
+      }
+
+      const app = await res.json();
+
+      return ctx.render({
+        app,
+        user: session.get("user"),
+        updateUrl: endpoints.dev.app.update + id,
+      });
+    } catch (e) {
+      return ctx.render({
+        user: session.get("user"),
+        error: e.message,
+      });
     }
-
-    const app = await res.json();
-
-    return ctx.render({
-      app,
-      user: session.get("user"),
-      updateUrl: endpoints.dev.app.update + id,
-    });
   },
   async POST(req, ctx) {
     const id = ctx.params.id;
@@ -181,7 +190,7 @@ export default function AppData({ data }: PageProps<Data>) {
             <div class="m-5 ">
               <h1 class="text-3xl font-medium text-white">App data</h1>
 
-              <div class=" mt-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
+              <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
                 <div class="flex flex-col">
                   <h4 class="text-primary-200 text-lg">
                     Client id
@@ -193,8 +202,18 @@ export default function AppData({ data }: PageProps<Data>) {
                   <CopyText text={data.app.clientSecret} />
                 </div>
               </div>
+              <h1 class="text-3xl font-medium text-white">OAuth data</h1>
 
-              <AppDataEditor app={data.app} url={data.updateUrl} />
+              <AppDataEditor app={data.app} />{" "}
+              <div class="mt-5 ">
+                <h1 class="text-3xl font-medium text-white">
+                  Auth Url Generator
+                </h1>
+
+                <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
+                  <AuthUrlGenerator urls={data.app.redirects || []} />
+                </div>
+              </div>
             </div>
           </>
         )}

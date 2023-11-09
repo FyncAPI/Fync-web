@@ -18,22 +18,3 @@ export const fyncOauthClient = new OAuth2Client({
     scope: "read:profile",
   },
 });
-
-export const scopes = {
-  read: {
-    profile: "read:profile",
-    email: "read:email",
-    friends: "read:friends",
-    posts: "read:posts",
-  },
-  write: {
-    profile: "write:profile",
-    email: "write:email",
-    friends: "write:friends",
-    apps: "write:apps",
-    friendship: "write:friendship",
-  },
-  dev: {
-    admin: "dev:admin",
-  },
-} as const;

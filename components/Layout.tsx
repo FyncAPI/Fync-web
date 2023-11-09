@@ -27,8 +27,8 @@ const Meta = ({ ...customMeta }) => {
 };
 
 export const Footer = () => (
-  <footer class="bg-primary-900 brightness-10 ">
-    <div class="max-w-screen-md mx-auto py-8 px-4 sm:px-6 lg:px-8 brightness-50 saturate-50 bg-opacity-30">
+  <footer class="bg-primary-900 ">
+    <div class="max-w-screen-md mx-auto py-8 px-4 sm:px-6 lg:px-8 brightness-75 bg-opacity-30">
       <a href="/dev" class="flex">
         developer portal
       </a>

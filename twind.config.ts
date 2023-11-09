@@ -15,16 +15,25 @@ export default {
     preflight: {
       "@import":
         `@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');`,
-      h1: apply`text(white)`, // Grouping syntax
+      // make text white by default
+      "@layer base": {
+        "*": {
+          color: "#fff",
+        },
+      },
     },
     theme: {
       extend: {
         fontFamily: {
           sans: ["Outfit", "sans-serif"],
         },
+        color: {
+          default: "#1c358c",
+        },
         textColor: {
           default: "#1c358c",
         },
+
         colors: {
           "primary": {
             "50": "#eff5ff",

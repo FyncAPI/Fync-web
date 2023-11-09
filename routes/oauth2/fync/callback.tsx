@@ -1,8 +1,9 @@
 import { Handlers } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
 import { Providers } from "deno_grant";
-import { fyncOauthClient, scopes } from "@/oauthClient.ts";
+import { fyncOauthClient } from "@/oauthClient.ts";
 import { endpoints } from "@/constants/endpoints.ts";
+import { scopes } from "@/constants/scopes.ts";
 
 export type Data = { session: Record<string, string> };
 
