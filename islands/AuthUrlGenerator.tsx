@@ -3,15 +3,17 @@ import { useSignal } from "@preact/signals";
 import Select from "@/islands/Select.tsx";
 import { scopes } from "@/constants/scopes.ts";
 
-export default function AuthUrlGenerator({ urls }: {
+export default function AuthUrlGenerator({ urls, clientId, env }: {
   urls: string[];
+  clientId: string;
+  env?: string;
 }) {
   const selectedUrl = useSignal(urls[0]);
   const selectedScope = useSignal<string[]>([]);
 
   return (
     <div>
-      <Select choices={urls} selected={selectedUrl} />
+      <Select choices={urls} selectedChoice={selectedUrl} />
       <div class={"flex flex-col bg-slate-900 p-4 rounded-md"}>
         <h2 class={"text-3xl"}>
           scopes
@@ -51,12 +53,14 @@ export default function AuthUrlGenerator({ urls }: {
         </div>
       </div>
       {JSON.stringify(selectedScope.value)}
-      {selectedUrl.value
+      {selectedUrl.value && selectedScope.value.length
         ? (
           <CopyText
-            text={`https://fync.in/oauth2/auth/${selectedUrl.value}?scopes=${
+            text={`${
+              env == "dev" ? "http://localhost:8000" : "https://fync.in"
+            }/oauth2/auth?redirect_uri=${selectedUrl.value}&scope=${
               selectedScope.value.join(",")
-            } `}
+            }&client_id=${clientId}&response_type=code`}
           />
         )
         : (

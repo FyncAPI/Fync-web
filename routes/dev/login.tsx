@@ -20,6 +20,8 @@ export const handler: Handlers<Data, WithSession> = {
     const token = session.get("accessToken");
 
     if (token) {
+      // check token with server
+
       return new Response(null, {
         status: 302,
         headers: {

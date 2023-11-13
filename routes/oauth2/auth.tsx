@@ -20,7 +20,6 @@ type Data = {
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
     const user = ctx.state.session.get("user");
-    console.log(req, "reqrqwere");
     // ctx.state.session.set("authUrl", req.url);
 
     if (!user) {
@@ -40,6 +39,8 @@ export const handler: Handlers<Data, WithSession> = {
     const clientId = query.get("client_id");
     const scope = query.get("scope");
     const state = query.get("state");
+
+    console.log(clientId, "xlii");
 
     if (!clientId) return ctx.render({ error: "Invalid client id" });
     if (!redirectUri) return ctx.render({ error: "Invalid redirect uri" });

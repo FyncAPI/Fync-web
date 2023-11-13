@@ -35,16 +35,30 @@ export const handler: Handlers<Data, WithSession> = {
       });
     }
 
-    const res = await axios.get(endpoints.dev.app.get, {
-      headers: {
-        Authorization: `Bearer ${session.get("accessToken")}`,
-      },
-    });
+    try {
+      const res = await axios.get(endpoints.dev.app.get, {
+        headers: {
+          Authorization: `Bearer ${session.get("accessToken")}`,
+        },
+      });
 
-    console.log(res, res.data, "res");
-    const apps = res.data;
+      console.log(res, res.data, "res");
+      const apps = res.data;
 
-    return ctx.render({ user, apps });
+      return ctx.render({ user, apps });
+    } catch (e) {
+      console.log(e);
+      // return ctx.render({ user, apps: [] });
+      if (e.response.status === 401) {
+        session.clear();
+        return new Response(null, {
+          status: 302,
+          headers: {
+            Location: "/dev/login",
+          },
+        });
+      }
+    }
   },
 };
 

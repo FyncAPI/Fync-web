@@ -12,7 +12,7 @@ export const handler: Handlers<
   async GET(req, ctx) {
     const { uri, codeVerifier } = await fyncOauthClient.code
       .getAuthorizationUri({
-        scope: [scopes.dev.admin],
+        scope: scopes.dev,
       });
     console.log(uri, "uu");
 

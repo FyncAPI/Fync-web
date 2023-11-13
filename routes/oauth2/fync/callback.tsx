@@ -19,7 +19,7 @@ export const handler: Handlers<
       const { accessToken, scope } = tokens;
       const { session } = ctx.state;
 
-      if (!scope?.includes(scopes.dev.admin)) {
+      if (JSON.stringify(scope) != JSON.stringify(scopes.dev)) {
         return new Response(
           JSON.stringify({
             error: "sumting wong",

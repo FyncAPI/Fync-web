@@ -3,11 +3,11 @@ import { Signal } from "@preact/signals";
 
 export default function Select({
   choices,
-  selected,
+  selectedChoice,
   ...props
 }: {
   choices: string[] | { label: string; value: string }[];
-  selected: Signal<string>;
+  selectedChoice: Signal<string>;
 } & JSX.HTMLAttributes<HTMLSelectElement>) {
   return (
     <select
@@ -16,15 +16,15 @@ export default function Select({
       // }}
       onChange={(e) => {
         const target = e.target as HTMLSelectElement;
-        selected.value = target.value;
+        selectedChoice.value = target.value;
       }}
-      value={selected.value}
+      value={selectedChoice.value}
       class={`p-2 text-slate-900 rounded-md bg-secondary-50 ${props.class}`}
     >
       {choices?.map((choice) => (
         <option
           value={typeof choice === "object" ? choice.value : choice}
-          selected={selected.value === choice}
+          selectedChoice={selectedChoice.value === choice}
         >
           {typeof choice === "object" ? choice.label : choice}
         </option>

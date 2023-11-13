@@ -16,6 +16,7 @@ type Data = {
   app?: App;
   updateUrl?: string;
   error?: string;
+  env?: string;
 };
 const getApp = async (id: string, token: string) => {
   const res = await fetch(endpoints.dev.app.get + id, {
@@ -73,6 +74,7 @@ export const handler: Handlers<Data, WithSession> = {
         app,
         user: session.get("user"),
         updateUrl: endpoints.dev.app.update + id,
+        env: Deno.env.get("ENV") || "dev",
       });
     } catch (e) {
       return ctx.render({
@@ -141,13 +143,6 @@ export const handler: Handlers<Data, WithSession> = {
   },
 };
 export default function AppData({ data }: PageProps<Data>) {
-  // const saveApp = (changed: Partial<App>) => {
-  //   const res = axios.put(endpoints.apps.update + data.app!._id, {
-  //     ...changed,
-  //   }).then((res) => {
-  //     console.log(res.data);
-  //   });
-  // };
   return (
     <>
       <DevNavbar user={data.user} />
@@ -211,7 +206,11 @@ export default function AppData({ data }: PageProps<Data>) {
                 </h1>
 
                 <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
-                  <AuthUrlGenerator urls={data.app.redirects || []} />
+                  <AuthUrlGenerator
+                    urls={data.app.redirects || []}
+                    clientId={data.app.clientId}
+                    env={data.env}
+                  />
                 </div>
               </div>
             </div>
