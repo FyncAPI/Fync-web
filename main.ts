@@ -14,8 +14,8 @@ import { z } from "zod";
 
 const envParser = z.object({
   ENV: z.string(),
-  GOOGLE_CLIENT_ID: z.string(),
-  GOOGLE_CLIENT_SECRET: z.string(),
+  // GOOGLE_CLIENT_ID: z.string(),
+  // GOOGLE_CLIENT_SECRET: z.string(),
   APP_KEY: z.string(),
 });
 
