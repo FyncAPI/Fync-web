@@ -3,6 +3,7 @@ import { apply, defineConfig } from "twind";
 // twind preset
 import presetAutoPrefix from "twind-preset-autoprefix";
 import presetTailWind from "twind-preset-tailwind";
+import { src } from "https://deno.land/std@0.193.0/semver/_shared.ts";
 
 export default {
   selfURL: import.meta.url,
@@ -15,6 +16,23 @@ export default {
     preflight: {
       // "@import":
       //   `url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap')`,
+      "@font-face": {
+        "fontFamily": "Outfit",
+        src: 'url("/fonts/Outfit-VariableFont_wght.ttf")',
+        // font-weight: 100 1000;
+      },
+      // "@font-face": [
+      //   {
+      //     fontFamily: "Outfit",
+      //     fontWeight: "400",
+      //     src: 'url(/fonts/proxima-nova/400-regular.woff) format("woff")',
+      //   },
+      //   {
+      //     fontFamily: "Proxima Nova",
+      //     fontWeight: "500",
+      //     src: 'url(/fonts/proxima-nova/500-medium.woff) format("woff")',
+      //   },
+      // ],
       // make text white by default
       "@layer base": {
         "*": {
