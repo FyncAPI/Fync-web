@@ -19,6 +19,10 @@ const Meta = ({ ...customMeta }) => {
   return (
     <Head>
       <title>{meta.title}</title>
+      <style>
+        @import
+        url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+      </style>
       <meta content={meta.description} name="description" />
       <link rel="icon" href="/favicon.ico" />
       <link rel="stylesheet" href="/styles.css" />
