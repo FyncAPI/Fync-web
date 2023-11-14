@@ -170,14 +170,14 @@ export default function AppData({ data }: PageProps<Data>) {
                       />
                     )
                     : (
-                      <h2 class="text-5xl font-medium text-white self-center text-center -mt-1">
+                      <h2 class="text-4xl font-medium text-white self-center text-center -mt-1">
                         {data.app.name.substring(0, 3)}
                       </h2>
                     )}
                 </div>
               </div>
               <div class={"flex flex-col ml-2 mr-auto text-left"}>
-                <h2 class="text-4xl font-medium text-white  ">
+                <h2 class="text-3xl font-medium text-white  ">
                   {data.app.name}
                 </h2>
                 <p class="text-primary-200 text-lg ">
@@ -186,7 +186,7 @@ export default function AppData({ data }: PageProps<Data>) {
               </div>
             </div>
             <div class="m-5 ">
-              <h1 class="text-3xl font-medium text-white">App data</h1>
+              <h1 class="text-2xl font-medium text-white">App data</h1>
 
               <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
                 <div class="flex flex-col">
@@ -200,11 +200,11 @@ export default function AppData({ data }: PageProps<Data>) {
                   <CopyText text={data.app.clientSecret} />
                 </div>
               </div>
-              <h1 class="text-3xl font-medium text-white">OAuth data</h1>
+              <h1 class="text-2xl font-medium text-white">OAuth data</h1>
 
               <AppDataEditor app={data.app} />{" "}
               <div class="mt-5 ">
-                <h1 class="text-3xl font-medium text-white">
+                <h1 class="text-2xl font-medium text-white">
                   Auth Url Generator
                 </h1>
 

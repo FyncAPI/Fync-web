@@ -58,11 +58,10 @@ export function Layout({ children, ...customMeta }: Props) {
     <>
       <Meta {...customMeta} />
       {/* <Nav /> */}
-      <main class="flex-1 bg-slate-800 backdrop-brightness-50 ">
+      <main class="flex-1 bg-slate-800 backdrop-brightness-50 min-h-screen">
         {children}
-
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 }

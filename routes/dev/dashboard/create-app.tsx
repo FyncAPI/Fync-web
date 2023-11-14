@@ -90,7 +90,7 @@ export default function CreateAppPage(props: PageProps<Data>) {
       <DevNavbar user={data.user} />
       <div class="h-screen">
         <div class="flex flex-col p-8 gap-3 md:p-20">
-          <h1 class="text-3xl font-medium text-white">Create app</h1>
+          <h1 class="text-2xl font-medium text-white">Create app</h1>
           <div class="p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 sticky top-0 z-10">
             {data.error && (
               <Banner type="error" text={data.error} />

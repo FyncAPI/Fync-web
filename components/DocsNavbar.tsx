@@ -23,7 +23,7 @@ export const DocsNavbar = ({ bg, user }: { bg?: string; user?: User }) => (
             Fync
           </span> */
           }
-          <h1 class="font-bold text-white  text-3xl ">
+          <h1 class="font-bold text-white  text-2xl ">
             Fync Docs
           </h1>
         </a>
@@ -49,7 +49,7 @@ export const DocsNavbar = ({ bg, user }: { bg?: string; user?: User }) => (
     >
       <div class="flex items-center text-white mr-6 p-3">
         <a href="/">
-          <h1 class="font-bold text-transparent  text-3xl ">
+          <h1 class="font-bold text-transparent  text-2xl ">
             Fync
           </h1>
         </a>

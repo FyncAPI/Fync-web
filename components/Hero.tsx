@@ -8,7 +8,7 @@ export default function Hero() {
       style="background-image:linear-gradient(rgba(0, 0, 40, 0.8),rgba(0, 0, 40, 0.8)), url('/gallery/hero-bg.webp');"
     >
       <div class="space-y-4 text-center">
-        <h1 class="text-4xl inline-block font-bold">Fresh Components Beta</h1>
+        <h1 class="text-3xl inline-block font-bold">Fresh Components Beta</h1>
         <p class="text-xl max-w-lg text-blue-100">
           Fresh Components is a collection of components built with Preact and
           Tailwind CSS.

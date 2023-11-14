@@ -134,7 +134,7 @@ export default function AuthScreen({
           {error == "Invalid client id"
             ? (
               <div class=" ">
-                <h1 class="text-3xl font-bold lg:text-4xl m-4 text-white overflow-visible">
+                <h1 class="text-2xl font-bold lg:text-3xl m-4 text-white overflow-visible">
                   Invalid client id
                 </h1>
                 <p class="text-gray-400 text-md m-4">
@@ -153,7 +153,7 @@ export default function AuthScreen({
                   </div>
                 )}
                 <>
-                  <h1 class="text-2xl font-medium lg:text-4xl m-4 text-white overflow-visible">
+                  <h1 class="text-2xl font-medium lg:text-3xl m-4 text-white overflow-visible">
                     Authorize{" "}
                     <strong>
                       {app?.name}

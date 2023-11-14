@@ -69,7 +69,7 @@ export default function DashboardPage(props: PageProps<Data>) {
       <DevNavbar user={data.user} />
       <div class="h-screen">
         <div class="p-6 gap-3 flex flex-row align-middle justify-between">
-          <h1 class="text-3xl font-medium text-white text-center self-center">
+          <h1 class="text-2xl font-medium text-white text-center self-center">
             Dashboard
           </h1>
           <LinkButton variant="primary" href="/dev/dashboard/create-app">

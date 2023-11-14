@@ -3,7 +3,7 @@ export default function UserNavbar() {
     <nav class="flex items-center justify-between flex-wrap  h-full w-full bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
       <div class="flex items-center text-white mr-6 p-3">
         <a href="/home">
-          <h1 class="font-bold text-white  text-3xl ">
+          <h1 class="font-bold text-white  text-2xl ">
             Fync
           </h1>
         </a>

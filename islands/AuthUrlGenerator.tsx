@@ -15,7 +15,7 @@ export default function AuthUrlGenerator({ urls, clientId, env }: {
     <div>
       <Select choices={urls} selectedChoice={selectedUrl} />
       <div class={"flex flex-col bg-slate-900 p-4 rounded-md mb-4"}>
-        <h2 class={"text-3xl"}>
+        <h2 class={"text-2xl"}>
           scopes
         </h2>
         <div class="flex flex-row">

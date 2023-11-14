@@ -126,7 +126,7 @@ export default function AuthScreen({
             </div>
           )}
           <div class=" ">
-            <h1 class="text-3xl font-bold lg:text-4xl m-4 text-white overflow-visible">
+            <h1 class="text-2xl font-bold lg:text-3xl m-4 text-white overflow-visible">
               Sign in to Fync
             </h1>
             <p class="text-gray-400 text-md m-4">

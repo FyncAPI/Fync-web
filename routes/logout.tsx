@@ -19,7 +19,7 @@ export default function Logout() {
     <>
       <div class="h-screen p-4 mx-auto bg-gradient-to-br from-fuchsia-900 via-indigo-900 to-primary-800 hue-rotate-15 bg-opacity-40 pt-20 flex items-center justify-center">
         <div className="p-4 -mt-56 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-brightness-75 bg-opacity-10  w-full max-w-md min-w-min">
-          <h1 class="text-6xl font-extrabold text-transparent md:text-7xl lg:text-8xl max-w-2xl m-4  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          <h1 class="text-5xl font-extrabold text-transparent md:text-6xl lg:text-8xl max-w-2xl m-4  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
             You have been logged out
           </h1>
           <a

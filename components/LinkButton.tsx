@@ -13,7 +13,7 @@ export function LinkButton(
     <a
       {...props}
       disabled={!IS_BROWSER || props.disabled}
-      class={`shadow-md hover:shadow-lg m-2 font-semibold py-2 px-4 rounded-full ${
+      class={`shadow-md hover:shadow-lg m-2 font-medium py-2 px-4 rounded-full ${
         variant == "secondary"
           ? "bg-secondary-50 text-black"
           : variant == "cancel"

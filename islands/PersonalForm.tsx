@@ -13,7 +13,7 @@ export default function PersonalForm() {
   const loading = useSignal(false);
 
   return (
-    <div class="flex flex-col items-center justify-center w-full h-full">
+    <div class="flex flex-col items-center justify-center w-full h-full mb-12">
       <div className="p-4 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 w-full max-w-md min-w-min m-4">
         {error && (
           <div class="bg-red-500 text-white p-2 rounded-md">

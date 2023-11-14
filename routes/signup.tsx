@@ -88,7 +88,7 @@ export default function Signup({
             </div>
           )}
           <div class=" ">
-            <h1 class="text-3xl font-bold lg:text-4xl m-4  text-white overflow-visible">
+            <h1 class="text-2xl font-bold lg:text-3xl m-4  text-white overflow-visible">
               Join Fync
             </h1>
           </div>

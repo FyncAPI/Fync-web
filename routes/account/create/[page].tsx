@@ -140,10 +140,10 @@ export default function CreateAccount(props: PageProps<Data>) {
         step={page}
       /> */
       }
-      <div class=" pt-10 h-screen p-O mx-auto mr-auto m ">
+      <div class=" pt-10 p-O mx-auto mr-auto  ">
         <div class="flex items-center self-start ml-auto mr-auto justify-center flex-col max-w-xl ">
           {/* {page == 1 ? <PersonalForm /> : <AccountForm />} */}
-          <h1 class="text-2xl font-extrabold text-transparent md:text-3xl lg:text-3xl max-w-2xl  bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-600">
+          <h1 class="text-2xl font-extrabold text-transparent md:text-2xl lg:text-2xl max-w-2xl  bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-600">
             Create Account
           </h1>
           <PersonalForm />
@@ -165,7 +165,7 @@ const Stepper = ({ steps, step: page }: {
 }) => {
   return (
     <ol class="flex basis-0 shrink items-center p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg rounded-t-none shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4 mr-0 pr-2 w-fit rounded-bl-none ">
-      <h1 class="text-2xl font-extrabold text-transparent md:text-3xl lg:text-3xl max-w-2xl  bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-600">
+      <h1 class="text-2xl font-extrabold text-transparent md:text-2xl lg:text-2xl max-w-2xl  bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-600">
         Create Account
       </h1>
       {steps.map((step) => (

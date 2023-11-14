@@ -20,14 +20,14 @@ export const AppsList = (props: { apps: App[] }) => {
                     />
                   )
                   : (
-                    <h2 class="text-4xl font-medium text-white self-center text-center -mt-1">
+                    <h2 class="text-3xl font-medium text-white self-center text-center -mt-1">
                       {app.name.substring(0, 3)}
                     </h2>
                   )}
               </div>
             </div>
             <div class={"flex flex-col ml-2 mr-auto text-left"}>
-              <h2 class="text-4xl font-medium text-white  ">
+              <h2 class="text-3xl font-medium text-white  ">
                 {app.name}
               </h2>
               <p class="text-primary-200 text-lg ">{app.description}</p>
