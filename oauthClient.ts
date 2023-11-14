@@ -1,4 +1,5 @@
 import { OAuth2Client } from "oauth2Client";
+import { scopes } from "@/constants/scopes.ts";
 
 const serverURI = Deno.env.get("ENV") == "dev"
   ? "http://localhost:8000"
@@ -15,6 +16,6 @@ export const fyncOauthClient = new OAuth2Client({
   tokenUri: apiURI + "/auth/access_token",
   redirectUri: serverURI + "/oauth2/fync/callback",
   defaults: {
-    scope: "read:profile",
+    scope: scopes.profile,
   },
 });

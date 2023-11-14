@@ -29,7 +29,6 @@ export default function Dev() {
         </a> */
         }
       </div>
-      <Footer />
     </>
   );
 }

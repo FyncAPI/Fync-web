@@ -23,7 +23,7 @@ export default function CopyText(props: { text: string }) {
         class="flex flex-row justify-between p-2 z-20"
         onClick={copyText}
       >
-        <p class="font-mono text-center self-center text-yellow-100 text-md">
+        <p class="font-mono text-start self-center text-yellow-100 text-md">
           {props.text}
         </p>
         <CopyButton text={props.text} clicked={clicked} />

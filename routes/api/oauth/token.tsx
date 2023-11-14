@@ -55,14 +55,14 @@ export const handler: Handlers<
 
       console.log(res.data, "rerx");
 
-      setTimeout(() => {
-        return new Response(
-          JSON.stringify(res.data),
-          {
-            status: 200,
-          },
-        );
-      }, 2000);
+      // setTimeout(() => {
+      return new Response(
+        JSON.stringify(res.data),
+        {
+          status: 200,
+        },
+      );
+      // }, 2000);
       //   return res.data;
     } catch (error) {
       console.log(Object.keys(error), "erx");

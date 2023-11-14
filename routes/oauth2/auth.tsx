@@ -179,10 +179,10 @@ export default function AuthScreen({
                   <form method="POST" class="grid grid-cols-1 ">
                     <div class="flex flex-row justify-between">
                       <LinkButton
-                        type="button"
+                        type="cancel"
                         variant="cancel"
                         class="hover:brightness-75 p-2"
-                        href={redirectUri!}
+                        href={redirectUri + "?error=access_denied"}
                       >
                         Cancel
                       </LinkButton>

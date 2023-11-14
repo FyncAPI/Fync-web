@@ -2,36 +2,24 @@
   "introduction": {
     "title": "Introduction"
   },
-  "getting-started": {
-    "title": "Getting Started",
+  "oauth2-flow": {
+    "title": "OAuth2 Flow Login",
     "pages": [
-      ["create-a-project", "Create a project"],
-      ["running-locally", "Running locally"],
-      ["create-a-route", "Create a route"],
-      ["dynamic-routes", "Dynamic routes"],
-      ["custom-handlers", "Custom handlers"],
-      ["fetching-data", "Fetching data"],
-      ["form-submissions", "Form submissions"],
-      ["adding-interactivity", "Adding interactivity"],
-      ["deploy-to-production", "Deploy to production"]
+      ["overview", "Overview"],
+      ["authentication", "Authentication"],
+      ["authorization", "Authorization"],
+      ["token-endpoint", "Token Endpoint"],
+      ["refresh-token", "Refresh Token"],
+      ["scopes", "Scopes"],
+      ["example-flow", "Example Flow"]
     ]
   },
-  "concepts": {
-    "title": "Concepts",
+  "api": {
+    "title": "API",
     "pages": [
-      ["architecture", "Architecture"],
-      ["routes", "Routes"],
-      ["forms", "Forms"],
-      ["islands", "Interactive islands"],
-      ["static-files", "Static files"],
-      ["middleware", "Route middleware"],
-      ["error-pages", "Error pages"],
-      ["routing", "Routing"],
-      ["data-fetching", "Data fetching"],
-      ["deployment", "Deployment"],
-      ["plugins", "Plugins"],
-      ["updating", "Updating Fresh"],
-      ["app-wrapper", "Application wrapper"]
+      ["profiles", "Get Profiles"],
+      ["friends", "Get Friends"],
+      ["posts", "Get Posts"]
     ]
   },
   "integrations": {
