@@ -24,7 +24,7 @@ export const handler: Handlers<Data, WithSession> = {
       return new Response(null, {
         status: 302,
         headers: {
-          Location: "/",
+          Location: "/login",
         },
       });
     }

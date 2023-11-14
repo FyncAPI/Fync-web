@@ -18,6 +18,7 @@ type Data = {
   error?: string;
   env?: string;
 };
+
 const getApp = async (id: string, token: string) => {
   const res = await fetch(endpoints.dev.app.get + id, {
     headers: {
@@ -39,6 +40,8 @@ const getApp = async (id: string, token: string) => {
 };
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
+    const domain = req.url.split("/").slice(0, 3).join("/");
+    console.log(domain, "dom");
     const id = ctx.params.id;
     const { session } = ctx.state;
     const token = session.get("accessToken");
@@ -74,7 +77,7 @@ export const handler: Handlers<Data, WithSession> = {
         app,
         user: session.get("user"),
         updateUrl: endpoints.dev.app.update + id,
-        env: Deno.env.get("ENV") || "dev",
+        env: domain == "http://localhost:8000" ? "dev" : "prod",
       });
     } catch (e) {
       return ctx.render({
