@@ -13,8 +13,8 @@ export default {
       presetTailWind(),
     ],
     preflight: {
-      "@import":
-        `url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap')`,
+      // "@import":
+      //   `url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap')`,
       // make text white by default
       "@layer base": {
         "*": {
