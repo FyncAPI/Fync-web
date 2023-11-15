@@ -69,10 +69,7 @@ export const handler: Handlers<
       //400
 
       return new Response(
-        JSON.stringify({
-          error: "invalid_request",
-          message: error.response.data,
-        }),
+        JSON.stringify(error.response.data),
         {
           status: 400,
         },
