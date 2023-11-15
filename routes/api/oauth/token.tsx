@@ -65,13 +65,13 @@ export const handler: Handlers<
       // }, 2000);
       //   return res.data;
     } catch (error) {
-      console.log(Object.keys(error), "erx");
+      console.log(error.message, "erx");
       //400
 
       return new Response(
         JSON.stringify({
           error: "invalid_request",
-          error_description: error,
+          message: error.response.data,
         }),
         {
           status: 400,

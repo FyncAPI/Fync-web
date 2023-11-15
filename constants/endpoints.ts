@@ -17,6 +17,9 @@ export const endpoints = {
     clientId: `${url}/apps/clientId/`,
     update: `${url}/apps/`,
   },
+  friends: {
+    get: `${url}/friends/`,
+  },
   dev: {
     login: `${url}/dev/login/`,
     profile: `${url}/dev/profile/`,

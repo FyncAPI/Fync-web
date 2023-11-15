@@ -113,3 +113,21 @@ export const userParser = z.object({
 
 export type User = z.infer<typeof userParser>;
 export type App = z.infer<typeof appParser>;
+
+export type Friendship = z.infer<typeof friendshipParser>;
+
+export const friendshipParser = z.object({
+  _id: z.string(),
+  adder: z.string(),
+  accepter: z.string(),
+  removed: z.boolean().optional(),
+
+  friendship: z.number(),
+
+  images: z.array(z.string()),
+  videos: z.array(z.string()),
+
+  // sameApps: z.array(z.instanceof(ObjectId)),
+
+  createdAt: z.date(),
+});
