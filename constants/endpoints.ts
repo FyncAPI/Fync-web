@@ -17,9 +17,9 @@ export const endpoints = {
     clientId: `${url}/apps/clientId/`,
     update: `${url}/apps/`,
   },
-  friends: {
-    get: `${url}/friends/`,
-  },
+  // friends: {
+  //   get: `${url}/friends/`,
+  // },
   dev: {
     login: `${url}/dev/login/`,
     profile: `${url}/dev/profile/`,
@@ -31,6 +31,7 @@ export const endpoints = {
   },
   user: {
     profile: `${url}/user/profile/`,
+    friends: `${url}/user/friends/`,
   },
   // Home
 };

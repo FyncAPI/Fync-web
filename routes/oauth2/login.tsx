@@ -64,21 +64,23 @@ export const handler: Handlers<Data, WithSession> = {
     try {
       const url = endpoints.auth.email.login;
 
-      const user = await fetch(url, {
+      const res = await fetch(url, {
         method: "POST",
         body: JSON.stringify(body),
       });
 
-      if (user.ok) {
+      if (res.ok) {
         console.log("ok");
-        const userBody = await user.json();
+        const { user, accessToken } = await res.json();
 
-        console.log(userBody, "userBody");
-        if (userBody.error) {
-          return ctx.render({ error: userBody.error });
+        console.log(user, "userBody");
+        if (user.error) {
+          return ctx.render({ error: user.error });
         }
-        if (userBody.userData) {
-          session.set("user", userBody.userData);
+
+        if (user) {
+          session.set("user", user);
+          session.set("accessToken", accessToken);
 
           // const authUrl = session.get("authUrl");
           // console.log("authUrl", authUrl);

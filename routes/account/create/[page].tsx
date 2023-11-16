@@ -6,6 +6,7 @@ import PersonalForm from "@/islands/PersonalForm.tsx";
 import AccountForm from "@/islands/AccountForm.tsx";
 import { PersonalInfo, personalInfoParser } from "@/utils/store/account.ts";
 import { endpoints } from "../../../constants/endpoints.ts";
+import { optimizeImage } from "@/utils/image.ts";
 
 type Data = {
   // session: Record<string, string>;
@@ -43,7 +44,8 @@ export const handler: Handlers<Data, WithSession> = {
     for (const [key, value] of form.entries()) {
       console.log(key);
       if (key === "profilePicture") {
-        body[key] = value as File;
+        const optimizedImage = await optimizeImage(value as File);
+        body[key] = optimizedImage;
       } else {
         body[key] = value as string;
       }
@@ -92,10 +94,8 @@ export const handler: Handlers<Data, WithSession> = {
       }
 
       session.set("user", resBody.user);
-
+      session.set("accessToken", resBody.accessToken);
       session.set("createUser", null);
-
-      // savePersonalInfo(result.data);
 
       return new Response("", {
         status: 302,

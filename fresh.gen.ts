@@ -67,7 +67,7 @@ const manifest = {
     "./routes/dev/login.tsx": $13,
     "./routes/docs/[...slug].tsx": $14,
     "./routes/docs/out.tsx": $15,
-    "./routes/friends/index.ts": $16,
+    "./routes/friends/index.tsx": $16,
     "./routes/gfm.css.ts": $17,
     "./routes/home.tsx": $18,
     "./routes/index.tsx": $19,

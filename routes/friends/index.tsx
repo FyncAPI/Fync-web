@@ -6,6 +6,7 @@ import { endpoints } from "@/constants/endpoints.ts";
 
 type Data = {
   friends: { user: User; friendship: Friendship }[];
+  error?: string | null;
 };
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
@@ -18,17 +19,18 @@ export const handler: Handlers<Data, WithSession> = {
     const user = session.get("user");
     const accessToken = session.get("accessToken");
 
+    console.log(user, accessToken, "user");
     if (!user || !accessToken) {
       return new Response(null, {
         status: 302,
         headers: {
-          Location: "/dev/login",
+          Location: "/login",
         },
       });
     }
 
     try {
-      const res = await axios.get(endpoints.friends.get);
+      const res = await axios.get(endpoints.user.friends);
 
       const friends = res.data;
 
@@ -36,16 +38,18 @@ export const handler: Handlers<Data, WithSession> = {
         friends,
       });
     } catch (e) {
-      console.log(e);
+      console.log(e.data);
       // return ctx.render({ user, apps: [] });
       if (e.response.status === 401) {
         session.clear();
         return new Response(null, {
           status: 302,
           headers: {
-            Location: "/dev/login",
+            Location: "/login",
           },
         });
+      } else {
+        return ctx.render({ friends: [], error: e.data });
       }
     }
   },
@@ -55,7 +59,7 @@ export default function Page(props: PageProps) {
   const { friends } = props.data;
   return (
     <main>
-      <h1>About</h1>
+      <h1>Friends</h1>
       {JSON.stringify(friends)}
       <p>This is the about page.</p>
     </main>

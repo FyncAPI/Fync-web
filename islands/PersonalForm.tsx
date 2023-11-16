@@ -69,6 +69,7 @@ export default function PersonalForm() {
               )}
             <input
               type="file"
+              accept="image/png, image/gif, image/jpeg"
               id="profilePicture"
               name="profilePicture"
               class="hidden"
@@ -155,6 +156,7 @@ export default function PersonalForm() {
               label="Birth Date"
               type="date"
               name="birthDate"
+              max="2016-01-01"
               placeholder="05/06/2000"
               required
               onChange={(e) => {
@@ -164,13 +166,7 @@ export default function PersonalForm() {
                     birthDate: (e.target as HTMLInputElement).value,
                   });
                 }
-
                 console.log(e, e?.target);
-
-                // setPersonalInfo({
-                //   ...personalInfo,
-                //   birthDate: new Date(e?.target?.value),
-                // });
               }}
             />
           </div>

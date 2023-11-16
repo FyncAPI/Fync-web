@@ -17,6 +17,7 @@ export const personalInfoParser = z.object({
   birthDate: z.string(),
   avatar: z.string().optional(),
 });
+
 export type PersonalInfo = z.infer<typeof personalInfoParser>;
 export type AccountInfo = {
   email: string;
