@@ -9,6 +9,7 @@ import { WithSession } from "fresh-session";
 import axios from "npm:axios";
 import { endpoints } from "@/constants/endpoints.ts";
 import { z } from "zod";
+import Banner from "@/islands/Banner.tsx";
 
 type Data = {
   friends: { user: User; friendship: Friendship }[];
@@ -26,7 +27,6 @@ export const handler: Handlers<Data, WithSession> = {
     const user = session.get("user");
     const accessToken = session.get("accessToken");
 
-    console.log(user, accessToken, "user");
     if (!user || !accessToken) {
       return new Response(null, {
         status: 302,
@@ -37,7 +37,11 @@ export const handler: Handlers<Data, WithSession> = {
     }
 
     try {
-      const res = await axios.get(endpoints.user.friends);
+      const res = await axios.get(endpoints.friends.get, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       const friends = z.object({
         user: userParser,
@@ -48,7 +52,7 @@ export const handler: Handlers<Data, WithSession> = {
         friends,
       });
     } catch (e) {
-      console.log(e.data);
+      console.log(e);
       // return ctx.render({ user, apps: [] });
       if (e?.response?.status === 401) {
         session.clear();
@@ -59,19 +63,20 @@ export const handler: Handlers<Data, WithSession> = {
           },
         });
       } else {
-        return ctx.render({ friends: [], error: e.data });
+        return ctx.render({ friends: [], error: e?.error || "sum wong" });
       }
     }
   },
 };
 
 export default function Page(props: PageProps) {
-  const { friends } = props.data;
+  const { friends, error } = props.data;
   return (
     <main>
-      <h1>Friends</h1>
+      <Banner text={error} type="error" />
+      <h1>About</h1>
       {JSON.stringify(friends)}
-      <p>This is the friends page.</p>
+      <p>This is the about page.</p>
     </main>
   );
 }
