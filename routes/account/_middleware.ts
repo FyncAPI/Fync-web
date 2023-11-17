@@ -9,7 +9,7 @@ export async function handler(
 ) {
   const { session } = ctx.state;
   //   console.log(session.data, "zx");
-  if (session.get("user")) {
+  if (session.get("accessToken")) {
     return new Response("", {
       status: 302,
       headers: {
@@ -18,7 +18,7 @@ export async function handler(
     });
   }
 
-  if (!session.data) {
+  if (!session.data || !session.data.accessToken) {
     return new Response("", {
       status: 302,
       headers: {

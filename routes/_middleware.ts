@@ -34,7 +34,8 @@ async function protector(req: Request, ctx: MiddlewareHandlerContext<State>) {
 
   if (path == "/login") {
     const user = session.get("user");
-    if (user) {
+    const accessToken = session.get("accessToken");
+    if (user && accessToken) {
       return new Response("Already logged in", {
         status: 302,
         headers: {

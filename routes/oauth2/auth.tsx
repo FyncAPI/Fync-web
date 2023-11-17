@@ -20,9 +20,10 @@ type Data = {
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
     const user = ctx.state.session.get("user");
+    const token = ctx.state.session.get("accessToken");
     // ctx.state.session.set("authUrl", req.url);
 
-    if (!user) {
+    if (!user || !token) {
       return new Response("", {
         status: 302,
         headers: {

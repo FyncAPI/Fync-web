@@ -49,15 +49,15 @@ export const handler: Handlers<Data, WithSession> = {
     } catch (e) {
       console.log(e);
       // return ctx.render({ user, apps: [] });
-      if (e.response.status === 401) {
-        session.clear();
-        return new Response(null, {
-          status: 302,
-          headers: {
-            Location: "/dev/login",
-          },
-        });
-      }
+      // if (e?.response.status === 401) {
+      // session.clear();
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: "/dev/login",
+        },
+      });
+      // }
     }
   },
 };

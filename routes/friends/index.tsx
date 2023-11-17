@@ -1,12 +1,19 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { Friendship, User } from "@/utils/type.ts";
+import {
+  Friendship,
+  friendshipParser,
+  User,
+  userParser,
+} from "@/utils/type.ts";
 import { WithSession } from "fresh-session";
 import axios from "npm:axios";
 import { endpoints } from "@/constants/endpoints.ts";
+import { z } from "zod";
 
 type Data = {
   friends: { user: User; friendship: Friendship }[];
 };
+
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
     const { session } = ctx.state;
@@ -22,7 +29,7 @@ export const handler: Handlers<Data, WithSession> = {
       return new Response(null, {
         status: 302,
         headers: {
-          Location: "/dev/login",
+          Location: "/login",
         },
       });
     }
@@ -30,7 +37,10 @@ export const handler: Handlers<Data, WithSession> = {
     try {
       const res = await axios.get(endpoints.friends.get);
 
-      const friends = res.data;
+      const friends = z.object({
+        user: userParser,
+        friendship: friendshipParser,
+      }).array().parse(res.data);
 
       return ctx.render({
         friends,
@@ -38,12 +48,19 @@ export const handler: Handlers<Data, WithSession> = {
     } catch (e) {
       console.log(e);
       // return ctx.render({ user, apps: [] });
-      if (e.response.status === 401) {
+      if (e?.response?.status === 401) {
         session.clear();
         return new Response(null, {
           status: 302,
           headers: {
-            Location: "/dev/login",
+            Location: "/login",
+          },
+        });
+      } else {
+        return new Response(null, {
+          status: 302,
+          headers: {
+            Location: "/login",
           },
         });
       }
@@ -55,9 +72,9 @@ export default function Page(props: PageProps) {
   const { friends } = props.data;
   return (
     <main>
-      <h1>About</h1>
+      <h1>Friew</h1>
       {JSON.stringify(friends)}
-      <p>This is the about page.</p>
+      <p>This is the friends page.</p>
     </main>
   );
 }
