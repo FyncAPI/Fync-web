@@ -12,6 +12,7 @@ import { z } from "zod";
 
 type Data = {
   friends: { user: User; friendship: Friendship }[];
+  error?: string | null;
 };
 
 export const handler: Handlers<Data, WithSession> = {
@@ -25,6 +26,7 @@ export const handler: Handlers<Data, WithSession> = {
     const user = session.get("user");
     const accessToken = session.get("accessToken");
 
+    console.log(user, accessToken, "user");
     if (!user || !accessToken) {
       return new Response(null, {
         status: 302,
@@ -35,7 +37,7 @@ export const handler: Handlers<Data, WithSession> = {
     }
 
     try {
-      const res = await axios.get(endpoints.friends.get);
+      const res = await axios.get(endpoints.user.friends);
 
       const friends = z.object({
         user: userParser,
@@ -46,7 +48,7 @@ export const handler: Handlers<Data, WithSession> = {
         friends,
       });
     } catch (e) {
-      console.log(e);
+      console.log(e.data);
       // return ctx.render({ user, apps: [] });
       if (e?.response?.status === 401) {
         session.clear();
@@ -57,12 +59,7 @@ export const handler: Handlers<Data, WithSession> = {
           },
         });
       } else {
-        return new Response(null, {
-          status: 302,
-          headers: {
-            Location: "/login",
-          },
-        });
+        return ctx.render({ friends: [], error: e.data });
       }
     }
   },
@@ -72,7 +69,7 @@ export default function Page(props: PageProps) {
   const { friends } = props.data;
   return (
     <main>
-      <h1>Friew</h1>
+      <h1>Friends</h1>
       {JSON.stringify(friends)}
       <p>This is the friends page.</p>
     </main>
