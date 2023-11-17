@@ -18,7 +18,7 @@ export const endpoints = {
     update: `${url}/apps/`,
   },
   friends: {
-    get: `${url}/friends/`,
+    get: `${url}/v1/friends/@me`,
   },
   dev: {
     login: `${url}/dev/login/`,
@@ -30,7 +30,8 @@ export const endpoints = {
     },
   },
   user: {
-    profile: `${url}/user/profile/`,
+    me: `${url}/v1/users/@me`,
+    get: `${url}/v1/users/`,
   },
   // Home
 };
