@@ -7,8 +7,8 @@ export async function handler(
   ctx: MiddlewareHandlerContext<State>,
 ) {
   const { session } = ctx.state;
-  //   console.log(session.data, "zx");
-  if (!session.get("accessToken")) {
+  console.log(session.data, "zx");
+  if (!session.get("devToken")) {
     return new Response("", {
       status: 302,
       headers: {

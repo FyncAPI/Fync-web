@@ -43,7 +43,7 @@ export const handler: Handlers<Data, WithSession> = {
     const domain = req.url.split("/").slice(0, 3).join("/");
     const id = ctx.params.id;
     const { session } = ctx.state;
-    const token = session.get("accessToken");
+    const token = session.get("devToken");
 
     if (!token) {
       return new Response("", {

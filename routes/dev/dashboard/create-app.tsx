@@ -51,7 +51,7 @@ export const handler: Handlers<Data, WithSession> = {
     }
 
     const { session } = ctx.state;
-    const token = session.get("accessToken");
+    const token = session.get("devToken");
 
     const res = await fetch(endpoints.dev.app.create, {
       method: "POST",

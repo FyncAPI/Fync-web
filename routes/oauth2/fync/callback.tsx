@@ -30,7 +30,7 @@ export const handler: Handlers<
         );
       }
 
-      session.set("accessToken", accessToken);
+      session.set("devToken", accessToken);
 
       const res = await fetch(endpoints.dev.profile, {
         headers: {

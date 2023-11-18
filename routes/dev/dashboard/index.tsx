@@ -21,6 +21,7 @@ export const handler: Handlers<Data, WithSession> = {
     const { session } = ctx.state;
 
     console.log(session.data, "session");
+    const devToken = session.get("devToken");
     // const user = await ctx.state.db.collection("users").findOne({
     //   _id: ctx.state.session.get("userId"),
     // });
@@ -38,7 +39,7 @@ export const handler: Handlers<Data, WithSession> = {
     try {
       const res = await axios.get(endpoints.dev.app.get, {
         headers: {
-          Authorization: `Bearer ${session.get("accessToken")}`,
+          Authorization: `Bearer ${devToken}`,
         },
       });
 

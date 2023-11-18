@@ -17,7 +17,7 @@ export const handler: Handlers<Data, WithSession> = {
     //   _id: ctx.state.session.get("userId"),
     // });
     const user = session.get("user");
-    const token = session.get("accessToken");
+    const token = session.get("devToken");
 
     if (token) {
       // check token with server
