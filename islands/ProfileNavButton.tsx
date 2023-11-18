@@ -37,6 +37,8 @@ export default function ProfileNavButton(props: {
         <p className="text-white font-semibold mr-2">{props.name}</p>
 
         <img
+          rel={"preload"}
+          as={"image"}
           src={props.profilePicture}
           alt="User Profile"
           className="rounded-full w-10 h-10 cursor-pointer"

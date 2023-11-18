@@ -1,7 +1,10 @@
 import { asset } from "$fresh/runtime.ts";
+import { User } from "@/utils/type.ts";
+import ProfileNavButton from "@/islands/ProfileNavButton.tsx";
 
-export const Navbar = ({ type }: {
+export const Navbar = ({ type, user }: {
   type?: string;
+  user?: User;
 }) => (
   <>
     {/* <div class="bg-grey-500"> */}
@@ -17,7 +20,10 @@ export const Navbar = ({ type }: {
         (
           <div class="flex items-center justify-center ml-auto mr-5 self-center">
             <NavButton href="/dev" text="develop" />
-            <NavButton href="/login" text="Login" />
+            {user?._id
+              ? <ProfileNavButton {...user} />
+              : <NavButton href="/dev/login" text="login" />}
+            {/* <NavButton href="/login" text="Login" /> */}
             {/* <NavButton href="/sign-up" text="Sign up" /> */}
           </div>
         )}

@@ -4,11 +4,14 @@ import axios from "npm:axios";
 import { endpoints } from "@/constants/endpoints.ts";
 import { Navbar } from "@/components/Navbar.tsx";
 import { WithSession } from "fresh-session";
+import UserNavbar from "@/islands/UserNavbar.tsx";
+import { UsersList } from "@/components/UserList.tsx";
 
 type Data = {
   error?: string | null;
   user?: User;
   users: User[];
+  query?: string;
 };
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
@@ -23,28 +26,39 @@ export const handler: Handlers<Data, WithSession> = {
       return await ctx.render({
         users: users.data,
         user: user,
+        query: q || "",
       });
     } catch (e) {
       //   console.log(e);
       return await ctx.render({
         error: e.data,
         user,
+
         users: [],
       });
     }
   },
 };
 export default function Search({ data }: PageProps<Data>) {
-  const { error, users, user } = data;
+  const { error, users, user, query } = data;
   return (
     <>
-      <Navbar user={user} />
-      Hello {JSON.stringify(error)} {JSON.stringify(users)}
-      {users?.map((user) => (
+      <UserNavbar user={user} />
+      <div class="p-6 gap-3 flex flex-row align-middle justify-between">
+        <h1 class="text-2xl font-medium text-white text-center self-center">
+          Search Results for "{query}"
+        </h1>
+      </div>
+      {/* create a apps list */}
+
+      {
+        /* {users?.map((user) => (
         <div key={user._id}>
           {user?.username} {user.email}
         </div>
-      ))}
+      ))} */
+      }
+      <UsersList user={user} users={users} friendable={true} />
     </>
   );
 }

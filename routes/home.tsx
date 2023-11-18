@@ -34,9 +34,10 @@ export const handler: Handlers<Data, WithSession> = {
 };
 
 export default function HomePage(props: PageProps<Data>) {
+  const { data } = props;
   return (
     <>
-      <UserNavbar />
+      <UserNavbar user={data.user} />
       <div class="h-screen">
         {props.data.user
           ? (

@@ -29,6 +29,23 @@ const HttpsUrlSchema = z.custom((value) => {
   }
 });
 
+export type Friendship = z.infer<typeof friendshipParser>;
+
+export const friendshipParser = z.object({
+  _id: z.string(),
+  adder: z.string(),
+  accepter: z.string(),
+  removed: z.boolean().optional(),
+
+  friendship: z.number(),
+
+  images: z.array(z.string()),
+  videos: z.array(z.string()),
+
+  // sameApps: z.array(
+  createdAt: z.date(),
+});
+
 export const appParser = z.object({
   _id: z.string(),
   name: z.string(),
@@ -89,45 +106,59 @@ export const createGoogleUserParser = z.object({
 export type CreateGoogleUser = z.infer<typeof createGoogleUserParser>;
 
 export const userParser = z.object({
-  _id: z.string(),
+  _id: (z.string()),
   provider: z.array(z.enum(["google", "facebook", "email"])).optional(),
+  devId: (z.string()).optional(),
 
   username: z.string(),
   name: z.string(),
   avatar: z.string().optional(),
+  age: z.number().optional(),
 
   profilePicture: z.string().optional(),
 
-  friends: z.array(friendParser),
+  friends: z.array(
+    z.object({
+      friendship: friendshipParser.or(z.string()),
+      user: z.string(),
+    }),
+  ),
+
+  inwardFriendRequests: z
+    .array(z.string())
+    .optional(),
+  outwardFriendRequests: z
+    .array(z.string())
+    .optional(),
+  declinedFriendRequests: z
+    .array(z.string())
+    .optional(),
+  canceledFriendRequests: z
+    .array(z.string())
+    .optional(),
+
   email: z.string(),
   password: z.string().optional(),
   verified: z.boolean(),
   createdAt: z.date(),
 
   phoneNumber: z.string().optional(),
-  birthday: z.string().optional(),
+  birthdate: z.string().optional(),
 
-  apps: z.array(z.string().or(appParser)),
-  appUsers: z.array(z.string().or(appUserParser)),
+  apps: z.array(z.string()),
+  appUsers: (z.string()).array(),
+
+  location: z
+    .object({
+      country: z.string(),
+      city: z.string(),
+    })
+    .optional(),
+
+  interests: z.array(z.string()).optional(),
+  hobbies: z.array(z.string()).optional(),
+  bio: z.string().optional(),
 });
 
 export type User = z.infer<typeof userParser>;
 export type App = z.infer<typeof appParser>;
-
-export type Friendship = z.infer<typeof friendshipParser>;
-
-export const friendshipParser = z.object({
-  _id: z.string(),
-  adder: z.string(),
-  accepter: z.string(),
-  removed: z.boolean().optional(),
-
-  friendship: z.number(),
-
-  images: z.array(z.string()),
-  videos: z.array(z.string()),
-
-  // sameApps: z.array(z.instanceof(ObjectId)),
-
-  createdAt: z.date(),
-});

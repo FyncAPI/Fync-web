@@ -32,7 +32,10 @@ import * as $26 from "./routes/oauth2/fync/index.tsx";
 import * as $27 from "./routes/oauth2/google/callback.tsx";
 import * as $28 from "./routes/oauth2/google/index.tsx";
 import * as $29 from "./routes/oauth2/login.tsx";
-import * as $30 from "./routes/signup.tsx";
+import * as $30 from "./routes/search.tsx";
+import * as $31 from "./routes/signup.tsx";
+import * as $32 from "./routes/users/[id]/add-friend.tsx";
+import * as $33 from "./routes/users/[id]/index.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/AppDataEditor.tsx";
 import * as $$2 from "./islands/ArrayInput.tsx";
@@ -82,7 +85,10 @@ const manifest = {
     "./routes/oauth2/google/callback.tsx": $27,
     "./routes/oauth2/google/index.tsx": $28,
     "./routes/oauth2/login.tsx": $29,
-    "./routes/signup.tsx": $30,
+    "./routes/search.tsx": $30,
+    "./routes/signup.tsx": $31,
+    "./routes/users/[id]/add-friend.tsx": $32,
+    "./routes/users/[id]/index.tsx": $33,
   },
   islands: {
     "./islands/AccountForm.tsx": $$0,

@@ -18,7 +18,7 @@ export async function handler(
     });
   }
 
-  if (!session.data || !session.data.accessToken) {
+  if (!session.data) {
     return new Response("", {
       status: 302,
       headers: {

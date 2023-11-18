@@ -1,26 +1,25 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
 import { endpoints } from "@/constants/endpoints.ts";
-import { App, appParser, User } from "@/utils/type.ts";
 import CopyText from "@/islands/CopyText.tsx";
 import { Input } from "@/components/Input.tsx";
-import AppDataEditor from "@/islands/AppDataEditor.tsx";
 import { DevNavbar } from "@/components/DevNavbar.tsx";
 import axios from "npm:axios";
 import Banner from "@/islands/Banner.tsx";
 import { Button } from "@/components/Button.tsx";
 import AuthUrlGenerator from "@/islands/AuthUrlGenerator.tsx";
+import { User } from "@/utils/type.ts";
+import UserNavbar from "@/islands/UserNavbar.tsx";
 
 type Data = {
   user: User;
-  app?: App;
-  updateUrl?: string;
+  me: User;
   error?: string;
   env?: string;
 };
 
-const getApp = async (id: string, token: string) => {
-  const res = await fetch(endpoints.dev.app.get + id, {
+const getUser = async (id: string, token: string) => {
+  const res = await fetch(endpoints.user.get + id, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -35,8 +34,8 @@ const getApp = async (id: string, token: string) => {
     });
   }
 
-  const app = await res.json();
-  return app;
+  const user = await res.json();
+  return user;
 };
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
@@ -49,163 +48,118 @@ export const handler: Handlers<Data, WithSession> = {
       return new Response("", {
         status: 302,
         headers: {
-          Location: "/dev/login",
+          Location: "/login",
         },
       });
     }
 
     try {
-      const res = await fetch(endpoints.dev.app.get + id, {
+      const res = await fetch(endpoints.user.get + id, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
       if (!res.ok) {
-        return new Response("", {
-          status: 302,
-          headers: {
-            Location: "/dev/dashboard",
-          },
+        return ctx.render({
+          user: {} as User,
+          me: session.get("user"),
+          error: "error fetching user",
         });
       }
 
-      const app = await res.json();
+      const user = await res.json();
 
       return ctx.render({
-        app,
-        user: session.get("user"),
-        updateUrl: endpoints.dev.app.update + id,
+        user,
+        me: session.get("user"),
         env: domain == "http://localhost:8000" ? "dev" : "prod",
       });
     } catch (e) {
       return ctx.render({
         user: session.get("user"),
-        error: e.message,
-      });
-    }
-  },
-  async POST(req, ctx) {
-    const id = ctx.params.id;
-    console.log("putshit", id);
-
-    // return new Response("ok");
-    const { session } = ctx.state;
-    const token = session.get("accessToken");
-
-    const form = await req.formData();
-    const data = form.get("changes");
-    console.log(data);
-
-    if (!token) {
-      return new Response("", {
-        status: 302,
-        headers: {
-          Location: "/dev/login",
-        },
-      });
-    }
-
-    try {
-      const res = await axios.put(endpoints.dev.app.update + id, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      console.log(res.statusText, "response update");
-
-      if (!res.data) {
-        const app = await getApp(id, token);
-        return ctx.render({
-          app,
-          user: session.get("user"),
-          error: "error updating ",
-        });
-      }
-
-      console.log(res.data, "should beok");
-
-      return ctx.render({ app: res.data, user: session.get("user") });
-    } catch (e) {
-      console.log(e);
-      return ctx.render({
-        app: await getApp(id, token),
-        user: session.get("user"),
+        me: session.get("user"),
         error: e.message,
       });
     }
   },
 };
-export default function AppData({ data }: PageProps<Data>) {
+export default function UserData(props: PageProps<Data>) {
+  const { user, me, error } = props.data;
+  console.log(user.username, "uu");
   return (
     <>
-      <DevNavbar user={data.user} />
+      <UserNavbar user={me} />
+      {error && <Banner text={error} type={"error"} />}
       <div>
         <div class="magicpattern -z-10 top-0 absolute w-full h-full  bg-gradient-to-b from-current to-transparent" />
-        {data.error && (
+        {error && (
           <Banner
-            text={JSON.stringify(data.error)}
+            text={JSON.stringify(error)}
             type={"error"}
           />
         )}
-        {data.app && (
+        {user && (
           <>
             <div class="flex flex-row m-5 md:m-10 rounded-md items-center justify-between ">
               <div>
                 <div class="rounded-md items-center justify-center bg-gray-500 flex w-24 h-24 m-2 gradient-grid">
-                  {data.app.image
+                  {user?.profilePicture
                     ? (
                       <img
-                        src={data.app.image}
+                        src={user?.profilePicture}
                         class="rounded-md"
                       />
                     )
                     : (
                       <h2 class="text-4xl font-medium text-white self-center text-center -mt-1">
-                        {data.app.name.substring(0, 3)}
+                        {user?.name?.substring(0, 3)}
                       </h2>
                     )}
                 </div>
               </div>
               <div class={"flex flex-col ml-2 mr-auto text-left"}>
                 <h2 class="text-3xl font-medium text-white  ">
-                  {data.app.name}
+                  {user.name}
                 </h2>
-                <p class="text-primary-200 text-lg ">
-                  {data.app.description}
-                </p>
+                {
+                  /* <p class="text-primary-200 text-lg ">
+                  {data.user.description}
+                </p> */
+                }
               </div>
             </div>
             <div class="m-5 ">
-              <h1 class="text-2xl font-medium text-white">App data</h1>
+              <h1 class="text-2xl font-medium text-white">User data</h1>
 
               <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
                 <div class="flex flex-col">
                   <h4 class="text-primary-200 text-lg">
                     Client id
                   </h4>
-                  <CopyText text={data.app.clientId} />
+                  {/* <CopyText text={data.user.clientId} /> */}
                   <h4 class="text-primary-200 text-lg mt-4">
                     Client secret
                   </h4>
-                  <CopyText text={data.app.clientSecret} />
+                  {/* <CopyText text={data.user.clientSecret} /> */}
                 </div>
               </div>
               <h1 class="text-2xl font-medium text-white">OAuth data</h1>
 
-              <AppDataEditor app={data.app} />{" "}
+              {/* <UserDataEditor user={data.user} />{" "} */}
               <div class="mt-5 ">
                 <h1 class="text-2xl font-medium text-white">
                   Auth Url Generator
                 </h1>
 
                 <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
-                  <AuthUrlGenerator
-                    urls={data.app.redirects || []}
-                    clientId={data.app.clientId}
+                  {
+                    /* <AuthUrlGenerator
+                    urls={data.user.redirects || []}
+                    clientId={data.user.clientId}
                     env={data.env}
-                  />
+                  /> */
+                  }
                 </div>
               </div>
             </div>
