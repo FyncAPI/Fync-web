@@ -91,7 +91,7 @@ export const handler: Handlers<Data, WithSession> = {
 
     // return new Response("ok");
     const { session } = ctx.state;
-    const token = session.get("accessToken");
+    const token = session.get("devToken");
 
     const form = await req.formData();
     const data = form.get("changes");
@@ -163,7 +163,7 @@ export default function AppData({ data }: PageProps<Data>) {
                     )
                     : (
                       <h2 class="text-4xl font-medium text-white self-center text-center -mt-1">
-                        {data.app.name.substring(0, 3)}
+                        {data?.app?.name?.substring(0, 3)}
                       </h2>
                     )}
                 </div>

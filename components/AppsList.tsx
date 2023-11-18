@@ -21,7 +21,7 @@ export const AppsList = (props: { apps: App[] }) => {
                   )
                   : (
                     <h2 class="text-3xl font-medium text-white self-center text-center -mt-1">
-                      {app.name.substring(0, 3)}
+                      {app?.name?.substring(0, 3)}
                     </h2>
                   )}
               </div>
