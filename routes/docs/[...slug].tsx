@@ -168,7 +168,7 @@ function Content(props: { page: Page }) {
   );
 }
 
-const button = "p-2 bg-gray-100 w-full border(1 gray-200) grid";
+const button = "p-2 bg-gray-900 w-full border(1 gray-200) grid";
 
 function ForwardBackButtons(props: { slug: string }) {
   const currentIndex = SLUGS.findIndex((slug) => slug === props.slug);

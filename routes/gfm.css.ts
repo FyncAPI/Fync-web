@@ -1,9 +1,5 @@
 import { Handlers } from "$fresh/server.ts";
 import { gfm } from "../utils/markdown.ts";
-
-// TODO(lucacasonato): hash the file and use the hash as the filename, and serve
-// with high-cacheability headers.
-
 const CSS = `${gfm.CSS}
 
 ol.nested {
@@ -50,6 +46,24 @@ ol.nested li:before {
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: #e5e7eb;
   padding: 1rem;
+}
+
+.markdown-body code {
+  font-family: 'Courier New', monospace; /* Specify your preferred monospaced font */
+  background-color: #2b2b2b; /* Background color for code blocks */
+  color: #f8f8f2; /* Text color for code */
+  padding: 0.2em 0.4em; /* Padding around code */
+  border-radius: 4px; /* Rounded corners for code blocks */
+}
+
+/* Additional styles for code blocks inside backticks */
+.markdown-body pre code {
+  display: block;
+  padding: 1em;
+  overflow-x: auto;
+  background-color: #1e1e1e; /* Background color for code blocks with scroll */
+  border-radius: 6px; /* Rounded corners for code blocks with scroll */
+  border: 1px solid #444; /* Border color for code blocks with scroll */
 }
 
 

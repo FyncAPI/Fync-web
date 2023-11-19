@@ -19,6 +19,7 @@
     "pages": [
       ["profiles", "Get Profiles"],
       ["friends", "Get Friends"],
+      ["add-friend", "Add Friend"],
       ["posts", "Get Posts"]
     ]
   },
