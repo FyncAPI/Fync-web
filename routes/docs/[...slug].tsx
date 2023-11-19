@@ -42,6 +42,7 @@ export const handler: Handlers<Data> = {
       console.log("no entry");
       return ctx.renderNotFound();
     }
+
     const url = new URL(`../../data/${entry.file}`, import.meta.url);
     const fileContent = await Deno.readTextFile(url);
     const { body, attrs } = frontMatter<Record<string, unknown>>(fileContent);

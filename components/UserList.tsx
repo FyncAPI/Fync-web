@@ -3,12 +3,19 @@ import { useEffect, useState } from "preact/hooks";
 import { endpoints } from "@/constants/endpoints.ts";
 import { Button } from "@/components/Button.tsx";
 import UsersPlusIcon from "tabler/users-plus.tsx";
-import UsersMimusIcon from "tabler/users-minus.tsx";
+import UsersMinusIcon from "tabler/users-minus.tsx";
+import IconX from "tabler/x.tsx";
+import IconCheck from "tabler/check.tsx";
 
 export const UsersList = (
-  props: { users: User[]; friendable: boolean; user: User },
+  props: {
+    users: User[];
+    friendable?: boolean;
+    user: User;
+    acceptable?: boolean;
+  },
 ) => {
-  const { users, friendable, user: me } = props;
+  const { users, friendable, acceptable, user: me } = props;
 
   return (
     <div class="flex flex-col">
@@ -46,10 +53,30 @@ export const UsersList = (
                   type={"submit"}
                   variant={friendable ? "primary" : "secondary"}
                 >
-                  {me?.friends?.find((friend) => friend.user == user._id)
-                    ? <UsersMimusIcon />
+                  {user?.friends?.find((friend) => friend.user == me._id)
+                    ? <UsersMinusIcon />
+                    : user?.inwardFriendRequests?.find((id) => id == me._id)
+                    ? <IconX />
                     : <UsersPlusIcon />}
                 </Button>
+              )}
+              {acceptable && (
+                <>
+                  <Button
+                    type={"submit"}
+                    formaction={`/users/${user._id}/reject`}
+                    variant={"cancel"}
+                  >
+                    <IconX />
+                  </Button>
+                  <Button
+                    type={"submit"}
+                    formaction={`/users/${user._id}/accept`}
+                    variant={"primary"}
+                  >
+                    <IconCheck />
+                  </Button>
+                </>
               )}
             </form>
           </div>

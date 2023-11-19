@@ -9,6 +9,10 @@ import Banner from "@/islands/Banner.tsx";
 import { Button } from "@/components/Button.tsx";
 import AuthUrlGenerator from "@/islands/AuthUrlGenerator.tsx";
 import { User } from "@/utils/type.ts";
+import UsersPlusIcon from "tabler/users-plus.tsx";
+import UsersMinusIcon from "tabler/users-minus.tsx";
+import IconX from "tabler/x.tsx";
+import IconCheck from "tabler/check.tsx";
 import UserNavbar from "@/islands/UserNavbar.tsx";
 
 type Data = {
@@ -70,6 +74,7 @@ export const handler: Handlers<Data, WithSession> = {
 
       const user = await res.json();
 
+      console.log(user, "uusx");
       return ctx.render({
         user,
         me: session.get("user"),
@@ -120,46 +125,61 @@ export default function UserData(props: PageProps<Data>) {
               </div>
               <div class={"flex flex-col ml-2 mr-auto text-left"}>
                 <h2 class="text-3xl font-medium text-white  ">
-                  {user.name}
+                  {user.username}
                 </h2>
-                {
-                  /* <p class="text-primary-200 text-lg ">
-                  {data.user.description}
-                </p> */
-                }
+                <p class="text-primary-200 text-lg ">
+                  {user.name}
+                </p>
+                <p class="text-primary-200 text-lg ">
+                  {user.interests?.join(", ") || "No interests set for now"}
+                </p>
               </div>
+
+              {user?.friends?.find((friend) => friend.user == me._id)
+                ? (
+                  <Button
+                    type={"submit"}
+                    variant={"secondary"}
+                  >
+                    <UsersMinusIcon />
+                  </Button>
+                )
+                : user?.inwardFriendRequests?.find((id) => id == me._id)
+                ? (
+                  <Button
+                    type={"submit"}
+                    variant={"cancel"}
+                    value={"Cancel"}
+                  >
+                    Cancel
+                    <IconX />
+                  </Button>
+                )
+                : (
+                  <Button
+                    type={"submit"}
+                    variant={"primary"}
+                    value={"Cancel"}
+                  >
+                    <UsersPlusIcon />
+                  </Button>
+                )}
             </div>
             <div class="m-5 ">
-              <h1 class="text-2xl font-medium text-white">User data</h1>
+              <h1 class="text-2xl font-medium text-white">Some Data</h1>
 
               <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
                 <div class="flex flex-col">
                   <h4 class="text-primary-200 text-lg">
-                    Client id
+                    Mutual Friends
                   </h4>
-                  {/* <CopyText text={data.user.clientId} /> */}
-                  <h4 class="text-primary-200 text-lg mt-4">
-                    Client secret
-                  </h4>
-                  {/* <CopyText text={data.user.clientSecret} /> */}
-                </div>
-              </div>
-              <h1 class="text-2xl font-medium text-white">OAuth data</h1>
-
-              {/* <UserDataEditor user={data.user} />{" "} */}
-              <div class="mt-5 ">
-                <h1 class="text-2xl font-medium text-white">
-                  Auth Url Generator
-                </h1>
-
-                <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
-                  {
-                    /* <AuthUrlGenerator
-                    urls={data.user.redirects || []}
-                    clientId={data.user.clientId}
-                    env={data.env}
-                  /> */
-                  }
+                  {user?.friends?.filter((f) => {
+                    return me?.friends?.find((f2) => f2.user == f.user);
+                  }).map((friend) => (
+                    <p>
+                      {JSON.stringify(friend)}
+                    </p>
+                  ))}
                 </div>
               </div>
             </div>

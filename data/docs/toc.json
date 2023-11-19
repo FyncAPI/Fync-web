@@ -17,13 +17,9 @@
   "api": {
     "title": "API",
     "pages": [
-      ["profiles", "Get Profiles"],
-      ["friends", "Get Friends"],
-      ["add-friend", "Add Friend"],
-      ["posts", "Get Posts"]
+      ["get-user-by-id", "Get User Data"],
+      ["list-friends", "List Friends"],
+      ["add-friend", "Add Friend"]
     ]
-  },
-  "integrations": {
-    "title": "Integrations"
   }
 }

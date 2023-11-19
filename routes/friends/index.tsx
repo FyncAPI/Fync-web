@@ -10,6 +10,7 @@ import axios from "npm:axios";
 import { endpoints } from "@/constants/endpoints.ts";
 import { z } from "zod";
 import Banner from "@/islands/Banner.tsx";
+import { LinkButton } from "@/components/LinkButton.tsx";
 
 type Data = {
   friends: { user: User; friendship: Friendship }[];
@@ -75,6 +76,9 @@ export default function Page(props: PageProps) {
     <main>
       <Banner text={error} type="error" />
       <h1>About</h1>
+      <LinkButton href="/friends/requests">
+        reqs
+      </LinkButton>
       {JSON.stringify(friends)}
       <p>This is the about page.</p>
     </main>
