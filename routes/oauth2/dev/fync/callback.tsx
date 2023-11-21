@@ -59,11 +59,21 @@ export const handler: Handlers<
     } catch (error) {
       console.log(error, "error");
       return new Response(
-        JSON.stringify({
-          error,
-        }),
+        `<div>
+<h1>
+        ${
+          JSON.stringify({
+            error,
+          })
+        }
+        </h1>
+        <a href="/dev/login">Login</a>
+        </div>`,
         {
           status: 400,
+          headers: {
+            "Content-Type": "text/html",
+          },
         },
       );
     }

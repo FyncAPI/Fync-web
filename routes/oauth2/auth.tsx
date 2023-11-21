@@ -23,17 +23,19 @@ export const handler: Handlers<Data, WithSession> = {
     const token = ctx.state.session.get("accessToken");
     // ctx.state.session.set("authUrl", req.url);
 
+    const url = new URL(req.url);
+    console.log(url);
+
     if (!user || !token) {
       return new Response("", {
         status: 302,
         headers: {
-          Location: "/oauth2/login",
+          Location: "/oauth2/login?authUrl=" + url.toString(),
         },
       });
     }
-
     const query = new URL(req.url).searchParams;
-    console.log(query.toString(), "query");
+
     // follo oauth2 query params
     const redirectUri = query.get("redirect_uri");
     const responseType = query.get("response_type");

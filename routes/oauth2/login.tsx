@@ -26,6 +26,7 @@ export const handler: Handlers<Data, WithSession> = {
     if (!query.get("client_id")) {
       return ctx.render({ ownsite: true, dev: query.get("dev") === "true" });
     }
+
     const redirectUri = query.get("redirect_uri");
     const responseType = query.get("response_type");
     const clientId = query.get("client_id");
@@ -82,17 +83,22 @@ export const handler: Handlers<Data, WithSession> = {
           session.set("user", user);
           session.set("accessToken", accessToken);
 
+          const authUrl = query.toString().split("authUrl=")[1];
+          console.log(
+            "auqqq",
+            decodeURIComponent(query.toString().split("authUrl=")[1]),
+          );
           // const authUrl = session.get("authUrl");
           // console.log("authUrl", authUrl);
-          // if (authUrl) {
-          //   console.log(authUrl);
-          //   return new Response(null, {
-          //     status: 302,
-          //     headers: {
-          //       Location: authUrl,
-          //     },
-          //   });
-          // }
+          if (authUrl) {
+            console.log(authUrl);
+            return new Response(null, {
+              status: 302,
+              headers: {
+                Location: decodeURIComponent(authUrl),
+              },
+            });
+          }
           console.log("gogogo");
 
           return new Response("", {

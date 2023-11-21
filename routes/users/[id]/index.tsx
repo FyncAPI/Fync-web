@@ -1,19 +1,16 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
 import { endpoints } from "@/constants/endpoints.ts";
-import CopyText from "@/islands/CopyText.tsx";
-import { Input } from "@/components/Input.tsx";
-import { DevNavbar } from "@/components/DevNavbar.tsx";
 import axios from "npm:axios";
 import Banner from "@/islands/Banner.tsx";
 import { Button } from "@/components/Button.tsx";
-import AuthUrlGenerator from "@/islands/AuthUrlGenerator.tsx";
 import { User } from "@/utils/type.ts";
 import UsersPlusIcon from "tabler/users-plus.tsx";
 import UsersMinusIcon from "tabler/users-minus.tsx";
 import IconX from "tabler/x.tsx";
-import IconCheck from "tabler/check.tsx";
+import IconPen from "tabler/pencil.tsx";
 import UserNavbar from "@/islands/UserNavbar.tsx";
+import { LinkButton } from "@/components/LinkButton.tsx";
 
 type Data = {
   user: User;
@@ -135,7 +132,18 @@ export default function UserData(props: PageProps<Data>) {
                 </p>
               </div>
 
-              {user?.friends?.find((friend) => friend.user == me._id)
+              {user._id == me._id
+                ? (
+                  <LinkButton
+                    type={"submit"}
+                    variant={"secondary"}
+                    href={`/users/${user._id}/edit`}
+                  >
+                    Edit
+                    <IconPen />
+                  </LinkButton>
+                )
+                : user?.friends?.find((friend) => friend.user == me._id)
                 ? (
                   <Button
                     type={"submit"}
