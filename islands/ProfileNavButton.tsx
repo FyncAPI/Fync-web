@@ -47,6 +47,12 @@ export default function ProfileNavButton(props: {
       {showDropdown && (
         <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
           <a
+            href={`/users/${props._id}/`}
+            className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
+          >
+            Profile
+          </a>
+          <a
             href={`/dev/users/${props._id}/edit`}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
           >

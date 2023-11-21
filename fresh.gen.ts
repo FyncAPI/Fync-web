@@ -9,34 +9,35 @@ import * as $3 from "./routes/_middleware.ts";
 import * as $4 from "./routes/account/_middleware.ts";
 import * as $5 from "./routes/account/create/[page].tsx";
 import * as $6 from "./routes/account/create/index.tsx";
-import * as $7 from "./routes/api/oauth/token.tsx";
-import * as $8 from "./routes/dev/dashboard/_middleware.ts";
-import * as $9 from "./routes/dev/dashboard/app/[id]/index.tsx";
-import * as $10 from "./routes/dev/dashboard/create-app.tsx";
-import * as $11 from "./routes/dev/dashboard/index.tsx";
-import * as $12 from "./routes/dev/index.tsx";
-import * as $13 from "./routes/dev/login.tsx";
-import * as $14 from "./routes/docs/[...slug].tsx";
-import * as $15 from "./routes/docs/out.tsx";
-import * as $16 from "./routes/friends/index.tsx";
-import * as $17 from "./routes/friends/requests.tsx";
-import * as $18 from "./routes/friends/search.tsx";
-import * as $19 from "./routes/gfm.css.ts";
-import * as $20 from "./routes/home.tsx";
-import * as $21 from "./routes/index.tsx";
-import * as $22 from "./routes/login.tsx";
-import * as $23 from "./routes/logout.tsx";
-import * as $24 from "./routes/oauth2/auth.tsx";
-import * as $25 from "./routes/oauth2/forgot-password.tsx";
-import * as $26 from "./routes/oauth2/fync/callback.tsx";
-import * as $27 from "./routes/oauth2/fync/index.tsx";
-import * as $28 from "./routes/oauth2/google/callback.tsx";
-import * as $29 from "./routes/oauth2/google/index.tsx";
-import * as $30 from "./routes/oauth2/login.tsx";
-import * as $31 from "./routes/search.tsx";
-import * as $32 from "./routes/signup.tsx";
-import * as $33 from "./routes/users/[id]/add-friend.tsx";
-import * as $34 from "./routes/users/[id]/index.tsx";
+import * as $7 from "./routes/api/me.tsx";
+import * as $8 from "./routes/api/oauth/token.tsx";
+import * as $9 from "./routes/dev/dashboard/_middleware.ts";
+import * as $10 from "./routes/dev/dashboard/app/[id]/index.tsx";
+import * as $11 from "./routes/dev/dashboard/create-app.tsx";
+import * as $12 from "./routes/dev/dashboard/index.tsx";
+import * as $13 from "./routes/dev/index.tsx";
+import * as $14 from "./routes/dev/login.tsx";
+import * as $15 from "./routes/docs/[...slug].tsx";
+import * as $16 from "./routes/docs/out.tsx";
+import * as $17 from "./routes/friends/index.tsx";
+import * as $18 from "./routes/friends/requests.tsx";
+import * as $19 from "./routes/friends/search.tsx";
+import * as $20 from "./routes/gfm.css.ts";
+import * as $21 from "./routes/home.tsx";
+import * as $22 from "./routes/index.tsx";
+import * as $23 from "./routes/login.tsx";
+import * as $24 from "./routes/logout.tsx";
+import * as $25 from "./routes/oauth2/auth.tsx";
+import * as $26 from "./routes/oauth2/forgot-password.tsx";
+import * as $27 from "./routes/oauth2/fync/callback.tsx";
+import * as $28 from "./routes/oauth2/fync/index.tsx";
+import * as $29 from "./routes/oauth2/google/callback.tsx";
+import * as $30 from "./routes/oauth2/google/index.tsx";
+import * as $31 from "./routes/oauth2/login.tsx";
+import * as $32 from "./routes/search.tsx";
+import * as $33 from "./routes/signup.tsx";
+import * as $34 from "./routes/users/[id]/add-friend.tsx";
+import * as $35 from "./routes/users/[id]/index.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/AppDataEditor.tsx";
 import * as $$2 from "./islands/ArrayInput.tsx";
@@ -63,34 +64,35 @@ const manifest = {
     "./routes/account/_middleware.ts": $4,
     "./routes/account/create/[page].tsx": $5,
     "./routes/account/create/index.tsx": $6,
-    "./routes/api/oauth/token.tsx": $7,
-    "./routes/dev/dashboard/_middleware.ts": $8,
-    "./routes/dev/dashboard/app/[id]/index.tsx": $9,
-    "./routes/dev/dashboard/create-app.tsx": $10,
-    "./routes/dev/dashboard/index.tsx": $11,
-    "./routes/dev/index.tsx": $12,
-    "./routes/dev/login.tsx": $13,
-    "./routes/docs/[...slug].tsx": $14,
-    "./routes/docs/out.tsx": $15,
-    "./routes/friends/index.tsx": $16,
-    "./routes/friends/requests.tsx": $17,
-    "./routes/friends/search.tsx": $18,
-    "./routes/gfm.css.ts": $19,
-    "./routes/home.tsx": $20,
-    "./routes/index.tsx": $21,
-    "./routes/login.tsx": $22,
-    "./routes/logout.tsx": $23,
-    "./routes/oauth2/auth.tsx": $24,
-    "./routes/oauth2/forgot-password.tsx": $25,
-    "./routes/oauth2/fync/callback.tsx": $26,
-    "./routes/oauth2/fync/index.tsx": $27,
-    "./routes/oauth2/google/callback.tsx": $28,
-    "./routes/oauth2/google/index.tsx": $29,
-    "./routes/oauth2/login.tsx": $30,
-    "./routes/search.tsx": $31,
-    "./routes/signup.tsx": $32,
-    "./routes/users/[id]/add-friend.tsx": $33,
-    "./routes/users/[id]/index.tsx": $34,
+    "./routes/api/me.tsx": $7,
+    "./routes/api/oauth/token.tsx": $8,
+    "./routes/dev/dashboard/_middleware.ts": $9,
+    "./routes/dev/dashboard/app/[id]/index.tsx": $10,
+    "./routes/dev/dashboard/create-app.tsx": $11,
+    "./routes/dev/dashboard/index.tsx": $12,
+    "./routes/dev/index.tsx": $13,
+    "./routes/dev/login.tsx": $14,
+    "./routes/docs/[...slug].tsx": $15,
+    "./routes/docs/out.tsx": $16,
+    "./routes/friends/index.tsx": $17,
+    "./routes/friends/requests.tsx": $18,
+    "./routes/friends/search.tsx": $19,
+    "./routes/gfm.css.ts": $20,
+    "./routes/home.tsx": $21,
+    "./routes/index.tsx": $22,
+    "./routes/login.tsx": $23,
+    "./routes/logout.tsx": $24,
+    "./routes/oauth2/auth.tsx": $25,
+    "./routes/oauth2/forgot-password.tsx": $26,
+    "./routes/oauth2/fync/callback.tsx": $27,
+    "./routes/oauth2/fync/index.tsx": $28,
+    "./routes/oauth2/google/callback.tsx": $29,
+    "./routes/oauth2/google/index.tsx": $30,
+    "./routes/oauth2/login.tsx": $31,
+    "./routes/search.tsx": $32,
+    "./routes/signup.tsx": $33,
+    "./routes/users/[id]/add-friend.tsx": $34,
+    "./routes/users/[id]/index.tsx": $35,
   },
   islands: {
     "./islands/AccountForm.tsx": $$0,
