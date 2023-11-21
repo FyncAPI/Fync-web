@@ -22,24 +22,23 @@ import * as $16 from "./routes/docs/out.tsx";
 import * as $17 from "./routes/friends/index.tsx";
 import * as $18 from "./routes/friends/requests.tsx";
 import * as $19 from "./routes/friends/search.tsx";
-import * as $20 from "./routes/gfm.css.ts";
-import * as $21 from "./routes/home.tsx";
-import * as $22 from "./routes/index.tsx";
-import * as $23 from "./routes/login.tsx";
-import * as $24 from "./routes/logout.tsx";
-import * as $25 from "./routes/oauth2/auth.tsx";
-import * as $26 from "./routes/oauth2/dev/fync/callback.tsx";
-import * as $27 from "./routes/oauth2/dev/fync/index.tsx";
-import * as $28 from "./routes/oauth2/forgot-password.tsx";
-import * as $29 from "./routes/oauth2/google/callback.tsx";
-import * as $30 from "./routes/oauth2/google/index.tsx";
-import * as $31 from "./routes/oauth2/login.tsx";
-import * as $32 from "./routes/search.tsx";
-import * as $33 from "./routes/signup.tsx";
-import * as $34 from "./routes/users/[id]/accept-friend.tsx";
-import * as $35 from "./routes/users/[id]/add-friend.tsx";
-import * as $36 from "./routes/users/[id]/edit.tsx";
-import * as $37 from "./routes/users/[id]/index.tsx";
+import * as $20 from "./routes/home.tsx";
+import * as $21 from "./routes/index.tsx";
+import * as $22 from "./routes/login.tsx";
+import * as $23 from "./routes/logout.tsx";
+import * as $24 from "./routes/oauth2/auth.tsx";
+import * as $25 from "./routes/oauth2/dev/fync/callback.tsx";
+import * as $26 from "./routes/oauth2/dev/fync/index.tsx";
+import * as $27 from "./routes/oauth2/forgot-password.tsx";
+import * as $28 from "./routes/oauth2/google/callback.tsx";
+import * as $29 from "./routes/oauth2/google/index.tsx";
+import * as $30 from "./routes/oauth2/login.tsx";
+import * as $31 from "./routes/search.tsx";
+import * as $32 from "./routes/signup.tsx";
+import * as $33 from "./routes/users/[id]/accept-friend.tsx";
+import * as $34 from "./routes/users/[id]/add-friend.tsx";
+import * as $35 from "./routes/users/[id]/edit.tsx";
+import * as $36 from "./routes/users/[id]/index.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/AppDataEditor.tsx";
 import * as $$2 from "./islands/ArrayInput.tsx";
@@ -79,24 +78,23 @@ const manifest = {
     "./routes/friends/index.tsx": $17,
     "./routes/friends/requests.tsx": $18,
     "./routes/friends/search.tsx": $19,
-    "./routes/gfm.css.ts": $20,
-    "./routes/home.tsx": $21,
-    "./routes/index.tsx": $22,
-    "./routes/login.tsx": $23,
-    "./routes/logout.tsx": $24,
-    "./routes/oauth2/auth.tsx": $25,
-    "./routes/oauth2/dev/fync/callback.tsx": $26,
-    "./routes/oauth2/dev/fync/index.tsx": $27,
-    "./routes/oauth2/forgot-password.tsx": $28,
-    "./routes/oauth2/google/callback.tsx": $29,
-    "./routes/oauth2/google/index.tsx": $30,
-    "./routes/oauth2/login.tsx": $31,
-    "./routes/search.tsx": $32,
-    "./routes/signup.tsx": $33,
-    "./routes/users/[id]/accept-friend.tsx": $34,
-    "./routes/users/[id]/add-friend.tsx": $35,
-    "./routes/users/[id]/edit.tsx": $36,
-    "./routes/users/[id]/index.tsx": $37,
+    "./routes/home.tsx": $20,
+    "./routes/index.tsx": $21,
+    "./routes/login.tsx": $22,
+    "./routes/logout.tsx": $23,
+    "./routes/oauth2/auth.tsx": $24,
+    "./routes/oauth2/dev/fync/callback.tsx": $25,
+    "./routes/oauth2/dev/fync/index.tsx": $26,
+    "./routes/oauth2/forgot-password.tsx": $27,
+    "./routes/oauth2/google/callback.tsx": $28,
+    "./routes/oauth2/google/index.tsx": $29,
+    "./routes/oauth2/login.tsx": $30,
+    "./routes/search.tsx": $31,
+    "./routes/signup.tsx": $32,
+    "./routes/users/[id]/accept-friend.tsx": $33,
+    "./routes/users/[id]/add-friend.tsx": $34,
+    "./routes/users/[id]/edit.tsx": $35,
+    "./routes/users/[id]/index.tsx": $36,
   },
   islands: {
     "./islands/AccountForm.tsx": $$0,

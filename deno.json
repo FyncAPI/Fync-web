@@ -23,9 +23,10 @@
     "twind-preset-tailwind": "https://esm.sh/@twind/preset-tailwind@1.1.4",
     "twind_fresh_plugin/": "https://deno.land/x/fresh_twindv1_plugin@v1.3.0/",
     "zod": "https://deno.land/x/zod@v3.16.1/mod.ts",
-    "$std/": "https://deno.land/std@0.178.0/",
+    "$std/": "https://deno.land/std@0.205.0/",
     "$ga4": "https://raw.githubusercontent.com/denoland/ga4/main/mod.ts",
-    "imagemagick": "https://deno.land/x/imagemagick_deno@0.0.19/mod.ts"
+    "imagemagick": "https://deno.land/x/imagemagick_deno@0.0.19/mod.ts",
+    "$marked-mangle": "https://esm.sh/marked-mangle@1.0.1"
   },
   "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
   "lint": { "rules": { "tags": ["fresh", "recommended"] } },

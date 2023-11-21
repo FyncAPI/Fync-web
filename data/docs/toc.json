@@ -18,7 +18,7 @@
     "title": "API",
     "pages": [
       ["get-user-by-id", "Get User Data"],
-      ["list-friends", "List Friends"],
+      ["get-my-friends", "List Friends"],
       ["add-friend", "Add Friend"]
     ]
   }

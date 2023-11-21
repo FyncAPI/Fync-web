@@ -1,7 +1,7 @@
-import { Head } from "$fresh/runtime.ts";
+import { asset, Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Footer } from "@/components/Layout.tsx";
-import { frontMatter, gfm } from "../../utils/markdown.ts";
+import { frontMatter, gfm, renderMarkdown } from "../../utils/markdown.ts";
 import { DocsNavbar } from "../../components/DocsNavbar.tsx";
 import DocsTitle from "../../components/DocsTitle.tsx";
 import DocsSidebar from "../../components/DocsSidebar.tsx";
@@ -63,7 +63,7 @@ export default function DocsPage(props: PageProps<Data>) {
     <>
       <Head>
         <title>{props.data.page?.title ?? "Not Found"} | fresh docs</title>
-        {/* <link rel="stylesheet" href={`/gfm.css?build=${__FRSH_BUILD_ID}`} /> */}
+        <link rel="stylesheet" href={asset("/markdown.css")} />
         {description && <meta name="description" content={description} />}
       </Head>
       <div class="flex flex-col min-h-screen">
@@ -150,7 +150,7 @@ function DesktopSidebar(props: { path: string }) {
 }
 
 function Content(props: { page: Page }) {
-  const html = gfm.render(props.page.markdown);
+  const html = renderMarkdown(props.page.markdown);
   return (
     <main class="py-6 overflow-hidden">
       <h1 class="text(4xl gray-100) tracking-tight font-extrabold mt-6">

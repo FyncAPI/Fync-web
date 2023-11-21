@@ -1,3 +1,8 @@
+---
+description: |
+  Document for the GET /v1/users/:id endpoint's API.
+---
+
 ### Get User by ID
 
 #### Request
