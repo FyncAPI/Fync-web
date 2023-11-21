@@ -49,16 +49,33 @@ export const UserList = (
             </div>
             <form action={`/users/${user._id}/add-friend`} method="post">
               {friendable && (
-                <Button
-                  type={"submit"}
-                  variant={friendable ? "primary" : "secondary"}
-                >
+                <>
                   {user?.friends?.find((friend) => friend.user == me._id)
-                    ? <UsersMinusIcon />
+                    ? (
+                      <Button
+                        type={"submit"}
+                        variant={friendable ? "primary" : "secondary"}
+                      >
+                        <UsersMinusIcon />
+                      </Button>
+                    )
                     : user?.inwardFriendRequests?.find((id) => id == me._id)
-                    ? <IconX />
-                    : <UsersPlusIcon />}
-                </Button>
+                    ? (
+                      <Button
+                        type={"submit"}
+                        formaction={`/users/${user._id}/cancel`}
+                        variant={"cancel"}
+                      >
+                        <IconX />
+                      </Button>
+                    )
+                    :
+                    <Button
+                      type={"submit"}
+                      variant={friendable ? "primary" : "secondary"}
+                    ><UsersPlusIcon />
+                    </Button>}
+                </>
               )}
               {acceptable && (
                 <>

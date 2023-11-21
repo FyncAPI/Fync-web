@@ -28,7 +28,7 @@ export const handler: Handlers<Data, WithSession> = {
       return new Response(data.success, {
         status: 302,
         headers: {
-          Location: "/users/" + id + "/accepted",
+          Location: "/users/" + id,
         },
       });
     } catch (e) {

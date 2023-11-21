@@ -34,7 +34,8 @@ export const endpoints = {
     get: `${url}/v1/users/`,
     addFriend: `${url}/v1/users/{id}/add-friend/`,
     acceptFriend: `${url}/v1/accept-friend/{id}`,
-    rejectFriend: `${url}/v1/reject-friend/{id}`,
+    rejectFriend: `${url}/v1/{id}/decline-friend`,
+    cancelFriend: `${url}/v1/{id}/cancel-friend`,
     requests: `${url}/v1/friend-requests/@me/`,
   },
   // Home
