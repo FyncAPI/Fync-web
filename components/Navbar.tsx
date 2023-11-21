@@ -8,7 +8,7 @@ export const Navbar = ({ type, user }: {
 }) => (
   <>
     {/* <div class="bg-grey-500"> */}
-    <nav class="flex items-center justify-between flex-wrap  h-full w-full bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
+    <nav class="flex items-center justify-between flex-wrap  h-full w-full bg-gray-400  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 z-30 ">
       <div class="flex items-center text-white mr-6 p-3">
         <a href="/">
           <h1 class="font-bold text-white  text-2xl ">
@@ -22,7 +22,7 @@ export const Navbar = ({ type, user }: {
             <NavButton href="/dev" text="develop" />
             {user?._id
               ? <ProfileNavButton {...user} />
-              : <NavButton href="/dev/login" text="login" />}
+              : <NavButton href="/login" text="login" />}
             {/* <NavButton href="/login" text="Login" /> */}
             {/* <NavButton href="/sign-up" text="Sign up" /> */}
           </div>

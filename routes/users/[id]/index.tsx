@@ -11,6 +11,7 @@ import IconX from "tabler/x.tsx";
 import IconPen from "tabler/pencil.tsx";
 import UserNavbar from "@/islands/UserNavbar.tsx";
 import { LinkButton } from "@/components/LinkButton.tsx";
+import IconCheck from "tabler/check.tsx";
 
 type Data = {
   user: User;
@@ -162,6 +163,27 @@ export default function UserData(props: PageProps<Data>) {
                     Cancel
                     <IconX />
                   </Button>
+                )
+                : user?.outwardFriendRequests?.includes(me._id)
+                ? (
+                  <form method={"post"}>
+                    <Button
+                      method={"post"}
+                      type={"submit"}
+                      formaction={`/users/${user._id}/reject-friend`}
+                      variant={"cancel"}
+                    >
+                      <IconX />
+                    </Button>
+                    <Button
+                      method={"post"}
+                      type={"submit"}
+                      formaction={`/users/${user._id}/accept-friend`}
+                      variant={"primary"}
+                    >
+                      <IconCheck />
+                    </Button>
+                  </form>
                 )
                 : (
                   <Button

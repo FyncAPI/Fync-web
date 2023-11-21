@@ -11,8 +11,9 @@ export const handler: Handlers<Data, WithSession> = {
       const { session } = ctx.state;
 
       console.log("ACCESSTOKEN", session.get("accessToken"));
+      console.log(endpoints.user.acceptFriend.replace("{id}", id), "sassd");
       const res = await axios.post(
-        endpoints.user.addFriend.replace("{id}", id),
+        endpoints.user.acceptFriend.replace("{id}", id),
         {},
         {
           headers: {
@@ -22,26 +23,23 @@ export const handler: Handlers<Data, WithSession> = {
       );
 
       const data = await res.data;
-      console.log(data);
+      console.log(data, "resdata");
 
       return new Response(data.success, {
         status: 302,
         headers: {
-          Location: "/users/" + id,
+          Location: "/users/" + id + "/accepted",
         },
       });
     } catch (e) {
-      // console.log(e);
+      console.log(e.response, "er");
 
-      return new Response(e.response.data.error, {
-        status: 400,
+      return new Response(e, {
+        status: 302,
+        headers: {
+          Location: "/users/" + id + "/shit error",
+        },
       });
-      // return new Response(e, {
-      //   status: 302,
-      //   headers: {
-      //     Location: "/users/" + id,
-      //   },
-      // });
     }
   },
 };

@@ -36,9 +36,10 @@ import * as $30 from "./routes/oauth2/google/index.tsx";
 import * as $31 from "./routes/oauth2/login.tsx";
 import * as $32 from "./routes/search.tsx";
 import * as $33 from "./routes/signup.tsx";
-import * as $34 from "./routes/users/[id]/add-friend.tsx";
-import * as $35 from "./routes/users/[id]/edit.tsx";
-import * as $36 from "./routes/users/[id]/index.tsx";
+import * as $34 from "./routes/users/[id]/accept-friend.tsx";
+import * as $35 from "./routes/users/[id]/add-friend.tsx";
+import * as $36 from "./routes/users/[id]/edit.tsx";
+import * as $37 from "./routes/users/[id]/index.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/AppDataEditor.tsx";
 import * as $$2 from "./islands/ArrayInput.tsx";
@@ -92,9 +93,10 @@ const manifest = {
     "./routes/oauth2/login.tsx": $31,
     "./routes/search.tsx": $32,
     "./routes/signup.tsx": $33,
-    "./routes/users/[id]/add-friend.tsx": $34,
-    "./routes/users/[id]/edit.tsx": $35,
-    "./routes/users/[id]/index.tsx": $36,
+    "./routes/users/[id]/accept-friend.tsx": $34,
+    "./routes/users/[id]/add-friend.tsx": $35,
+    "./routes/users/[id]/edit.tsx": $36,
+    "./routes/users/[id]/index.tsx": $37,
   },
   islands: {
     "./islands/AccountForm.tsx": $$0,

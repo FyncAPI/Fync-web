@@ -11,9 +11,13 @@ import { endpoints } from "@/constants/endpoints.ts";
 import { z } from "zod";
 import Banner from "@/islands/Banner.tsx";
 import { LinkButton } from "@/components/LinkButton.tsx";
+import UserNavbar from "@/islands/UserNavbar.tsx";
+import { UserList } from "@/components/UserList.tsx";
+import { FriendList } from "@/components/FriendList.tsx";
 
 type Data = {
   friends: { user: User; friendship: Friendship }[];
+  me: User;
   error?: string | null;
 };
 
@@ -43,14 +47,16 @@ export const handler: Handlers<Data, WithSession> = {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      console.log(res.data);
 
       const friends = z.object({
         user: userParser,
         friendship: friendshipParser,
-      }).array().parse(res.data);
+      }).array().parse(res.data.data);
 
       return ctx.render({
         friends,
+        me: user,
       });
     } catch (e) {
       console.log(e);
@@ -64,23 +70,28 @@ export const handler: Handlers<Data, WithSession> = {
           },
         });
       } else {
-        return ctx.render({ friends: [], error: e?.error || "sum wong" });
+        return ctx.render({
+          friends: [],
+          error: e?.error || "sum wong",
+          me: user,
+        });
       }
     }
   },
 };
 
-export default function Page(props: PageProps) {
-  const { friends, error } = props.data;
+export default function Friends(props: PageProps) {
+  const { friends, me, error } = props.data;
   return (
-    <main>
-      <Banner text={error} type="error" />
-      <h1>About</h1>
+    <>
+      <UserNavbar user={me} />
+      {error && <Banner text={error} type="error" />}
       <LinkButton href="/friends/requests">
         reqs
       </LinkButton>
+      <FriendList friends={friends} me={me} />
       {JSON.stringify(friends)}
       <p>This is the about page.</p>
-    </main>
+    </>
   );
 }

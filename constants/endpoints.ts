@@ -33,6 +33,8 @@ export const endpoints = {
     me: `${url}/v1/users/@me`,
     get: `${url}/v1/users/`,
     addFriend: `${url}/v1/users/{id}/add-friend/`,
+    acceptFriend: `${url}/v1/accept-friend/{id}`,
+    rejectFriend: `${url}/v1/reject-friend/{id}`,
     requests: `${url}/v1/friend-requests/@me/`,
   },
   // Home

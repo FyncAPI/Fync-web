@@ -5,7 +5,7 @@ import { endpoints } from "@/constants/endpoints.ts";
 import { Navbar } from "@/components/Navbar.tsx";
 import { WithSession } from "fresh-session";
 import UserNavbar from "@/islands/UserNavbar.tsx";
-import { UsersList } from "@/components/UserList.tsx";
+import { UserList } from "@/components/UserList.tsx";
 
 type Data = {
   error?: string | null;
@@ -58,7 +58,7 @@ export default function Search({ data }: PageProps<Data>) {
         </div>
       ))} */
       }
-      <UsersList user={user} users={users} friendable={true} />
+      <UserList user={user} users={users} friendable={true} />
     </>
   );
 }

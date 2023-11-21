@@ -32,7 +32,7 @@ export default function ProfileNavButton(props: {
   }, []);
 
   return (
-    <div className="relative mx-5" ref={dropdownRef}>
+    <div className="z-50 mx-5" ref={dropdownRef}>
       <div className="flex items-center" onClick={toggleDropdown}>
         <p className="text-white font-semibold mr-2">{props.name}</p>
 
@@ -45,7 +45,7 @@ export default function ProfileNavButton(props: {
         />
       </div>
       {showDropdown && (
-        <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+        <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl z-30">
           <a
             href={`/users/${props._id}/`}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"

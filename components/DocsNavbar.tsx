@@ -38,7 +38,7 @@ export const DocsNavbar = ({ bg, user }: { bg?: string; user?: User }) => (
         <NavButton href="/docs" text="docs" />
         {user?._id
           ? <ProfileNavButton {...user} />
-          : <NavButton href="/dev/login" text="login" />}
+          : <NavButton href="/login" text="login" />}
       </div>
     </nav>
     {/* </div> */}

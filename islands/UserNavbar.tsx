@@ -29,7 +29,7 @@ export default function UserNavbar({ type, user }: {
         </form>
         {user?._id
           ? <ProfileNavButton {...user} />
-          : <NavButton href="/dev/login" text="login" />}
+          : <NavButton href="/login" text="login" />}
         {/* <NavButton href="/login" text="Login" /> */}
       </div>
     </nav>

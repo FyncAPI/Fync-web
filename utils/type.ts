@@ -43,7 +43,7 @@ export const friendshipParser = z.object({
   videos: z.array(z.string()),
 
   // sameApps: z.array(
-  createdAt: z.date(),
+  createdAt: z.date().or(z.string()),
 });
 
 export const appParser = z.object({
@@ -66,7 +66,7 @@ export const appParser = z.object({
   events: z.array(z.string()),
   interactions: z.array(z.string()),
 
-  createdAt: z.date(),
+  createdAt: z.date().or(z.string()),
 });
 
 export const appUserParser = z.object({
@@ -82,7 +82,7 @@ export const appUserParser = z.object({
     eventCount: z.number(),
     lastInteraction: z.date(),
   }),
-  createdAt: z.date(),
+  createdAt: z.date().or(z.string()),
 });
 
 export const createEmailUserParser = z.object({
@@ -140,7 +140,7 @@ export const userParser = z.object({
   email: z.string(),
   password: z.string().optional(),
   verified: z.boolean(),
-  createdAt: z.date(),
+  createdAt: z.date().or(z.string()),
 
   phoneNumber: z.string().optional(),
   birthdate: z.string().optional(),

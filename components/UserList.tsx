@@ -7,7 +7,7 @@ import UsersMinusIcon from "tabler/users-minus.tsx";
 import IconX from "tabler/x.tsx";
 import IconCheck from "tabler/check.tsx";
 
-export const UsersList = (
+export const UserList = (
   props: {
     users: User[];
     friendable?: boolean;
@@ -70,8 +70,9 @@ export const UsersList = (
                     <IconX />
                   </Button>
                   <Button
+                    method={"post"}
                     type={"submit"}
-                    formaction={`/users/${user._id}/accept`}
+                    formaction={`/users/${user._id}/accept-friend`}
                     variant={"primary"}
                   >
                     <IconCheck />

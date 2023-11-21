@@ -5,7 +5,7 @@ import { endpoints } from "@/constants/endpoints.ts";
 import { Navbar } from "@/components/Navbar.tsx";
 import { WithSession } from "fresh-session";
 import UserNavbar from "@/islands/UserNavbar.tsx";
-import { UsersList } from "@/components/UserList.tsx";
+import { UserList } from "@/components/UserList.tsx";
 
 type Data = {
   error?: string | null;
@@ -59,13 +59,13 @@ export default function Requests({ data }: PageProps<Data>) {
           inwards
         </h1>
       </div>
-      <UsersList user={user} users={inwards} acceptable={true} />
+      <UserList user={user} users={inwards} acceptable={true} />
       <div class="p-6 gap-3 flex flex-row align-middle justify-between">
         <h1 class="text-2xl font-medium text-white text-center self-center">
           pending
         </h1>
       </div>
-      <UsersList user={user} users={outwards} friendable={true} />
+      <UserList user={user} users={outwards} friendable={true} />
     </>
   );
 }
