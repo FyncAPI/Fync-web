@@ -37,8 +37,10 @@ import * as $31 from "./routes/search.tsx";
 import * as $32 from "./routes/signup.tsx";
 import * as $33 from "./routes/users/[id]/accept-friend.tsx";
 import * as $34 from "./routes/users/[id]/add-friend.tsx";
-import * as $35 from "./routes/users/[id]/edit.tsx";
-import * as $36 from "./routes/users/[id]/index.tsx";
+import * as $35 from "./routes/users/[id]/cancel.tsx";
+import * as $36 from "./routes/users/[id]/edit.tsx";
+import * as $37 from "./routes/users/[id]/index.tsx";
+import * as $38 from "./routes/users/[id]/reject.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/AppDataEditor.tsx";
 import * as $$2 from "./islands/ArrayInput.tsx";
@@ -93,8 +95,10 @@ const manifest = {
     "./routes/signup.tsx": $32,
     "./routes/users/[id]/accept-friend.tsx": $33,
     "./routes/users/[id]/add-friend.tsx": $34,
-    "./routes/users/[id]/edit.tsx": $35,
-    "./routes/users/[id]/index.tsx": $36,
+    "./routes/users/[id]/cancel.tsx": $35,
+    "./routes/users/[id]/edit.tsx": $36,
+    "./routes/users/[id]/index.tsx": $37,
+    "./routes/users/[id]/reject.tsx": $38,
   },
   islands: {
     "./islands/AccountForm.tsx": $$0,

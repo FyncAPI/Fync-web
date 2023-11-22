@@ -11,9 +11,9 @@ export const handler: Handlers<Data, WithSession> = {
       const { session } = ctx.state;
 
       console.log("ACCESSTOKEN", session.get("accessToken"));
-      console.log(endpoints.user.acceptFriend.replace("{id}", id), "sassd");
+      console.log(endpoints.user.rejectFriend.replace("{id}", id), "sassd");
       const res = await axios.post(
-        endpoints.user.acceptFriend.replace("{id}", id),
+        endpoints.user.rejectFriend.replace("{id}", id),
         {},
         {
           headers: {
@@ -28,7 +28,7 @@ export const handler: Handlers<Data, WithSession> = {
       /*return new Response(data.success, {
         status: 302,
         headers: {
-          Location: "/users/" + id,
+            Location: "/friends/requests",
         },
       });*/
       return new Response(data.success, {

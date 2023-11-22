@@ -24,11 +24,14 @@ export const handler: Handlers<Data, WithSession> = {
       const data = await res.data;
       console.log(data);
 
-      return new Response(data.success, {
+      /*return new Response(data.success, {
         status: 302,
         headers: {
           Location: "/users/" + id,
         },
+      });*/
+      return new Response(data.success, {
+        status: 200,
       });
     } catch (e) {
       // console.log(e);

@@ -59,7 +59,7 @@ export default function Requests({ data }: PageProps<Data>) {
           inwards
         </h1>
       </div>
-      <UserList user={user} users={inwards} acceptable={true} />
+      <UserList user={user} users={inwards} friendable={true} />
       <div class="p-6 gap-3 flex flex-row align-middle justify-between">
         <h1 class="text-2xl font-medium text-white text-center self-center">
           pending

@@ -6,6 +6,7 @@ import UsersPlusIcon from "tabler/users-plus.tsx";
 import UsersMinusIcon from "tabler/users-minus.tsx";
 import IconX from "tabler/x.tsx";
 import IconCheck from "tabler/check.tsx";
+import FriendingButton from "@/components/FriendingButton.tsx";
 
 export const UserList = (
   props: {
@@ -19,7 +20,7 @@ export const UserList = (
 
   return (
     <div class="flex flex-col">
-      {users?.map((user) => (
+      {users?.filter((u) => u._id != me._id).map((user) => (
         <a
           href={"/users/" + user._id}
           class={"mx-5 md:mx-10 my-3"}
@@ -47,39 +48,7 @@ export const UserList = (
               </h2>
               <p class="text-primary-200 text-lg ">{user.name}</p>
             </div>
-            <form action={`/users/${user._id}/add-friend`} method="post">
-              {friendable && (
-                <Button
-                  type={"submit"}
-                  variant={friendable ? "primary" : "secondary"}
-                >
-                  {user?.friends?.find((friend) => friend.user == me._id)
-                    ? <UsersMinusIcon />
-                    : user?.inwardFriendRequests?.find((id) => id == me._id)
-                    ? <IconX />
-                    : <UsersPlusIcon />}
-                </Button>
-              )}
-              {acceptable && (
-                <>
-                  <Button
-                    type={"submit"}
-                    formaction={`/users/${user._id}/reject`}
-                    variant={"cancel"}
-                  >
-                    <IconX />
-                  </Button>
-                  <Button
-                    method={"post"}
-                    type={"submit"}
-                    formaction={`/users/${user._id}/accept-friend`}
-                    variant={"primary"}
-                  >
-                    <IconCheck />
-                  </Button>
-                </>
-              )}
-            </form>
+            {friendable && <FriendingButton user={user} me={me} />}
           </div>
         </a>
       ))}
