@@ -25,11 +25,14 @@ export const handler: Handlers<Data, WithSession> = {
       const data = await res.data;
       console.log(data, "resdata");
 
-      return new Response(data.success, {
+      /*return new Response(data.success, {
         status: 302,
         headers: {
             Location: "/friends/requests",
         },
+      });*/
+      return new Response(data.success, {
+        status: 200,
       });
     } catch (e) {
       console.log(e.response, "er");

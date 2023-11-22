@@ -19,7 +19,7 @@ export const UserList = (
 
   return (
     <div class="flex flex-col">
-      {users?.map((user) => (
+      {users?.map((user) => ((
         <a
           href={"/users/" + user._id}
           class={"mx-5 md:mx-10 my-3"}
@@ -99,7 +99,7 @@ export const UserList = (
             </form>
           </div>
         </a>
-      ))}
+      )))}
     </div>
   );
 };
