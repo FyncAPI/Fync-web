@@ -6,6 +6,7 @@ import UsersPlusIcon from "tabler/users-plus.tsx";
 import UsersMinusIcon from "tabler/users-minus.tsx";
 import IconX from "tabler/x.tsx";
 import IconCheck from "tabler/check.tsx";
+import FriendingButton from "@/components/FriendingButton.tsx";
 
 export const UserList = (
   props: {
@@ -47,56 +48,7 @@ export const UserList = (
               </h2>
               <p class="text-primary-200 text-lg ">{user.name}</p>
             </div>
-            <form action={`/users/${user._id}/add-friend`} method="post">
-              {friendable && (
-                <>
-                  {user?.friends?.find((friend) => friend.user == me._id)
-                    ? (
-                      <Button
-                        type={"submit"}
-                        variant={friendable ? "primary" : "secondary"}
-                      >
-                        <UsersMinusIcon />
-                      </Button>
-                    )
-                    : user?.inwardFriendRequests?.find((id) => id == me._id)
-                    ? (
-                      <Button
-                        type={"submit"}
-                        formaction={`/users/${user._id}/cancel`}
-                        variant={"cancel"}
-                      >
-                        <IconX />
-                      </Button>
-                    )
-                    :
-                    <Button
-                      type={"submit"}
-                      variant={friendable ? "primary" : "secondary"}
-                    ><UsersPlusIcon />
-                    </Button>}
-                </>
-              )}
-              {acceptable && (
-                <>
-                  <Button
-                    type={"submit"}
-                    formaction={`/users/${user._id}/reject`}
-                    variant={"cancel"}
-                  >
-                    <IconX />
-                  </Button>
-                  <Button
-                    method={"post"}
-                    type={"submit"}
-                    formaction={`/users/${user._id}/accept-friend`}
-                    variant={"primary"}
-                  >
-                    <IconCheck />
-                  </Button>
-                </>
-              )}
-            </form>
+            {friendable && <FriendingButton user={user} me={me} />}
           </div>
         </a>
       )))}
