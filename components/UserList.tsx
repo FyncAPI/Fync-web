@@ -20,38 +20,40 @@ export const UserList = (
 
   return (
     <div class="flex flex-col">
-      {users?.map((user) => ((
-        <a
-          href={"/users/" + user._id}
-          class={"mx-5 md:mx-10 my-3"}
-        >
-          <div class="flex flex-row rounded-md items-center justify-between bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 magicpattern">
-            <div>
-              <div class="rounded-md items-center justify-center bg-gray-500 w-16 flex h-16 m-2 gradient-grid">
-                {user.profilePicture
-                  ? (
-                    <img
-                      src={user.profilePicture}
-                      class="rounded-md"
-                    />
-                  )
-                  : (
-                    <h2 class="text-3xl font-medium text-white self-center text-center -mt-1">
-                      {user.name.substring(0, 3)}
-                    </h2>
-                  )}
+      {users?.map((user) => {
+          return user._id != me._id ? (
+            <a
+              href={"/users/" + user._id}
+              class={"mx-5 md:mx-10 my-3"}
+            >
+              <div class="flex flex-row rounded-md items-center justify-between bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 magicpattern">
+                <div>
+                  <div class="rounded-md items-center justify-center bg-gray-500 w-16 flex h-16 m-2 gradient-grid">
+                    {user.profilePicture
+                      ? (
+                        <img
+                          src={user.profilePicture}
+                          class="rounded-md"
+                        />
+                      )
+                      : (
+                        <h2 class="text-3xl font-medium text-white self-center text-center -mt-1">
+                          {user.name.substring(0, 3)}
+                        </h2>
+                      )}
+                  </div>
+                </div>
+                <div class={"flex flex-col ml-2 mr-auto text-left"}>
+                  <h2 class="text-3xl font-medium text-white  ">
+                    {user.username}
+                  </h2>
+                  <p class="text-primary-200 text-lg ">{user.name}</p>
+                </div>
+                {friendable && <FriendingButton user={user} me={me} />}
               </div>
-            </div>
-            <div class={"flex flex-col ml-2 mr-auto text-left"}>
-              <h2 class="text-3xl font-medium text-white  ">
-                {user.username}
-              </h2>
-              <p class="text-primary-200 text-lg ">{user.name}</p>
-            </div>
-            {friendable && <FriendingButton user={user} me={me} />}
-          </div>
-        </a>
-      )))}
+            </a>
+            ) : <></>
+      })}
     </div>
   );
 };
