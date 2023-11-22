@@ -10,6 +10,7 @@ import axios from "npm:axios";
 import Banner from "@/islands/Banner.tsx";
 import { Button } from "@/components/Button.tsx";
 import AuthUrlGenerator from "@/islands/AuthUrlGenerator.tsx";
+import InteractionEditor from "@/islands/InteractionEditor.tsx";
 
 type Data = {
   user: User;
@@ -208,6 +209,12 @@ export default function AppData({ data }: PageProps<Data>) {
                   />
                 </div>
               </div>
+              <a
+                class="text-2xl font-medium text-white"
+                href={`/dev/dashboard/app/${data.app._id}/interactions`}
+              >
+                interactions
+              </a>
             </div>
           </>
         )}

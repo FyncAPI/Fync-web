@@ -1,4 +1,15 @@
 import { z, ZodObject } from "zod";
+export const interactionParser = z.object({
+  _id: z.string(),
+  app: z.string(),
+  title: z.string(),
+  description: z.string(),
+  // type: z.string(),
+  // data: z.any().optional(),
+
+  // createdAt: z.date().or(z.string()),
+});
+export type Interaction = z.infer<typeof interactionParser>;
 
 export const friendParser = z.object({
   _id: z.string(),
