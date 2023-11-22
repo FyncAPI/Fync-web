@@ -12,6 +12,7 @@ import IconPen from "tabler/pencil.tsx";
 import UserNavbar from "@/islands/UserNavbar.tsx";
 import { LinkButton } from "@/components/LinkButton.tsx";
 import IconCheck from "tabler/check.tsx";
+import FriendingButton from "@/components/FriendingButton.tsx";
 
 type Data = {
   user: User;
@@ -144,56 +145,7 @@ export default function UserData(props: PageProps<Data>) {
                     <IconPen />
                   </LinkButton>
                 )
-                : user?.friends?.find((friend) => friend.user == me._id)
-                ? (
-                  <Button
-                    type={"submit"}
-                    variant={"secondary"}
-                  >
-                    <UsersMinusIcon />
-                  </Button>
-                )
-                : user?.inwardFriendRequests?.find((id) => id == me._id)
-                ? (
-                  <Button
-                    type={"submit"}
-                    variant={"cancel"}
-                    value={"Cancel"}
-                  >
-                    Cancel
-                    <IconX />
-                  </Button>
-                )
-                : user?.outwardFriendRequests?.includes(me._id)
-                ? (
-                  <form method={"post"}>
-                    <Button
-                      method={"post"}
-                      type={"submit"}
-                      formaction={`/users/${user._id}/reject-friend`}
-                      variant={"cancel"}
-                    >
-                      <IconX />
-                    </Button>
-                    <Button
-                      method={"post"}
-                      type={"submit"}
-                      formaction={`/users/${user._id}/accept-friend`}
-                      variant={"primary"}
-                    >
-                      <IconCheck />
-                    </Button>
-                  </form>
-                )
-                : (
-                  <Button
-                    type={"submit"}
-                    variant={"primary"}
-                    value={"Cancel"}
-                  >
-                    <UsersPlusIcon />
-                  </Button>
-                )}
+                : <FriendingButton user={user} me={me} />}
             </div>
             <div class="m-5 ">
               <h1 class="text-2xl font-medium text-white">Some Data</h1>
