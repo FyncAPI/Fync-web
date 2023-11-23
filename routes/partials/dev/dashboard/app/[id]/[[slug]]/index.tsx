@@ -1,4 +1,4 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
 import { endpoints } from "@/constants/endpoints.ts";
 import { App, appParser, User } from "@/utils/type.ts";
@@ -11,6 +11,7 @@ import Banner from "@/islands/Banner.tsx";
 import { Button } from "@/components/Button.tsx";
 import AuthUrlGenerator from "@/islands/AuthUrlGenerator.tsx";
 import InteractionEditor from "@/islands/InteractionEditor.tsx";
+import { Partial } from "$fresh/runtime.ts";
 
 type Data = {
   user: User;
@@ -18,6 +19,10 @@ type Data = {
   updateUrl?: string;
   error?: string;
   env?: string;
+};
+export const config: RouteConfig = {
+  skipAppWrapper: true,
+  skipInheritedLayouts: true,
 };
 
 const getApp = async (id: string, token: string) => {
@@ -138,87 +143,24 @@ export const handler: Handlers<Data, WithSession> = {
     }
   },
 };
-export default function AppData({ data }: PageProps<Data>) {
-  return (
-    <>
-      <DevNavbar user={data.user} />
+export default function AppData(props: PageProps<Data>) {
+  const { data, params } = props;
+  console.log("oyoyo", params);
+
+  if (!data.app) {
+    return (
       <div>
-        <div class="magicpattern -z-10 top-0 absolute w-full h-full  bg-gradient-to-b from-current to-transparent" />
-        {data.error && (
-          <Banner
-            text={JSON.stringify(data.error)}
-            type={"error"}
-          />
-        )}
-        {data.app && (
-          <>
-            <div class="flex flex-row m-5 md:m-10 rounded-md items-center justify-between ">
-              <div>
-                <div class="rounded-md items-center justify-center bg-gray-500 flex w-24 h-24 m-2 gradient-grid">
-                  {data.app.image
-                    ? (
-                      <img
-                        src={data.app.image}
-                        class="rounded-md"
-                      />
-                    )
-                    : (
-                      <h2 class="text-4xl font-medium text-white self-center text-center -mt-1">
-                        {data?.app?.name?.substring(0, 3)}
-                      </h2>
-                    )}
-                </div>
-              </div>
-              <div class={"flex flex-col ml-2 mr-auto text-left"}>
-                <h2 class="text-3xl font-medium text-white  ">
-                  {data.app.name}
-                </h2>
-                <p class="text-primary-200 text-lg ">
-                  {data.app.description}
-                </p>
-              </div>
-            </div>
-            <div class="m-5 ">
-              <h1 class="text-2xl font-medium text-white">App data</h1>
-
-              <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
-                <div class="flex flex-col">
-                  <h4 class="text-primary-200 text-lg">
-                    Client id
-                  </h4>
-                  <CopyText text={data.app.clientId} />
-                  <h4 class="text-primary-200 text-lg mt-4">
-                    Client secret
-                  </h4>
-                  <CopyText text={data.app.clientSecret} />
-                </div>
-              </div>
-              <h1 class="text-2xl font-medium text-white">OAuth data</h1>
-
-              <AppDataEditor app={data.app} />{" "}
-              <div class="mt-5 ">
-                <h1 class="text-2xl font-medium text-white">
-                  Auth Url Generator
-                </h1>
-
-                <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
-                  <AuthUrlGenerator
-                    urls={data.app.redirects || []}
-                    clientId={data.app.clientId}
-                    env={data.env}
-                  />
-                </div>
-              </div>
-              <a
-                class="text-2xl font-medium text-white"
-                href={`/dev/dashboard/app/${data.app._id}/interactions`}
-              >
-                interactions
-              </a>
-            </div>
-          </>
-        )}
+        NO APP DATa
       </div>
-    </>
+    );
+  }
+  return (
+    <Partial name="app-editor">
+      {params?.slug == "discord"
+        ? <div>dis</div>
+        : params?.slug == "interactions"
+        ? <div>int</div>
+        : <AppDataEditor app={data.app} />}
+    </Partial>
   );
 }

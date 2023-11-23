@@ -14,6 +14,14 @@
       ["example-flow", "Example Flow"]
     ]
   },
+  "discord-flow": {
+    "title": "Discord Flow Login",
+    "pages": [
+      ["overview", "Overview"],
+      ["setup", "Setup"],
+      ["customize", "Customize"]
+    ]
+  },
   "api": {
     "title": "API",
     "pages": [
