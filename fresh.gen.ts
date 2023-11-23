@@ -13,9 +13,9 @@ import * as $7 from "./routes/api/me.tsx";
 import * as $8 from "./routes/api/oauth/token.tsx";
 import * as $9 from "./routes/dev/dashboard/_middleware.ts";
 import * as $10 from "./routes/dev/dashboard/app/[id]/[[slug]]/index.tsx";
-import * as $11 from "./routes/dev/dashboard/interactions.tsx";
-import * as $12 from "./routes/dev/dashboard/create-app.tsx";
-import * as $13 from "./routes/dev/dashboard/index.tsx";
+import * as $11 from "./routes/dev/dashboard/create-app.tsx";
+import * as $12 from "./routes/dev/dashboard/index.tsx";
+import * as $13 from "./routes/dev/dashboard/interactions.tsx";
 import * as $14 from "./routes/dev/index.tsx";
 import * as $15 from "./routes/dev/login.tsx";
 import * as $16 from "./routes/docs/[...slug].tsx";
@@ -34,7 +34,7 @@ import * as $28 from "./routes/oauth2/forgot-password.tsx";
 import * as $29 from "./routes/oauth2/google/callback.tsx";
 import * as $30 from "./routes/oauth2/google/index.tsx";
 import * as $31 from "./routes/oauth2/login.tsx";
-import * as $32 from "./routes/partials/discord.tsx";
+import * as $32 from "./routes/partials/dev/dashboard/app/[id]/[[slug]]/index.tsx";
 import * as $33 from "./routes/search.tsx";
 import * as $34 from "./routes/signup.tsx";
 import * as $35 from "./routes/users/[id]/accept-friend.tsx";
@@ -74,10 +74,10 @@ const manifest = {
     "./routes/api/me.tsx": $7,
     "./routes/api/oauth/token.tsx": $8,
     "./routes/dev/dashboard/_middleware.ts": $9,
-    "./routes/dev/dashboard/app/[id]/index.tsx": $10,
-    "./routes/dev/dashboard/app/[id]/interactions.tsx": $11,
-    "./routes/dev/dashboard/create-app.tsx": $12,
-    "./routes/dev/dashboard/index.tsx": $13,
+    "./routes/dev/dashboard/app/[id]/[[slug]]/index.tsx": $10,
+    "./routes/dev/dashboard/create-app.tsx": $11,
+    "./routes/dev/dashboard/index.tsx": $12,
+    "./routes/dev/dashboard/interactions.tsx": $13,
     "./routes/dev/index.tsx": $14,
     "./routes/dev/login.tsx": $15,
     "./routes/docs/[...slug].tsx": $16,
@@ -96,7 +96,7 @@ const manifest = {
     "./routes/oauth2/google/callback.tsx": $29,
     "./routes/oauth2/google/index.tsx": $30,
     "./routes/oauth2/login.tsx": $31,
-    "./routes/partials/discord.tsx": $32,
+    "./routes/partials/dev/dashboard/app/[id]/[[slug]]/index.tsx": $32,
     "./routes/search.tsx": $33,
     "./routes/signup.tsx": $34,
     "./routes/users/[id]/accept-friend.tsx": $35,
