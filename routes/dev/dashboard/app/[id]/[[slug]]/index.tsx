@@ -13,6 +13,7 @@ import AuthUrlGenerator from "@/islands/AuthUrlGenerator.tsx";
 import InteractionEditor from "@/islands/InteractionEditor.tsx";
 import { Partial } from "$fresh/runtime.ts";
 import InteractionsEditor from "@/islands/InteractionsEditor.tsx";
+import AppEditorPartial from "@/components/AppEditorPartial.tsx";
 
 type Data = {
   user: User;
@@ -229,13 +230,11 @@ export default function AppData(props: PageProps<Data>) {
                 </a>
               </aside>
 
-              <Partial name="app-editor" mode="replace">
-                {params?.slug == "discord"
-                  ? <div>dis</div>
-                  : params?.slug == "interactions"
-                  ? <InteractionsEditor interactions={data.interactions} />
-                  : <AppDataEditor app={data.app} />}
-              </Partial>
+              <AppEditorPartial
+                slug={params.slug}
+                app={data.app}
+                interactions={data.interactions}
+              />
               <div class="mt-5 ">
                 <h1 class="text-2xl font-medium text-white">
                   Auth Url Generator
@@ -248,6 +247,7 @@ export default function AppData(props: PageProps<Data>) {
                     env={data.env}
                   />
                 </div>
+                A
               </div>
               <a
                 class="text-2xl font-medium text-white"

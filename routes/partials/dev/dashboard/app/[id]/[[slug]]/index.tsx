@@ -1,7 +1,7 @@
 import { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
 import { endpoints } from "@/constants/endpoints.ts";
-import { App, appParser, User } from "@/utils/type.ts";
+import { App, appParser, Interaction, User } from "@/utils/type.ts";
 import CopyText from "@/islands/CopyText.tsx";
 import { Input } from "@/components/Input.tsx";
 import AppDataEditor from "@/islands/AppDataEditor.tsx";
@@ -12,11 +12,13 @@ import { Button } from "@/components/Button.tsx";
 import AuthUrlGenerator from "@/islands/AuthUrlGenerator.tsx";
 import InteractionEditor from "@/islands/InteractionEditor.tsx";
 import { Partial } from "$fresh/runtime.ts";
+import AppEditorPartial from "@/components/AppEditorPartial.tsx";
 
 type Data = {
   user: User;
   app?: App;
   updateUrl?: string;
+  interactions?: Interaction[];
   error?: string;
   env?: string;
 };
@@ -155,12 +157,10 @@ export default function AppData(props: PageProps<Data>) {
     );
   }
   return (
-    <Partial name="app-editor">
-      {params?.slug == "discord"
-        ? <div>dis</div>
-        : params?.slug == "interactions"
-        ? <div>int</div>
-        : <AppDataEditor app={data.app} />}
-    </Partial>
+    <AppEditorPartial
+      slug={params.slug}
+      app={data.app}
+      interactions={data.interactions}
+    />
   );
 }
