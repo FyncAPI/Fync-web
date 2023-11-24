@@ -1,7 +1,7 @@
 import { Handlers } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
 import { Providers } from "deno_grant";
-import { denoGrant } from "@/utils/grant.ts";
+import { denoGrant } from "../../../utils/grant.ts";
 
 export type Data = { session: Record<string, string> };
 
@@ -10,8 +10,6 @@ export const handler: Handlers<
   WithSession // indicate with Typescript that the session is in the `ctx.state`
 > = {
   async GET(req, ctx) {
-    console.log(req.url, "url");
-    console.log(ctx.params, "params");
     try {
       const tokens = await denoGrant.getToken(Providers.google, req.url);
 

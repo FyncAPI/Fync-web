@@ -7,17 +7,20 @@ description: |
 
 ## 1. Turn on discord Auth Mode
 
-## 2. Add the redirect url to discord
+## 2. Add the Client Id and secret to fync
 
-## 3. Add your redirect url to fync
+## 3. Add the redirect url to discord
 
-## 4. Add discord login button to your app
+## 4. Get URL to discord authorization page in fync
+
+## 5. Add discord login button to your app with the url
 
 ### Flow
 
 1. app redirects to discord authorization page
 2. user authorizes app
-3. discord callback to fync
+3. discord callback to fync //TODO: generate callback url. or just get the
+   client id and secret?
 4. fync get profile info from discord
 5. fync register/login user
 6. fync redirect to app with auth code

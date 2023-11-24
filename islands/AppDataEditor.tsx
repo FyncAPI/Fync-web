@@ -175,6 +175,7 @@ export default function AppDataEditor(
               } catch (e) {
                 console.log(e.message);
                 error.value = e.message;
+                e.preventDefault();
 
                 return;
               }
