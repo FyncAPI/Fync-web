@@ -10,6 +10,9 @@ export const endpoints = {
       login: `${url}/auth/email/`,
       register: `${url}/auth/email/register/`,
     },
+    flow: {
+      discord: `${url}/auth/flow/discord/{cid}`,
+    },
     authorize: `${url}/auth/authorize/`,
     token: `${url}/auth/access_token/`,
   },

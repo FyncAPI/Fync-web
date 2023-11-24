@@ -35,6 +35,7 @@ export const handler: Handlers<
       const dcid = appData.discordClientId;
       const dcsecret = appData.discordClientSecret;
       const dcRedirectUri = appData.discordRedirectUri!;
+      const dcScopes = appData.discordScopes;
 
       const redirectUri = `${
         (req.url.includes("http://localhost:8000")
@@ -101,71 +102,33 @@ export const handler: Handlers<
 
       console.log(profile);
 
-      const { session } = ctx.state;
-      session.set("createUser", profile);
-      console.log(profile, "setting session");
-      // check email if exists in server
-
-      const existedRes = (await axios.post(
-        endpoints.auth.email.check,
-        { email: profile.email },
-      )).data;
-
-      const existed = !existedRes.available;
-
-      if (!existed) {
-        // https://cdn.discordapp.com/avatars/userId/avatar
-        const user = (await axios.post(endpoints.user.create.discord, {
+      // https://cdn.discordapp.com/avatars/userId/avatar
+      const fyncCode =
+        (await axios.post(endpoints.auth.flow.discord.replace("{cid}", cid), {
           email: profile.email,
           discordId: profile.id,
           username: profile.username,
           name: profile.global_name || "",
+          scopes: dcScopes,
           profilePicture:
             `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`,
         })).data;
-        const res = await axios.post(endpoints.auth.authorize, {
-          clientId: cid,
-          userId: user._id,
-          scopes: ["identify", "email"],
-        });
 
-        const { code } = res.data;
+      const url = new URL(dcRedirectUri);
+      url.searchParams.append("code", fyncCode);
 
-        const url = new URL(dcRedirectUri);
-        url.searchParams.append("code", code);
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: url.toString(),
+        },
+      });
 
-        return new Response(null, {
-          status: 302,
-          headers: {
-            Location: url.toString(),
-          },
-        });
-
-        // return new Response("", {
-        //   status: 302,
-        //   headers: { Location: "/account/create" },
-        // });
-        // Just create the user for it
-      } else {
-        const user = await axios.get(endpoints.user.getByEmail + profile.email);
-        // gen code and redirect back to redirectUri
-        const res = await axios.post(endpoints.auth.authorize, {
-          clientId: cid,
-          userId: user.data._id,
-          scopes: ["identify", "email"],
-        });
-        const { code } = res.data;
-
-        const url = new URL(dcRedirectUri);
-        url.searchParams.append("code", code);
-
-        return new Response(null, {
-          status: 302,
-          headers: {
-            Location: url.toString(),
-          },
-        });
-      }
+      // return new Response("", {
+      //   status: 302,
+      //   headers: { Location: "/account/create" },
+      // });
+      // Just create the user for it
 
       return new Response(JSON.stringify(profile));
       //redirect to create user page

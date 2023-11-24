@@ -6,6 +6,7 @@ import { Button } from "@/components/Button.tsx";
 import CopyText from "@/islands/CopyText.tsx";
 import { z } from "zod";
 import Select from "@/islands/Select.tsx";
+import ScopePicker from "@/islands/ScopePicker.tsx";
 
 export default function DiscordAuthEditor(
   { app, env }: { app: App; env: string },
@@ -87,6 +88,12 @@ export default function DiscordAuthEditor(
           type={"string"}
           onChange={update("discordRedirectUri")}
         />
+
+        <ScopePicker
+          selectedScope={changedData.value["discordScopes"] ||
+            appData.value["discordScopes"]}
+        />
+
         {edited.value && (
           <Button
             class={"self-end"}
