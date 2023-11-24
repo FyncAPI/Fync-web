@@ -1,4 +1,4 @@
-import { asset, Head } from "$fresh/runtime.ts";
+import { asset, Head, Partial } from "$fresh/runtime.ts";
 import { ComponentChildren } from "preact";
 import Counter from "@/islands/Counter.tsx";
 
@@ -57,9 +57,13 @@ export function Layout({ children, ...customMeta }: Props) {
   return (
     <>
       <Meta {...customMeta} />
-      {/* <Nav /> */}
+      {/* <Nav /> */}{" "}
       <main class="flex-1 bg-slate-800 backdrop-brightness-50 min-h-screen">
-        {children}
+        <body>
+          {/* <Partial name="body"> */}
+          {children}
+          {/* </Partial> */}
+        </body>
       </main>
       <Footer />
     </>

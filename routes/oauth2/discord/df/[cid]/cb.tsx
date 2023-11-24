@@ -10,10 +10,9 @@ export const handler: Handlers<
   WithSession // indicate with Typescript that the session is in the `ctx.state`
 > = {
   async GET(req, ctx) {
-    console.log(req.url, "url");
-    console.log(ctx.params, "params");
     try {
-      const tokens = await denoGrant.getToken(Providers.google, req.url);
+      console.log("teti", ctx.params, req.url);
+      const tokens = await denoGrant.getToken(Providers.discord, req.url);
 
       if (!tokens) {
         return new Response(
@@ -27,7 +26,7 @@ export const handler: Handlers<
       }
 
       const profile = await denoGrant.getProfile(
-        Providers.google,
+        Providers.discord,
         tokens.accessToken,
       );
 
@@ -41,6 +40,8 @@ export const handler: Handlers<
           },
         );
       }
+
+      console.log(profile);
 
       const { session } = ctx.state;
       session.set("createUser", profile);
@@ -62,5 +63,10 @@ export const handler: Handlers<
         },
       );
     }
+  },
+  POST(req, ctx) {
+    console.log("post");
+
+    return new Response("yo");
   },
 };

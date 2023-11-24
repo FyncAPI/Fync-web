@@ -1,6 +1,6 @@
 import { Handlers } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
-import { fyncOauthClient } from "@/oauthClient.ts";
+import { fyncOauthClient } from "@/utils/fyncClient.ts";
 import { scopes } from "@/constants/scopes.ts";
 
 export type Data = { session: Record<string, string> };

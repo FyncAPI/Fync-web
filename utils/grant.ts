@@ -12,6 +12,11 @@ export const denoGrant = new DenoGrant({
       redirect_path: "/oauth2/google/callback",
       scope: "email openid profile",
     },
+    {
+      provider: Providers.discord,
+      client_id: "...",
+      client_secret: "...",
+    },
   ],
 });
 

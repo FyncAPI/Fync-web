@@ -26,6 +26,7 @@ export const endpoints = {
     app: {
       "create": `${url}/dev/app/create/`,
       get: `${url}/dev/apps/`,
+      interactions: `${url}/v1/apps/{id}/interactions/`,
       update: `${url}/dev/apps/`,
     },
   },
