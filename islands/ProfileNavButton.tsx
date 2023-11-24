@@ -34,7 +34,7 @@ export default function ProfileNavButton(props: {
   return (
     <div className="z-50 mx-5" ref={dropdownRef}>
       <div className="flex items-center" onClick={toggleDropdown}>
-        <p className="text-white font-semibold mr-2">{props.name}</p>
+        {/* <p className="text-white font-semibold mr-2">{props.name}</p> */}
 
         <img
           rel={"preload"}
