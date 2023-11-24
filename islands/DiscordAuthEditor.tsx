@@ -5,6 +5,7 @@ import DataInput from "@/islands/DataInput.tsx";
 import { Button } from "@/components/Button.tsx";
 import CopyText from "@/islands/CopyText.tsx";
 import { z } from "zod";
+import Select from "@/islands/Select.tsx";
 
 export default function DiscordAuthEditor(
   { app, env }: { app: App; env: string },
@@ -17,7 +18,7 @@ export default function DiscordAuthEditor(
   const edited = computed(() => {
     return JSON.stringify(appData.value) !== JSON.stringify(changedData.value);
   });
-
+  const selectedUrl = useSignal(app.discordRedirectUri || "");
   const update = (
     field: keyof App,
   ) =>
@@ -78,6 +79,14 @@ export default function DiscordAuthEditor(
           type={"string"}
           onChange={update("discordClientSecret")}
         />
+        <DataInput
+          label={"Discord Redirect uri"}
+          value={changedData.value["discordRedirectUri"] ||
+            appData.value["discordRedirectUri"]}
+          name={"discordRedirectUri"}
+          type={"string"}
+          onChange={update("discordRedirectUri")}
+        />
         {edited.value && (
           <Button
             class={"self-end"}
@@ -85,10 +94,7 @@ export default function DiscordAuthEditor(
             onClick={(e) => {
               console.log(changedData.value);
               try {
-                const result = z.object({
-                  discordClientId: z.string(),
-                  discordClientSecret: z.string(),
-                }).parse(changedData.value);
+                const result = appParser.partial().parse(changedData.value);
 
                 console.log(result, "rsx");
                 return result;
@@ -105,7 +111,7 @@ export default function DiscordAuthEditor(
           </Button>
         )}
       </form>
-      {/* generate link like this https://discord.com/api/oauth2/authorize?client_id=1133644259552141452&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Foauth2%2Fdiscord%2Fdf%2F9c8d1087-0e20-4445-9cc4-9a2999b3782f%2Fcb&response_type=code&scope=identify%20email */}
+
       <h4 class="text-primary-200 text-lg mt-4">
         Redirect uri
       </h4>

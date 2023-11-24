@@ -31,8 +31,12 @@ export const endpoints = {
     },
   },
   user: {
+    create: {
+      discord: `${url}/v1/users/create/discord/`,
+    },
     me: `${url}/v1/users/@me`,
     get: `${url}/v1/users/`,
+    getByEmail: `${url}/v1/users/email/`,
     addFriend: `${url}/v1/users/{id}/add-friend`,
     acceptFriend: `${url}/v1/{id}/accept-friend`,
     rejectFriend: `${url}/v1/{id}/decline-friend`,
