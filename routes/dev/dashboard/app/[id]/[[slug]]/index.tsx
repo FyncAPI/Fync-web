@@ -43,6 +43,7 @@ const getApp = async (id: string, token: string) => {
   const app = await res.json();
   return app;
 };
+
 const getInteractions = async (id: string, token: string) => {
   const res = await axios.get(
     endpoints.dev.app.interactions.replace(
@@ -60,6 +61,7 @@ const getInteractions = async (id: string, token: string) => {
   console.log(interactions, "iiio");
   return interactions;
 };
+
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
     const domain = req.url.split("/").slice(0, 3).join("/");
@@ -151,6 +153,7 @@ export const handler: Handlers<Data, WithSession> = {
     }
   },
 };
+
 export default function AppData(props: PageProps<Data>) {
   const { data, params } = props;
 
@@ -229,8 +232,8 @@ export default function AppData(props: PageProps<Data>) {
                   Discord
                 </a>
               </aside>
-
               <AppEditorPartial
+                env={data.env}
                 slug={params.slug}
                 app={data.app}
                 interactions={data.interactions}

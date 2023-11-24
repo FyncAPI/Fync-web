@@ -30,19 +30,22 @@ import * as $24 from "./routes/logout.tsx";
 import * as $25 from "./routes/oauth2/auth.tsx";
 import * as $26 from "./routes/oauth2/dev/fync/callback.tsx";
 import * as $27 from "./routes/oauth2/dev/fync/index.tsx";
-import * as $28 from "./routes/oauth2/forgot-password.tsx";
-import * as $29 from "./routes/oauth2/google/callback.tsx";
-import * as $30 from "./routes/oauth2/google/index.tsx";
-import * as $31 from "./routes/oauth2/login.tsx";
-import * as $32 from "./routes/partials/dev/dashboard/app/[id]/[[slug]]/index.tsx";
-import * as $33 from "./routes/search.tsx";
-import * as $34 from "./routes/signup.tsx";
-import * as $35 from "./routes/users/[id]/accept-friend.tsx";
-import * as $36 from "./routes/users/[id]/add-friend.tsx";
-import * as $37 from "./routes/users/[id]/cancel.tsx";
-import * as $38 from "./routes/users/[id]/edit.tsx";
-import * as $39 from "./routes/users/[id]/index.tsx";
-import * as $40 from "./routes/users/[id]/reject.tsx";
+import * as $28 from "./routes/oauth2/discord/callback.tsx";
+import * as $29 from "./routes/oauth2/discord/df/[cid]/cb.tsx";
+import * as $30 from "./routes/oauth2/discord/index.tsx";
+import * as $31 from "./routes/oauth2/forgot-password.tsx";
+import * as $32 from "./routes/oauth2/google/callback.tsx";
+import * as $33 from "./routes/oauth2/google/index.tsx";
+import * as $34 from "./routes/oauth2/login.tsx";
+import * as $35 from "./routes/partials/dev/dashboard/app/[id]/[[slug]]/index.tsx";
+import * as $36 from "./routes/search.tsx";
+import * as $37 from "./routes/signup.tsx";
+import * as $38 from "./routes/users/[id]/accept-friend.tsx";
+import * as $39 from "./routes/users/[id]/add-friend.tsx";
+import * as $40 from "./routes/users/[id]/cancel.tsx";
+import * as $41 from "./routes/users/[id]/edit.tsx";
+import * as $42 from "./routes/users/[id]/index.tsx";
+import * as $43 from "./routes/users/[id]/reject.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/AppDataEditor.tsx";
 import * as $$2 from "./islands/ArrayInput.tsx";
@@ -52,15 +55,16 @@ import * as $$5 from "./islands/CopyButton.tsx";
 import * as $$6 from "./islands/CopyText.tsx";
 import * as $$7 from "./islands/Counter.tsx";
 import * as $$8 from "./islands/DataInput.tsx";
-import * as $$9 from "./islands/Input.tsx";
-import * as $$10 from "./islands/InteractionEditor.tsx";
-import * as $$11 from "./islands/InteractionsEditor.tsx";
-import * as $$12 from "./islands/Login.tsx";
-import * as $$13 from "./islands/PersonalForm.tsx";
-import * as $$14 from "./islands/ProfileNavButton.tsx";
-import * as $$15 from "./islands/SearchButton.tsx";
-import * as $$16 from "./islands/Select.tsx";
-import * as $$17 from "./islands/UserNavbar.tsx";
+import * as $$9 from "./islands/DiscordAuthEditor.tsx";
+import * as $$10 from "./islands/Input.tsx";
+import * as $$11 from "./islands/InteractionEditor.tsx";
+import * as $$12 from "./islands/InteractionsEditor.tsx";
+import * as $$13 from "./islands/Login.tsx";
+import * as $$14 from "./islands/PersonalForm.tsx";
+import * as $$15 from "./islands/ProfileNavButton.tsx";
+import * as $$16 from "./islands/SearchButton.tsx";
+import * as $$17 from "./islands/Select.tsx";
+import * as $$18 from "./islands/UserNavbar.tsx";
 
 const manifest = {
   routes: {
@@ -92,19 +96,22 @@ const manifest = {
     "./routes/oauth2/auth.tsx": $25,
     "./routes/oauth2/dev/fync/callback.tsx": $26,
     "./routes/oauth2/dev/fync/index.tsx": $27,
-    "./routes/oauth2/forgot-password.tsx": $28,
-    "./routes/oauth2/google/callback.tsx": $29,
-    "./routes/oauth2/google/index.tsx": $30,
-    "./routes/oauth2/login.tsx": $31,
-    "./routes/partials/dev/dashboard/app/[id]/[[slug]]/index.tsx": $32,
-    "./routes/search.tsx": $33,
-    "./routes/signup.tsx": $34,
-    "./routes/users/[id]/accept-friend.tsx": $35,
-    "./routes/users/[id]/add-friend.tsx": $36,
-    "./routes/users/[id]/cancel.tsx": $37,
-    "./routes/users/[id]/edit.tsx": $38,
-    "./routes/users/[id]/index.tsx": $39,
-    "./routes/users/[id]/reject.tsx": $40,
+    "./routes/oauth2/discord/callback.tsx": $28,
+    "./routes/oauth2/discord/df/[cid]/cb.tsx": $29,
+    "./routes/oauth2/discord/index.tsx": $30,
+    "./routes/oauth2/forgot-password.tsx": $31,
+    "./routes/oauth2/google/callback.tsx": $32,
+    "./routes/oauth2/google/index.tsx": $33,
+    "./routes/oauth2/login.tsx": $34,
+    "./routes/partials/dev/dashboard/app/[id]/[[slug]]/index.tsx": $35,
+    "./routes/search.tsx": $36,
+    "./routes/signup.tsx": $37,
+    "./routes/users/[id]/accept-friend.tsx": $38,
+    "./routes/users/[id]/add-friend.tsx": $39,
+    "./routes/users/[id]/cancel.tsx": $40,
+    "./routes/users/[id]/edit.tsx": $41,
+    "./routes/users/[id]/index.tsx": $42,
+    "./routes/users/[id]/reject.tsx": $43,
   },
   islands: {
     "./islands/AccountForm.tsx": $$0,
@@ -116,15 +123,16 @@ const manifest = {
     "./islands/CopyText.tsx": $$6,
     "./islands/Counter.tsx": $$7,
     "./islands/DataInput.tsx": $$8,
-    "./islands/Input.tsx": $$9,
-    "./islands/InteractionEditor.tsx": $$10,
-    "./islands/InteractionsEditor.tsx": $$11,
-    "./islands/Login.tsx": $$12,
-    "./islands/PersonalForm.tsx": $$13,
-    "./islands/ProfileNavButton.tsx": $$14,
-    "./islands/SearchButton.tsx": $$15,
-    "./islands/Select.tsx": $$16,
-    "./islands/UserNavbar.tsx": $$17,
+    "./islands/DiscordAuthEditor.tsx": $$9,
+    "./islands/Input.tsx": $$10,
+    "./islands/InteractionEditor.tsx": $$11,
+    "./islands/InteractionsEditor.tsx": $$12,
+    "./islands/Login.tsx": $$13,
+    "./islands/PersonalForm.tsx": $$14,
+    "./islands/ProfileNavButton.tsx": $$15,
+    "./islands/SearchButton.tsx": $$16,
+    "./islands/Select.tsx": $$17,
+    "./islands/UserNavbar.tsx": $$18,
   },
   baseUrl: import.meta.url,
 };
