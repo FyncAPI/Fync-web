@@ -1,6 +1,6 @@
 import { Handlers } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
-import { googleAuthorizationURI } from "@/utils/grant.ts";
+import { googleAuthorizationURI } from "../../../utils/grant.ts";
 
 export type Data = { session: Record<string, string> };
 
