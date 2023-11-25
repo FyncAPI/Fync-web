@@ -17,7 +17,7 @@ export default function DiscordAuthEditor(
   const changedData = useSignal<Partial<App>>({});
   const validated = useSignal(false);
   const edited = computed(() => {
-    return JSON.stringify(appData.value) !== JSON.stringify(changedData.value);
+    return Object.keys(changedData.value).length;
   });
   const selectedScopes = useSignal<string[]>(app.discordScopes || []);
   const update = (
@@ -54,6 +54,7 @@ export default function DiscordAuthEditor(
       {error.value && (
         <Banner text={JSON.stringify(error.value)} type={"error"} />
       )}
+
       <form
         class="flex flex-col gap-4"
         method={"POST"}
@@ -101,29 +102,37 @@ export default function DiscordAuthEditor(
           }}
         />
 
-        {edited.value && (
-          <Button
-            class={"self-end"}
-            type={validated.value ? "submit" : "button"}
-            onClick={(e) => {
-              console.log(changedData.value);
-              try {
-                const result = appParser.partial().parse(changedData.value);
+        {edited.value
+          ? (
+            <div class={"flex flex-row justify-between"}>
+              <p class="text-white text-lg mt-4">
+                Edited
+              </p>
+              <div class="bg-gray-400 w-max h-[0.2px] flex-grow-[0.75] shrink flex self-center mx-4" />
+              <Button
+                class={"self-end"}
+                type={validated.value ? "submit" : "button"}
+                onClick={(e) => {
+                  console.log(changedData.value);
+                  try {
+                    const result = appParser.partial().parse(changedData.value);
 
-                console.log(result, "rsx");
-                return result;
-              } catch (ex) {
-                console.log(ex.message);
-                error.value = ex.message;
+                    console.log(result, "rsx");
+                    return result;
+                  } catch (ex) {
+                    console.log(ex.message);
+                    error.value = ex.message;
 
-                e.preventDefault();
-                return;
-              }
-            }}
-          >
-            Save
-          </Button>
-        )}
+                    e.preventDefault();
+                    return;
+                  }
+                }}
+              >
+                Save
+              </Button>
+            </div>
+          )
+          : null}
       </form>
 
       <h4 class="text-primary-200 text-lg mt-4">

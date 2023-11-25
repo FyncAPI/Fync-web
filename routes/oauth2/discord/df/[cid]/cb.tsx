@@ -114,8 +114,9 @@ export const handler: Handlers<
             `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`,
         })).data;
 
+      console.log(fyncCode);
       const url = new URL(dcRedirectUri);
-      url.searchParams.append("code", fyncCode);
+      url.searchParams.append("code", fyncCode.code);
 
       return new Response(null, {
         status: 302,
