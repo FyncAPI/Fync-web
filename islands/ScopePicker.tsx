@@ -4,17 +4,20 @@ import { scopes } from "@/constants/scopes.ts";
 export default function ScopePicker({
   selectedScope,
   selectedScopeSignal,
+  onChange,
 }: {
   selectedScope?: string[] | undefined;
   selectedScopeSignal?: Signal<string[]>;
+  onChange?: (value: string[]) => void;
 }) {
   const selected = useSignal<string[]>(
     selectedScope || selectedScopeSignal?.value || [],
   );
 
   effect(() => {
-    if (selectedScopeSignal) {
+    if (selectedScopeSignal && selected.value !== selectedScopeSignal.value) {
       selectedScopeSignal.value = selected.value;
+      onChange && onChange(selected.value);
     }
   });
   return (

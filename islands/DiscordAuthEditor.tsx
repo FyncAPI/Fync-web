@@ -19,7 +19,7 @@ export default function DiscordAuthEditor(
   const edited = computed(() => {
     return JSON.stringify(appData.value) !== JSON.stringify(changedData.value);
   });
-  const selectedUrl = useSignal(app.discordRedirectUri || "");
+  const selectedScopes = useSignal<string[]>(app.discordScopes || []);
   const update = (
     field: keyof App,
   ) =>
@@ -54,7 +54,6 @@ export default function DiscordAuthEditor(
       {error.value && (
         <Banner text={JSON.stringify(error.value)} type={"error"} />
       )}
-      {JSON.stringify(changedData.value)}
       <form
         class="flex flex-col gap-4"
         method={"POST"}
@@ -88,10 +87,18 @@ export default function DiscordAuthEditor(
           type={"string"}
           onChange={update("discordRedirectUri")}
         />
-
+        <h4 class="text-primary-200 text-lg mt-4">
+          scopes
+        </h4>
         <ScopePicker
-          selectedScope={changedData.value["discordScopes"] ||
-            appData.value["discordScopes"]}
+          selectedScopeSignal={selectedScopes}
+          onChange={(value) => {
+            console.log(value);
+            changedData.value = {
+              ...changedData.value,
+              discordScopes: value,
+            };
+          }}
         />
 
         {edited.value && (
