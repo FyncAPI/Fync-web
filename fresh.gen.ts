@@ -62,9 +62,10 @@ import * as $$12 from "./islands/InteractionsEditor.tsx";
 import * as $$13 from "./islands/Login.tsx";
 import * as $$14 from "./islands/PersonalForm.tsx";
 import * as $$15 from "./islands/ProfileNavButton.tsx";
-import * as $$16 from "./islands/SearchButton.tsx";
-import * as $$17 from "./islands/Select.tsx";
-import * as $$18 from "./islands/UserNavbar.tsx";
+import * as $$16 from "./islands/ScopePicker.tsx";
+import * as $$17 from "./islands/SearchButton.tsx";
+import * as $$18 from "./islands/Select.tsx";
+import * as $$19 from "./islands/UserNavbar.tsx";
 
 const manifest = {
   routes: {
@@ -130,9 +131,10 @@ const manifest = {
     "./islands/Login.tsx": $$13,
     "./islands/PersonalForm.tsx": $$14,
     "./islands/ProfileNavButton.tsx": $$15,
-    "./islands/SearchButton.tsx": $$16,
-    "./islands/Select.tsx": $$17,
-    "./islands/UserNavbar.tsx": $$18,
+    "./islands/ScopePicker.tsx": $$16,
+    "./islands/SearchButton.tsx": $$17,
+    "./islands/Select.tsx": $$18,
+    "./islands/UserNavbar.tsx": $$19,
   },
   baseUrl: import.meta.url,
 };

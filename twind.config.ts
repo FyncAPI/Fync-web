@@ -51,7 +51,6 @@ export default {
         textColor: {
           default: "#1c358c",
         },
-
         colors: {
           "primary": {
             "50": "#eff5ff",
@@ -81,4 +80,4 @@ export default {
       },
     },
   }),
-} as Options;
+}

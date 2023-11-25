@@ -5,6 +5,8 @@ import DataInput from "@/islands/DataInput.tsx";
 import { Button } from "@/components/Button.tsx";
 import CopyText from "@/islands/CopyText.tsx";
 import { z } from "zod";
+import Select from "@/islands/Select.tsx";
+import ScopePicker from "@/islands/ScopePicker.tsx";
 
 export default function DiscordAuthEditor(
   { app, env }: { app: App; env: string },
@@ -15,9 +17,9 @@ export default function DiscordAuthEditor(
   const changedData = useSignal<Partial<App>>({});
   const validated = useSignal(false);
   const edited = computed(() => {
-    return JSON.stringify(appData.value) !== JSON.stringify(changedData.value);
+    return Object.keys(changedData.value).length;
   });
-
+  const selectedScopes = useSignal<string[]>(app.discordScopes || []);
   const update = (
     field: keyof App,
   ) =>
@@ -52,7 +54,7 @@ export default function DiscordAuthEditor(
       {error.value && (
         <Banner text={JSON.stringify(error.value)} type={"error"} />
       )}
-      {JSON.stringify(changedData.value)}
+
       <form
         class="flex flex-col gap-4"
         method={"POST"}
@@ -78,34 +80,61 @@ export default function DiscordAuthEditor(
           type={"string"}
           onChange={update("discordClientSecret")}
         />
-        {edited.value && (
-          <Button
-            class={"self-end"}
-            type={validated.value ? "submit" : "button"}
-            onClick={(e) => {
-              console.log(changedData.value);
-              try {
-                const result = z.object({
-                  discordClientId: z.string(),
-                  discordClientSecret: z.string(),
-                }).parse(changedData.value);
+        <DataInput
+          label={"Discord Redirect uri"}
+          value={changedData.value["discordRedirectUri"] ||
+            appData.value["discordRedirectUri"]}
+          name={"discordRedirectUri"}
+          type={"string"}
+          onChange={update("discordRedirectUri")}
+        />
+        <h4 class="text-primary-200 text-lg mt-4">
+          scopes
+        </h4>
+        <ScopePicker
+          selectedScopeSignal={selectedScopes}
+          onChange={(value) => {
+            console.log(value);
+            changedData.value = {
+              ...changedData.value,
+              discordScopes: value,
+            };
+          }}
+        />
 
-                console.log(result, "rsx");
-                return result;
-              } catch (ex) {
-                console.log(ex.message);
-                error.value = ex.message;
+        {edited.value
+          ? (
+            <div class={"flex flex-row justify-between"}>
+              <p class="text-white text-lg mt-4">
+                Edited
+              </p>
+              <div class="bg-gray-400 w-max h-[0.2px] flex-grow-[0.75] shrink flex self-center mx-4" />
+              <Button
+                class={"self-end"}
+                type={validated.value ? "submit" : "button"}
+                onClick={(e) => {
+                  console.log(changedData.value);
+                  try {
+                    const result = appParser.partial().parse(changedData.value);
 
-                e.preventDefault();
-                return;
-              }
-            }}
-          >
-            Save
-          </Button>
-        )}
+                    console.log(result, "rsx");
+                    return result;
+                  } catch (ex) {
+                    console.log(ex.message);
+                    error.value = ex.message;
+
+                    e.preventDefault();
+                    return;
+                  }
+                }}
+              >
+                Save
+              </Button>
+            </div>
+          )
+          : null}
       </form>
-      {/* generate link like this https://discord.com/api/oauth2/authorize?client_id=1133644259552141452&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Foauth2%2Fdiscord%2Fdf%2F9c8d1087-0e20-4445-9cc4-9a2999b3782f%2Fcb&response_type=code&scope=identify%20email */}
+
       <h4 class="text-primary-200 text-lg mt-4">
         Redirect uri
       </h4>
