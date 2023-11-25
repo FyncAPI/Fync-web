@@ -231,14 +231,7 @@ export default function AppData(props: PageProps<Data>) {
                     env={data.env}
                   />
                 </div>
-                A
               </div>
-              <a
-                class="text-2xl font-medium text-white"
-                href={`/dev/dashboard/app/${data.app._id}/interactions`}
-              >
-                interactions
-              </a>
             </div>
           </>
         )}
