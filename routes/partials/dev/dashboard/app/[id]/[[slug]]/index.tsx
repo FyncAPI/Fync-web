@@ -13,6 +13,7 @@ import AuthUrlGenerator from "@/islands/AuthUrlGenerator.tsx";
 import InteractionEditor from "@/islands/InteractionEditor.tsx";
 import { Partial } from "$fresh/runtime.ts";
 import AppEditorPartial from "@/components/AppEditorPartial.tsx";
+import TabNavPartial from "@/components/TabNavPartial.tsx";
 
 type Data = {
   user: User;
@@ -157,10 +158,13 @@ export default function AppData(props: PageProps<Data>) {
     );
   }
   return (
-    <AppEditorPartial
-      slug={params.slug}
-      app={data.app}
-      interactions={data.interactions}
-    />
+    <>
+      <TabNavPartial slug={params.slug} appId={data.app._id} />
+      <AppEditorPartial
+        slug={params.slug}
+        app={data.app}
+        interactions={data.interactions}
+      />
+    </>
   );
 }

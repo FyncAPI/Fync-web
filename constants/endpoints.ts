@@ -10,6 +10,9 @@ export const endpoints = {
       login: `${url}/auth/email/`,
       register: `${url}/auth/email/register/`,
     },
+    flow: {
+      discord: `${url}/v1/auth/flow/discord/{cid}`,
+    },
     authorize: `${url}/auth/authorize/`,
     token: `${url}/auth/access_token/`,
   },
@@ -32,8 +35,12 @@ export const endpoints = {
     },
   },
   user: {
+    create: {
+      discord: `${url}/v1/users/create/discord/`,
+    },
     me: `${url}/v1/users/@me`,
     get: `${url}/v1/users/`,
+    getByEmail: `${url}/v1/users/email/`,
     addFriend: `${url}/v1/users/{id}/add-friend`,
     acceptFriend: `${url}/v1/{id}/accept-friend`,
     rejectFriend: `${url}/v1/{id}/decline-friend`,
