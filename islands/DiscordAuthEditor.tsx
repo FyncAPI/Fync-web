@@ -52,7 +52,6 @@ export default function DiscordAuthEditor(
       {error.value && (
         <Banner text={JSON.stringify(error.value)} type={"error"} />
       )}
-      {JSON.stringify(changedData.value)}
       <form
         class="flex flex-col gap-4"
         method={"POST"}

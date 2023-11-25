@@ -14,6 +14,7 @@ import InteractionEditor from "@/islands/InteractionEditor.tsx";
 import { Partial } from "$fresh/runtime.ts";
 import InteractionsEditor from "@/islands/InteractionsEditor.tsx";
 import AppEditorPartial from "@/components/AppEditorPartial.tsx";
+import TabNavPartial from "@/components/TabNavPartial.tsx";
 
 type Data = {
   user: User;
@@ -45,28 +46,29 @@ const getApp = async (id: string, token: string) => {
 };
 
 const getInteractions = async (id: string, token: string) => {
-  const res = await axios.get(
+  const res = await fetch(
     endpoints.dev.app.interactions.replace(
       "{id}",
       id,
     ),
     {
+      method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
 
-  const interactions = await res.data;
-  console.log(interactions, "iiio");
-  return interactions;
+  const interactions_data = await res.json();
+  const interactions = interactions_data.success ? interactions_data.data : [];
+  //console.log("json", interactions);
+  return interactions as Interaction[];
 };
 
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
-    const domain = req.url.split("/").slice(0, 3).join("/");
+    const domain = req.url.split("/0").slice(0, 3).join("/");
     const id = ctx.params.id;
-    const slug = ctx.params.slug;
     const { session } = ctx.state;
     const token = session.get("devToken");
 
@@ -86,11 +88,17 @@ export const handler: Handlers<Data, WithSession> = {
         });
       }
 
+      const interactions = await getInteractions(id, token) as Interaction[];
+
+      //console.log("token", token);
+      console.log("interactions", interactions);
+
       const app = await res.json();
 
       return ctx.render({
         app,
         user: session.get("user"),
+        interactions: interactions,
         updateUrl: endpoints.dev.app.update + id,
         env: domain == "http://localhost:8000" ? "dev" : "prod",
       });
@@ -103,6 +111,8 @@ export const handler: Handlers<Data, WithSession> = {
   },
   async POST(req, ctx) {
     const id = ctx.params.id;
+    const slug = ctx.params.slug;
+    const action = ctx.params.action;
     console.log("putshit", id);
 
     // return new Response("ok");
@@ -211,27 +221,7 @@ export default function AppData(props: PageProps<Data>) {
                   <CopyText text={data.app.clientSecret} />
                 </div>
               </div>
-              <h1 class="text-2xl font-medium text-white">OAuth data</h1>
-              <aside class="text-primary-200 text-lg gap-3 mx-4">
-                <a
-                  href={`/dev/dashboard/app/${data.app._id}/`}
-                  f-partial={`/partials/dev/dashboard/app/${data.app._id}/`}
-                >
-                  Oauth
-                </a>
-                <a
-                  href={`/dev/dashboard/app/${data.app._id}/interactions`}
-                  f-partial={`/partials/dev/dashboard/app/${data.app._id}/interactions`}
-                >
-                  Edit interactions
-                </a>
-                <a
-                  href={`/dev/dashboard/app/${data.app._id}/discord`}
-                  f-partial={`/partials/dev/dashboard/app/${data.app._id}/discord`}
-                >
-                  Discord
-                </a>
-              </aside>
+              <TabNavPartial slug={params.slug} appId={data.app._id} />
               <AppEditorPartial
                 env={data.env}
                 slug={params.slug}
@@ -250,14 +240,7 @@ export default function AppData(props: PageProps<Data>) {
                     env={data.env}
                   />
                 </div>
-                A
               </div>
-              <a
-                class="text-2xl font-medium text-white"
-                href={`/dev/dashboard/app/${data.app._id}/interactions`}
-              >
-                interactions
-              </a>
             </div>
           </>
         )}

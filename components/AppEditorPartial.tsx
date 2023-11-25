@@ -15,7 +15,7 @@ export default function AppEditorPartial(props: {
       {props.slug == "discord"
         ? <DiscordAuthEditor app={props.app} env={props.env} />
         : props.slug == "interactions"
-        ? <InteractionsEditor interactions={props.interactions || []} />
+        ? <InteractionsEditor app={props.app as App} interactions={props.interactions || []} env={props.env} />
         : <AppDataEditor app={props.app || {} as App} />}
     </Partial>
   );
