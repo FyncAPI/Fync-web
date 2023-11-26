@@ -127,6 +127,15 @@ export const handler: Handlers<Data, WithSession> = {
       session.set("accessToken", resBody.accessToken);
       session.set("createUser", null);
 
+      const authUrl = req.url.split("authUrl=")[1];
+      if (authUrl) {
+        return new Response(null, {
+          status: 302,
+          headers: {
+            Location: decodeURIComponent(authUrl),
+          },
+        });
+      }
       return new Response("", {
         status: 302,
         headers: { Location: "/home" },

@@ -103,6 +103,7 @@ export const handler: Handlers<
         console.log("no user");
         let registerUrl = "/account/create";
         state && (registerUrl += `?authUrl=${state.split("authUrl=")[1]}`);
+        console.log(registerUrl, "registerUrl");
         return new Response(null, {
           status: 302,
           headers: {

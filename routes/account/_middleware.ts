@@ -8,8 +8,9 @@ export async function handler(
   ctx: MiddlewareHandlerContext<State>,
 ) {
   const { session } = ctx.state;
-  console.log(req.url.split("authUrl=")[1], "req.url");
+  console.log(req.url.split("authUrl=")[1], "auth .url");
   const authUrl = req.url.split("authUrl=")[1];
+  session.set("authUrl", authUrl);
   //   console.log(session.data, "zx");
   if (session.get("accessToken")) {
     return new Response("", {
