@@ -126,7 +126,6 @@ export default function AuthScreen({
 }: PageProps<Data>) {
   return (
     <>
-      {JSON.stringify(url.search)}
       <div class="h-screen p-4 mx-auto bg-gradient-to-br from-gray-900 via-fuchsia-950 to-secondary-900 hue-rotate-15 bg-opacity-40 pt-20 flex items-center justify-center">
         <div className="p-4 -mt-56 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-brightness-25 bg-opacity-10  w-full max-w-md min-w-min">
           {error && (

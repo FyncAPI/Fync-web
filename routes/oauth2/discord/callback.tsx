@@ -4,6 +4,7 @@ import { Providers } from "deno_grant";
 import { denoGrant } from "../../../utils/grant.ts";
 import axios from "npm:axios";
 import { endpoints } from "@/constants/endpoints.ts";
+import "$std/dotenv/load.ts";
 
 export type Data = { session: Record<string, string> };
 
@@ -16,6 +17,7 @@ export const handler: Handlers<
       const state = new URL(req.url).searchParams.get("state");
       const tokens = await denoGrant.getToken(Providers.discord, req.url);
 
+      console.log(tokens, "discord tokens");
       if (!tokens) {
         return new Response(
           JSON.stringify({
@@ -60,16 +62,22 @@ export const handler: Handlers<
       //   "email": "big168bk@gmail.com",
       //   "verified": true
       //   }
-
-      const userRes = await axios.post(endpoints.auth.discord, profile, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
       const { session } = ctx.state;
       session.set("discordProfile", profile);
 
+      const userRes = await axios.post(endpoints.auth.discord.login, profile, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Basic ${
+            btoa(
+              Deno.env.get("FYNC_CLIENT_ID") + ":" +
+                Deno.env.get("FYNC_CLIENT_SECRET"),
+            )
+          }`,
+        },
+      });
+
+      console.log(userRes.status, "userRes");
       if (userRes.status == 200) {
         const { user, accessToken } = userRes.data;
         session.set("user", user);
@@ -91,14 +99,33 @@ export const handler: Handlers<
             location: "/home",
           },
         });
+      } else if (userRes.status == 204) {
+        console.log("no user");
+        let registerUrl = "/account/create";
+        state && (registerUrl += `?authUrl=${state.split("authUrl=")[1]}`);
+        return new Response(null, {
+          status: 302,
+          headers: {
+            location: registerUrl,
+          },
+        });
       }
+
       //redirect to create user page
       return new Response("", {
         status: 302,
         headers: { Location: "/account/create" },
       });
-    } catch (error) {
-      console.log(error, "error");
+    } catch (e) {
+      console.log(e);
+      console.log(e.error, "error");
+      if (e?.error?.response?.status == 404) {
+        return new Response("", {
+          status: 302,
+          headers: { Location: "/account/create" },
+        });
+      }
+      console.log(e, "ex");
       return new Response(
         JSON.stringify({
           error: "Invalid token",
