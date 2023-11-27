@@ -1,9 +1,10 @@
 import DenoGrant, { Providers } from "deno_grant";
+import "$std/dotenv/load.ts";
 
 export const denoGrant = new DenoGrant({
   base_uri: Deno.env.get("ENV") == "dev"
     ? "http://localhost:8000"
-    : "https://fync.deno.dev",
+    : "https://fync.in",
   strategies: [
     {
       provider: Providers.google,
@@ -14,8 +15,12 @@ export const denoGrant = new DenoGrant({
     },
     {
       provider: Providers.discord,
-      client_id: "...",
-      client_secret: "...",
+      client_id: Deno.env.get("DISCORD_CLIENT_ID")!,
+      client_secret: Deno.env.get("DISCORD_CLIENT_SECRET")!,
+      scope: "identify email",
+      redirect_uri: Deno.env.get("ENV") == "dev"
+        ? "http://localhost:8000/oauth2/discord/callback"
+        : "https://fync.in/oauth2/discord/callback",
     },
   ],
 });

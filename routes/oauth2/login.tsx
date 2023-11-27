@@ -4,6 +4,7 @@ import { Button } from "@/components/Button.tsx";
 import { Input } from "@/components/Input.tsx";
 import { endpoints } from "../../constants/endpoints.ts";
 import { App } from "@/utils/type.ts";
+import IconDiscordFilled from "tabler/brand-discord-filled.tsx";
 
 type Data = {
   error?: string | null;
@@ -120,6 +121,8 @@ export const handler: Handlers<Data, WithSession> = {
 };
 export default function AuthScreen({
   data: { error, ownsite },
+  params,
+  url,
 }: PageProps<Data>) {
   return (
     <>
@@ -167,6 +170,14 @@ export default function AuthScreen({
                 </Button>
               </div>
             </form>
+          </div>
+          <div class="mt-5 p-5">
+            <p class="text-gray-400 text-md my-4">
+              or continue with
+            </p>
+            <a href={"/oauth2/discord" + (url.search || "")}>
+              <IconDiscordFilled size={35} />
+            </a>
           </div>
         </div>
       </div>

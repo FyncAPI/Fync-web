@@ -568,6 +568,7 @@
     "https://deno.land/x/oauth2_client@v1.0.2/src/resource_owner_password_credentials.ts": "bd3df99d32eeebffb411c4a2d3c3d057395515fb41690a8d91460dd74b9bf466",
     "https://deno.land/x/oauth2_client@v1.0.2/src/types.ts": "3327c2e81bc483e91843fb103595dd304393c3ac2a530d1c89200b6a5cf75e13",
     "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/books.tsx": "efe08df5b895fbb57507b8526de1b755cacd4e83c92f8d1b8a8286d4099b45b2",
+    "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/brand-discord-filled.tsx": "2fc9fe559b915a62a9ad33ec21adc2ae0a05b2bffce68c258f72af4baaaa48da",
     "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/check.tsx": "7a34654bec04502f8c411801621572232fa842a3a916fe6da0897aa0affb60ac",
     "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/chevron-right.tsx": "ac5c5c1a1b4aa6313347372f2d8dbb6cf192cf95d28573ae40d7d42e9073d0b6",
     "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/clipboard-check.tsx": "862bc8eb6885e982c69952ab3d3938a7dd970829cff69862c0f3e93476f5396b",

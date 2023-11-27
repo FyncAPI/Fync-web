@@ -14,7 +14,7 @@ export const discordClient = new OAuth2Client({
   clientSecret: "...",
   authorizationEndpointUri: serverURI + "/oauth2/auth",
   tokenUri: apiURI + "/auth/access_token",
-  redirectUri: serverURI + "/oauth2/dev/fync/callback",
+  redirectUri: serverURI + "/oauth2/fync/callback",
   defaults: {
     scope: scopes.dev,
   },

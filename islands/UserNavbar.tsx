@@ -31,7 +31,7 @@ export default function UserNavbar({ type, user }: {
         </form>
         <NavButton href="/friends" text="friends" />
         <NavButton href="/apps" text="apps" />
-        {user?._id
+        {user
           ? <ProfileNavButton {...user} />
           : <NavButton href="/login" text="login" />}
       </div>

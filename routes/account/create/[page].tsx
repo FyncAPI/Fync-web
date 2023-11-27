@@ -4,7 +4,11 @@ import { WithSession } from "fresh-session";
 import { Navbar } from "@/components/Navbar.tsx";
 import PersonalForm from "@/islands/PersonalForm.tsx";
 import AccountForm from "@/islands/AccountForm.tsx";
-import { PersonalInfo, personalInfoParser } from "@/utils/store/account.ts";
+import {
+  createDiscordUserParser,
+  PersonalInfo,
+  personalInfoParser,
+} from "@/utils/store/account.ts";
 import { endpoints } from "../../../constants/endpoints.ts";
 import { optimizeImage } from "@/utils/image.ts";
 
@@ -16,11 +20,23 @@ type Data = {
     email: string;
     password: string;
   };
+  discordProfile?: {
+    id: string;
+    username: string;
+    avatar: string;
+    discriminator: string;
+    public_flags: number;
+    premium_type: number;
+    flags: number;
+    email: string;
+  };
 };
 
 export const handler: Handlers<Data, WithSession> = {
   GET(_req, ctx) {
     const { session } = ctx.state;
+    const discordProfile = session.get("discordProfile");
+
     if (session.get("user")) {
       return new Response("", {
         status: 302,
@@ -31,29 +47,37 @@ export const handler: Handlers<Data, WithSession> = {
     }
     const user = session.get("createUser");
     console.log(user, "getting session");
-    return ctx.render({ user });
+    return ctx.render({ user, discordProfile });
   },
 
   async POST(req, ctx) {
     const form = await req.formData();
     const { session } = ctx.state;
     const user = session.get("createUser");
+    const discordProfile = session.get("discordProfile");
 
     const body: PersonalInfo = {} as PersonalInfo;
 
+    console.log(form.get("profilePicture"), "form");
     for (const [key, value] of form.entries()) {
       console.log(key);
-      if (key === "profilePicture") {
+      if (key === "profilePicture" && value instanceof File) {
         const optimizedImage = await optimizeImage(value as File);
         body[key] = optimizedImage;
-      } else {
+      } else if (key !== "profilePicture") {
         body[key] = value as string;
       }
     }
 
     console.log(body, form, "gogs");
 
-    const result = personalInfoParser.safeParse(body);
+    let result;
+
+    if (discordProfile) {
+      result = createDiscordUserParser.safeParse(body);
+    } else {
+      result = personalInfoParser.safeParse(body);
+    }
     if (!result.success) {
       console.log(result.error);
       return new Response(JSON.stringify(result.error), {
@@ -64,12 +88,18 @@ export const handler: Handlers<Data, WithSession> = {
     console.log(result.data, "res parse");
 
     try {
-      const url = endpoints.auth.email.register;
+      const url = discordProfile
+        ? endpoints.auth.discord.register
+        : endpoints.auth.email.register;
 
       for (const field in user) {
         form.append(field, user[field]);
       }
-
+      if (discordProfile) {
+        for (const field in discordProfile) {
+          form.append(field, discordProfile[field]);
+        }
+      }
       const res = await fetch(url, {
         method: "POST",
         body: form,
@@ -97,6 +127,15 @@ export const handler: Handlers<Data, WithSession> = {
       session.set("accessToken", resBody.accessToken);
       session.set("createUser", null);
 
+      const authUrl = req.url.split("authUrl=")[1];
+      if (authUrl) {
+        return new Response(null, {
+          status: 302,
+          headers: {
+            Location: decodeURIComponent(authUrl),
+          },
+        });
+      }
       return new Response("", {
         status: 302,
         headers: { Location: "/home" },
@@ -111,6 +150,7 @@ export const handler: Handlers<Data, WithSession> = {
 export default function CreateAccount(props: PageProps<Data>) {
   // const page = Number(props.params.page);
   console.log(props.data);
+  const profile = props.data.discordProfile;
   return (
     <>
       <Navbar type="create" />
@@ -146,7 +186,15 @@ export default function CreateAccount(props: PageProps<Data>) {
           <h1 class="text-2xl font-extrabold text-transparent md:text-2xl lg:text-2xl max-w-2xl  bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-600">
             Create Account
           </h1>
-          <PersonalForm />
+          <PersonalForm
+            profile={profile
+              ? {
+                discordAvatar:
+                  `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`,
+                username: profile.username,
+              }
+              : undefined}
+          />
         </div>
       </div>
     </>

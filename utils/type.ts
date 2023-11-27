@@ -121,6 +121,24 @@ export const createGoogleUserParser = z.object({
 
 export type CreateGoogleUser = z.infer<typeof createGoogleUserParser>;
 
+export const createDiscordUserParser = z.object({
+  id: z.string(),
+  username: z.string(),
+  avatar: z.string(),
+  discriminator: z.string(),
+  public_flags: z.number(),
+  flags: z.number(),
+  locale: z.string(),
+  mfa_enabled: z.boolean(),
+  premium_type: z.number(),
+  email: z.string(),
+  verified: z.boolean(),
+  phone: z.string(),
+  access_token: z.string(),
+  refresh_token: z.string(),
+  expires_in: z.number(),
+});
+
 export const userParser = z.object({
   _id: (z.string()),
   provider: z.array(z.enum(["google", "facebook", "email"])).optional(),
