@@ -10,12 +10,16 @@ export default function AppEditorPartial(props: {
   interactions?: Interaction[] | null;
   slug: string;
 }) {
+  /*console.log("props.slug:", props.slug);
+  console.log("props.app:", props.app);
+  console.log("props.interactions:", props.interactions);
+  console.log("props.env:", props.env);*/
   return (
     <Partial name="app-editor">
       {props.slug == "discord"
         ? <DiscordAuthEditor app={props.app} env={props.env} />
         : props.slug == "interactions"
-        ? <InteractionsEditor interactions={props.interactions || []} />
+        ? <InteractionsEditor app={props.app as App} interactions={props.interactions || []} env={props.env} />
         : <AppDataEditor app={props.app || {} as App} />}
     </Partial>
   );

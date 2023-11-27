@@ -23,6 +23,10 @@ export const endpoints = {
   apps: {
     clientId: `${url}/apps/clientId/`,
     update: `${url}/apps/`,
+    interaction: {
+      create: `${url}/v1/apps/{id}/create-interaction/`,
+      update: `${url}/v1/apps/{id}/update-interaction/`,
+    }
   },
   friends: {
     get: `${url}/v1/friends/@me`,

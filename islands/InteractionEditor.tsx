@@ -19,23 +19,15 @@ export default function InteractionEditor(
     field: keyof Interaction,
   ) =>
   (value: T) => {
-    if (field === "redirects") {
-      changedData.value = {
-        ...changedData.value,
-        [field]: value as string[],
-      };
-    } else if (
-      field !== "interactions" &&
-      field !== "users" &&
-      field !== "createdAt" &&
-      field !== "events" &&
+    if (
       value instanceof Event
     ) {
       const target = value.target as HTMLInputElement;
-      console.log(target.value, "target", field);
+
+      console.log("value", target.value);
       changedData.value = {
         ...changedData.value,
-        [field]: target.value,
+        [field]: parseInt(target.value) ? parseInt(target.value) : target.value,
       };
     }
   };
@@ -45,11 +37,10 @@ export default function InteractionEditor(
       try {
         const result = interactionParser.partial().parse(changedData.value);
 
-        console.log(result, "res");
         validated.value = true;
         return result;
       } catch (e) {
-        console.log(e.message);
+        console.log("e", e.message);
         error.value = e.message;
         validated.value = false;
         return;
@@ -66,87 +57,35 @@ export default function InteractionEditor(
         class="flex flex-col gap-4"
         method={"POST"}
       >
+      <input
+        type="hidden"
+        name="_id"
+        value={interactionData.value._id}
+      />
         <input
           type="hidden"
           name="changes"
           value={strigified.value}
         />
         {[
+          { name: "version", label: "Interaction Version" },
           { name: "title", label: "Interaction Title" },
           { name: "description", label: "Interaction Description" },
           // { name: "url", label: "Interaction Website" },
           // { name: "redirects", label: "Interaction Redirects", type: "array" },
           // { name: "androidPackageName", label: "Android Package Name" },
           // { name: "interactionStoreId", label: "iOS Bundle ID" },
-        ].map((item) =>
-          item?.type == "array"
-            ? (
-              // <ArrayInput
-              //   label={item.label}
-              //   value={changedData.value.redirects ||
-              //     interactionData.value.redirects}
-              //   name={item.name}
-              //   disabled={!editing.value}
-              //   onChange={update(item.name as keyof Interaction)}
-              // />
-              <></>
-            )
-            : (
-              <DataInput
-                label={item.label}
-                value={changedData.value[item.name as keyof Interaction] ||
-                  interactionData.value[item.name as keyof Interaction]}
-                name={item.name}
-                disabled={!editing.value}
-                type={"string"}
-                onChange={update(item.name as keyof Interaction)}
-              />
-            )
-        )}
-        {
-          /* <DataInput
-          label="Interaction name"
-          value={changedData.value.name || interactiondata.value.name}
-          name="name"
-          disabled={!editing.value}
-          onChange={update("name")}
-        />
-        <DataInput
-          label="Interaction description"
-          value={interactiondata.value.description}
-          name="description"
-          disabled={!editing.value}
-          onChange={update("description")}
-        />
-        <DataInput
-          label="website"
-          name="url"
-          value={interactiondata.value.url}
-          disabled={!editing.value}
-          onChange={update("url")}
-        />
-        <ArrayInput
-          label="redirects"
-          value={interactiondata.value.redirects}
-          name="redirects"
-          disabled={!editing.value}
-          onChange={update("redirects")}
-        />
-        <DataInput
-          label="android package name"
-          value={interactiondata.value.androidPackageName}
-          name="androidPackageName"
-          disabled={!editing.value}
-          onChange={update("androidPackageName")}
-        />
-        <DataInput
-          label="ios bundle id"
-          value={interactiondata.value.interactionStoreId}
-          name="interactionStoreId"
-          disabled={!editing.value}
-          onChange={update("interactionStoreId")}
-        />{" "} */
-        }
+        ].map((item) => (
+          <DataInput
+            label={item.label}
+            value={(changedData.value[item.name as keyof Interaction] ||
+              interactionData.value[item.name as keyof Interaction]).toString()}
+            name={item.name}
+            disabled={!editing.value}
+            type={"string"}
+            onChange={update(item.name as keyof Interaction)}
+          />
+        ))}
         <Button
           type="button"
           onClick={() => {
@@ -165,18 +104,19 @@ export default function InteractionEditor(
             type={validated.value ? "submit" : "button"} // onClick={() => {
             // type="button"
             onClick={(e) => {
-              console.log(changedData.value);
               // e.preventDefault();
               try {
                 const result = interactionParser.partial().parse(
                   changedData.value,
                 );
 
-                console.log(result, "res");
+                //console.log("res", result);
+                console.log("success new data:", result);
                 return result;
               } catch (e) {
-                console.log(e.message);
+                console.log("error new data:", e.message);
                 error.value = e.message;
+                e.preventDefault();
 
                 return;
               }

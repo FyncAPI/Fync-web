@@ -2,6 +2,7 @@ import { z, ZodObject } from "zod";
 export const interactionParser = z.object({
   _id: z.string(),
   app: z.string(),
+  version: z.number(),
   title: z.string(),
   description: z.string(),
   // type: z.string(),

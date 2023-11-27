@@ -46,28 +46,29 @@ const getApp = async (id: string, token: string) => {
 };
 
 const getInteractions = async (id: string, token: string) => {
-  const res = await axios.get(
+  const res = await fetch(
     endpoints.dev.app.interactions.replace(
       "{id}",
       id,
     ),
     {
+      method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
 
-  const interactions = await res.data;
-  console.log(interactions, "iiio");
-  return interactions;
+  const interactions_data = await res.json();
+  const interactions = interactions_data.success ? interactions_data.data : [];
+  //console.log("json", interactions);
+  return interactions as Interaction[];
 };
 
 export const handler: Handlers<Data, WithSession> = {
   async GET(req, ctx) {
-    const domain = req.url.split("/").slice(0, 3).join("/");
+    const domain = req.url.split("/0").slice(0, 3).join("/");
     const id = ctx.params.id;
-    const slug = ctx.params.slug;
     const { session } = ctx.state;
     const token = session.get("devToken");
 
@@ -92,18 +93,22 @@ export const handler: Handlers<Data, WithSession> = {
       return ctx.render({
         app,
         user: session.get("user"),
+        interactions: await getInteractions(id, token) as Interaction[],
         updateUrl: endpoints.dev.app.update + id,
         env: domain == "http://localhost:8000" ? "dev" : "prod",
       });
     } catch (e) {
       return ctx.render({
         user: session.get("user"),
+        interactions: await getInteractions(id, token) as Interaction[],
         error: e.message,
       });
     }
   },
   async POST(req, ctx) {
     const id = ctx.params.id;
+    const slug = ctx.params.slug;
+    const action = ctx.params.action;
     console.log("putshit", id);
 
     // return new Response("ok");
@@ -111,8 +116,6 @@ export const handler: Handlers<Data, WithSession> = {
     const token = session.get("devToken");
 
     const form = await req.formData();
-    const data = form.get("changes");
-    console.log(data);
 
     if (!token) {
       return new Response("", {
@@ -123,40 +126,94 @@ export const handler: Handlers<Data, WithSession> = {
       });
     }
 
-    try {
-      const res = await axios.put(endpoints.dev.app.update + id, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    if (slug == undefined) {
+      try {
+        const data = form.get("changes");
 
-      console.log(res.statusText, "response update");
+        const res = await axios.put(endpoints.dev.app.update + id, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      if (!res.data) {
-        const app = await getApp(id, token);
+        console.log(res.statusText, "response update");
+
+        if (!res.data) {
+          const app = await getApp(id, token);
+          return ctx.render({
+            app,
+            user: session.get("user"),
+            interactions: await getInteractions(id, token) as Interaction[],
+            error: "error updating ",
+          });
+        }
+
+        console.log(res.data, "should beok");
+
+        return ctx.render({ app: res.data, user: session.get("user"), interactions: await getInteractions(id, token) as Interaction[] });
+      } catch (e) {
+        console.log(e);
         return ctx.render({
-          app,
+          app: await getApp(id, token),
           user: session.get("user"),
-          error: "error updating ",
+          interactions: await getInteractions(id, token) as Interaction[],
+          error: e.message,
         });
       }
+    } else if (slug == "interactions") {
+      try {
+        if (form.get("_id") && form.get("changes")) {
+          const data = form.get("changes");
+          const interaction_id = form.get("_id") || "";
 
-      console.log(res.data, "should beok");
+          const res = await axios.put(endpoints.apps.interaction.update.replace("{id}", interaction_id.toString()), data, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-      return ctx.render({ app: res.data, user: session.get("user") });
-    } catch (e) {
-      console.log(e);
-      return ctx.render({
-        app: await getApp(id, token),
-        user: session.get("user"),
-        error: e.message,
-      });
+          console.log(res.statusText, "response update");
+
+          if (!res.data) {
+            return ctx.render({
+              app: await getApp(id, token),
+              user: session.get("user"),
+              interactions: await getInteractions(id, token) as Interaction[],
+              error: "error updating ",
+            });
+          }
+
+          console.log(res.data, "should beok");
+
+          return ctx.render({
+            app: await getApp(id, token),
+            user: session.get("user"),
+            interactions: await getInteractions(id, token) as Interaction[],
+          });
+        }
+      } catch (e) {
+        console.log(e);
+        return ctx.render({
+          app: await getApp(id, token),
+          user: session.get("user"),
+          interactions: await getInteractions(id, token) as Interaction[],
+          error: e.message,
+        });
+      }
     }
+
+    return ctx.render({
+      app: await getApp(id, token),
+      user: session.get("user"),
+      interactions: await getInteractions(id, token) as Interaction[],
+    });
   },
 };
 
 export default function AppData(props: PageProps<Data>) {
   const { data, params } = props;
+
+  console.log("have data:", data?.interactions != undefined);
 
   return (
     <>
