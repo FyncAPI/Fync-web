@@ -44,7 +44,7 @@ export const handler: Handlers<Data, WithSession> = {
 
     if (slug == "interactions") {
       const res = await fetch(
-        endpoints.apps.createInteractions.replace(
+        endpoints.apps.interaction.create.replace(
           "{id}",
           id
         ),

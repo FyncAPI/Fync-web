@@ -10,6 +10,10 @@ export default function AppEditorPartial(props: {
   interactions?: Interaction[] | null;
   slug: string;
 }) {
+  /*console.log("props.slug:", props.slug);
+  console.log("props.app:", props.app);
+  console.log("props.interactions:", props.interactions);
+  console.log("props.env:", props.env);*/
   return (
     <Partial name="app-editor">
       {props.slug == "discord"
