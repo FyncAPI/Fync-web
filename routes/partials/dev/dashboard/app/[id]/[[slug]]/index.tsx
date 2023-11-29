@@ -26,7 +26,6 @@ type Data = {
   interactions?: Interaction[];
   updateUrl?: string;
   error?: string;
-  env?: string;
 };
 
 const getApp = async (id: string, token: string) => {
@@ -99,7 +98,6 @@ export const handler: Handlers<Data, WithSession> = {
         user: session.get("user"),
         interactions: await getInteractions(id, token) as Interaction[],
         updateUrl: endpoints.dev.app.update + id,
-        env: domain == "http://localhost:8000" ? "dev" : "prod",
       });
     } catch (e) {
       return ctx.render({
@@ -154,7 +152,11 @@ export const handler: Handlers<Data, WithSession> = {
 
         console.log(res.data, "should beok");
 
-        return ctx.render({ app: res.data, user: session.get("user"), interactions: await getInteractions(id, token) as Interaction[] });
+        return ctx.render({
+          app: res.data,
+          user: session.get("user"),
+          interactions: await getInteractions(id, token) as Interaction[],
+        });
       } catch (e) {
         console.log(e);
         return ctx.render({
@@ -170,11 +172,18 @@ export const handler: Handlers<Data, WithSession> = {
           const data = form.get("changes");
           const interaction_id = form.get("_id") || "";
 
-          const res = await axios.put(endpoints.apps.interaction.update.replace("{id}", interaction_id.toString()), data, {
-            headers: {
-              Authorization: `Bearer ${token}`,
+          const res = await axios.put(
+            endpoints.apps.interaction.update.replace(
+              "{id}",
+              interaction_id.toString(),
+            ),
+            data,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             },
-          });
+          );
 
           console.log(res.statusText, "response update");
 
@@ -216,7 +225,7 @@ export const handler: Handlers<Data, WithSession> = {
 
 export default function AppData(props: PageProps<Data>) {
   const { data, params } = props;
-  console.log("oyoyo", params);
+  const env = props.url.hostname == "localhost" ? "dev" : "prod";
 
   if (!data.app) {
     return (
@@ -231,6 +240,7 @@ export default function AppData(props: PageProps<Data>) {
       <AppEditorPartial
         slug={params.slug}
         app={data.app}
+        env={env}
         interactions={data.interactions}
       />
     </>

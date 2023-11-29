@@ -22,7 +22,6 @@ type Data = {
   interactions?: Interaction[];
   updateUrl?: string;
   error?: string;
-  env?: string;
 };
 
 const getApp = async (id: string, token: string) => {
@@ -95,7 +94,6 @@ export const handler: Handlers<Data, WithSession> = {
         user: session.get("user"),
         interactions: await getInteractions(id, token) as Interaction[],
         updateUrl: endpoints.dev.app.update + id,
-        env: domain == "http://localhost:8000" ? "dev" : "prod",
       });
     } catch (e) {
       return ctx.render({
@@ -150,7 +148,11 @@ export const handler: Handlers<Data, WithSession> = {
 
         console.log(res.data, "should beok");
 
-        return ctx.render({ app: res.data, user: session.get("user"), interactions: await getInteractions(id, token) as Interaction[] });
+        return ctx.render({
+          app: res.data,
+          user: session.get("user"),
+          interactions: await getInteractions(id, token) as Interaction[],
+        });
       } catch (e) {
         console.log(e);
         return ctx.render({
@@ -166,11 +168,18 @@ export const handler: Handlers<Data, WithSession> = {
           const data = form.get("changes");
           const interaction_id = form.get("_id") || "";
 
-          const res = await axios.put(endpoints.apps.interaction.update.replace("{id}", interaction_id.toString()), data, {
-            headers: {
-              Authorization: `Bearer ${token}`,
+          const res = await axios.put(
+            endpoints.apps.interaction.update.replace(
+              "{id}",
+              interaction_id.toString(),
+            ),
+            data,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             },
-          });
+          );
 
           console.log(res.statusText, "response update");
 
@@ -212,7 +221,9 @@ export const handler: Handlers<Data, WithSession> = {
 
 export default function AppData(props: PageProps<Data>) {
   const { data, params } = props;
+  const env = props.url.hostname == "localhost" ? "dev" : "prod";
 
+  console.log(props.url.toString().split("/0").slice(0, 3).join("/"), env);
   console.log("have data:", data?.interactions != undefined);
 
   return (
@@ -270,8 +281,9 @@ export default function AppData(props: PageProps<Data>) {
                 </div>
               </div>
               <TabNavPartial slug={params.slug} appId={data.app._id} />
+              {env}
               <AppEditorPartial
-                env={data.env}
+                env={env}
                 slug={params.slug}
                 app={data.app}
                 interactions={data.interactions}
@@ -285,7 +297,7 @@ export default function AppData(props: PageProps<Data>) {
                   <AuthUrlGenerator
                     urls={data.app.redirects || []}
                     clientId={data.app.clientId}
-                    env={data.env}
+                    env={env}
                   />
                 </div>
               </div>

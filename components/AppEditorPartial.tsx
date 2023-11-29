@@ -5,7 +5,7 @@ import AppDataEditor from "@/islands/AppDataEditor.tsx";
 import DiscordAuthEditor from "@/islands/DiscordAuthEditor.tsx";
 
 export default function AppEditorPartial(props: {
-  env?: string;
+  env: string;
   app?: App;
   interactions?: Interaction[] | null;
   slug: string;
@@ -19,7 +19,13 @@ export default function AppEditorPartial(props: {
       {props.slug == "discord"
         ? <DiscordAuthEditor app={props.app} env={props.env} />
         : props.slug == "interactions"
-        ? <InteractionsEditor app={props.app as App} interactions={props.interactions || []} env={props.env} />
+        ? (
+          <InteractionsEditor
+            app={props.app as App}
+            interactions={props.interactions || []}
+            env={props.env}
+          />
+        )
         : <AppDataEditor app={props.app || {} as App} />}
     </Partial>
   );
