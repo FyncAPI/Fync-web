@@ -34,7 +34,7 @@ export default function AppDataEditor(
       value instanceof Event
     ) {
       const target = value.target as HTMLInputElement;
-      console.log(target.value, "target", field);
+      console.log("value", target.value);
       changedData.value = {
         ...changedData.value,
         [field]: target.value,
@@ -170,11 +170,12 @@ export default function AppDataEditor(
               try {
                 const result = appParser.partial().parse(changedData.value);
 
-                console.log(result, "res");
+                console.log("success new data:", result);
                 return result;
               } catch (e) {
-                console.log(e.message);
+                console.log("error new data:", e.message);
                 error.value = e.message;
+                e.preventDefault();
 
                 return;
               }

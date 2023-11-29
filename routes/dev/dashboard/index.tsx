@@ -9,10 +9,12 @@ import { LinkButton } from "@/components/LinkButton.tsx";
 import axios from "npm:axios";
 import { endpoints } from "@/constants/endpoints.ts";
 import { AppsList } from "@/components/AppsList.tsx";
+import Banner from "@/islands/Banner.tsx";
 
 type Data = {
   user: User;
   apps: App[];
+  error?: string;
 };
 
 export const handler: Handlers<Data, WithSession> = {
@@ -50,15 +52,17 @@ export const handler: Handlers<Data, WithSession> = {
     } catch (e) {
       console.log(e);
       // return ctx.render({ user, apps: [] });
-      // if (e?.response.status === 401) {
-      // session.clear();
-      return new Response(null, {
-        status: 302,
-        headers: {
-          Location: "/dev/login",
-        },
-      });
-      // }
+      if (e?.response.status === 401) {
+        session.clear();
+        return new Response(null, {
+          status: 302,
+          headers: {
+            Location: "/dev/login",
+          },
+        });
+      } else {
+        return ctx.render({ user, apps: [], error: "Something went wrong" });
+      }
     }
   },
 };
@@ -68,6 +72,7 @@ export default function DashboardPage(props: PageProps<Data>) {
   return (
     <>
       <DevNavbar user={data.user} />
+      {data.error && <Banner text={data.error} type="error" />}
       <div class="h-screen">
         <div class="p-6 gap-3 flex flex-row align-middle justify-between">
           <h1 class="text-2xl font-medium text-white text-center self-center">

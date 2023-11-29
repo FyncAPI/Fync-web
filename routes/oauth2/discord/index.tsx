@@ -1,6 +1,8 @@
 import { Handlers } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
-import { googleAuthorizationURI } from "@/utils/grant.ts";
+import { discordClient } from "@/utils/discordClient.ts";
+import { denoGrant } from "@/utils/grant.ts";
+import { Providers } from "deno_grant";
 
 export type Data = { session: Record<string, string> };
 
@@ -9,12 +11,17 @@ export const handler: Handlers<
   WithSession // indicate with Typescript that the session is in the `ctx.state`
 > = {
   GET(req, ctx) {
-    const uri = googleAuthorizationURI!;
-    console.log(uri, "uu");
+    const search = new URL(req.url).search;
+    let uri = denoGrant.getAuthorizationUri(Providers.discord);
+    if (search) {
+      uri?.searchParams.append("state", search);
+    }
 
     return new Response("", {
       status: 302,
-      headers: { Location: uri },
+      headers: {
+        Location: uri,
+      },
     });
   },
   async POST(req, ctx) {

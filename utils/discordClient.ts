@@ -9,12 +9,12 @@ const apiURI = Deno.env.get("ENV") == "dev"
   ? "http://localhost:8080"
   : "https://api.fync.in";
 
-export const fyncOauthClient = new OAuth2Client({
-  clientId: Deno.env.get("FYNC_CLIENT_ID")!,
-  clientSecret: Deno.env.get("FYNC_CLIENT_SECRET")!,
+export const discordClient = new OAuth2Client({
+  clientId: "...",
+  clientSecret: "...",
   authorizationEndpointUri: serverURI + "/oauth2/auth",
   tokenUri: apiURI + "/auth/access_token",
-  redirectUri: serverURI + "/oauth2/dev/fync/callback",
+  redirectUri: serverURI + "/oauth2/fync/callback",
   defaults: {
     scope: scopes.dev,
   },

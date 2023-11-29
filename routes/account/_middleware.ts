@@ -8,6 +8,9 @@ export async function handler(
   ctx: MiddlewareHandlerContext<State>,
 ) {
   const { session } = ctx.state;
+  console.log(req.url.split("authUrl=")[1], "auth .url");
+  const authUrl = req.url.split("authUrl=")[1];
+  session.set("authUrl", authUrl);
   //   console.log(session.data, "zx");
   if (session.get("accessToken")) {
     return new Response("", {
@@ -22,9 +25,14 @@ export async function handler(
     return new Response("", {
       status: 302,
       headers: {
-        "Location": "oauth2/auth",
+        "Location": "/oauth2/auth" + (authUrl ? "?authUrl=" + authUrl : ""),
       },
     });
+  }
+
+  const discordProfile = session.get("discordProfile");
+  if (discordProfile) {
+    return await ctx.next();
   }
 
   const result = createEmailUserParser.or(createGoogleUserParser).safeParse(
@@ -35,7 +43,7 @@ export async function handler(
     return new Response("", {
       status: 302,
       headers: {
-        "Location": "oauth2/auth",
+        "Location": "/oauth2/auth",
       },
     });
   }

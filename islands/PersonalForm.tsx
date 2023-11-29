@@ -1,11 +1,17 @@
 import { useState } from "preact/hooks";
 import { Button } from "@/components/Button.tsx";
 import IconPlus from "tabler/plus.tsx";
-import { PersonalInfo, personalInfoParser } from "@/utils/store/account.ts";
+import {
+  createDiscordUserParser,
+  PersonalInfo,
+  personalInfoParser,
+} from "@/utils/store/account.ts";
 import { FormInput } from "@/components/FormInput.tsx";
 import { useSignal } from "@preact/signals";
 
-export default function PersonalForm() {
+export default function PersonalForm({ profile }: {
+  profile?: { discordAvatar: string; username: string };
+}) {
   const [error, setError] = useState<string | null>(null);
   const [personalInfo, setPersonalInfo] = useState<
     PersonalInfo
@@ -52,6 +58,21 @@ export default function PersonalForm() {
                   </label>
                 </>
               )
+              : profile?.discordAvatar
+              ? (
+                <>
+                  <label class="text-white" for="profilePicture">
+                    Profile Picture
+                  </label>
+                  <label for="profilePicture">
+                    <img
+                      src={profile?.discordAvatar}
+                      alt="Profile Picture"
+                      class="w-32 h-32 rounded-full mx-auto"
+                    />
+                  </label>
+                </>
+              )
               : (
                 <>
                   <label class="text-white" for="profilePicture">
@@ -73,7 +94,7 @@ export default function PersonalForm() {
               id="profilePicture"
               name="profilePicture"
               class="hidden"
-              required
+              required={!profile}
               onChange={(e) => {
                 console.log(
                   e.target as HTMLInputElement,
@@ -174,7 +195,9 @@ export default function PersonalForm() {
           <Button
             type="submit"
             onClick={() => {
-              const result = personalInfoParser.safeParse(personalInfo);
+              const result = profile
+                ? createDiscordUserParser.safeParse(personalInfo)
+                : personalInfoParser.safeParse(personalInfo);
 
               if (!result.success) {
                 console.log(result.error);

@@ -1,4 +1,16 @@
 import { z, ZodObject } from "zod";
+export const interactionParser = z.object({
+  _id: z.string(),
+  app: z.string(),
+  version: z.number(),
+  title: z.string(),
+  description: z.string(),
+  // type: z.string(),
+  // data: z.any().optional(),
+
+  // createdAt: z.date().or(z.string()),
+});
+export type Interaction = z.infer<typeof interactionParser>;
 
 export const friendParser = z.object({
   _id: z.string(),
@@ -53,6 +65,10 @@ export const appParser = z.object({
 
   clientId: z.string(),
   clientSecret: z.string(),
+  discordClientId: z.string().optional(),
+  discordClientSecret: z.string().optional(),
+  discordRedirectUri: z.string().optional(),
+  discordScopes: z.array(z.string()).optional(),
 
   appStoreId: z.string().optional(),
   androidPackageName: z.string().optional(),
@@ -104,6 +120,24 @@ export const createGoogleUserParser = z.object({
 });
 
 export type CreateGoogleUser = z.infer<typeof createGoogleUserParser>;
+
+export const createDiscordUserParser = z.object({
+  id: z.string(),
+  username: z.string(),
+  avatar: z.string(),
+  discriminator: z.string(),
+  public_flags: z.number(),
+  flags: z.number(),
+  locale: z.string(),
+  mfa_enabled: z.boolean(),
+  premium_type: z.number(),
+  email: z.string(),
+  verified: z.boolean(),
+  phone: z.string(),
+  access_token: z.string(),
+  refresh_token: z.string(),
+  expires_in: z.number(),
+});
 
 export const userParser = z.object({
   _id: (z.string()),

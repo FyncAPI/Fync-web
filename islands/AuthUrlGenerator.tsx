@@ -2,6 +2,7 @@ import CopyText from "@/islands/CopyText.tsx";
 import { useSignal } from "@preact/signals";
 import Select from "@/islands/Select.tsx";
 import { scopes } from "@/constants/scopes.ts";
+import ScopePicker from "@/islands/ScopePicker.tsx";
 
 export default function AuthUrlGenerator({ urls, clientId, env }: {
   urls: string[];
@@ -19,43 +20,7 @@ export default function AuthUrlGenerator({ urls, clientId, env }: {
           scopes
         </h2>
         <div class="flex flex-row">
-          <div>
-            {Object.entries(scopes).map(([key, values]) =>
-              key != "dev" && (
-                <div class={"bg-slate-800 m-2 p-2 rounded-sm"}>
-                  <h3>
-                    {key}
-                  </h3>
-                  {values.map((value) => (
-                    <label for={value} class={"p-2"}>
-                      <input
-                        name={value}
-                        type={"checkbox"}
-                        id={value}
-                        class="mr-2"
-                        checked={selectedScope.value.includes(value)}
-                        value={value}
-                        onChange={() => {
-                          console.log(selectedScope.value, value);
-                          if (selectedScope.value.includes(value)) {
-                            selectedScope.value = selectedScope.value.filter((
-                              v,
-                            ) => v !== value);
-                          } else {
-                            selectedScope.value = [
-                              ...selectedScope.value,
-                              value,
-                            ];
-                          }
-                        }}
-                      />
-                      {value}
-                    </label>
-                  ))}
-                </div>
-              )
-            )}
-          </div>
+          <ScopePicker selectedScopeSignal={selectedScope} />
         </div>
       </div>
       {selectedUrl.value && selectedScope.value.length

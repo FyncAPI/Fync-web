@@ -13,6 +13,7 @@ export const handler: Handlers<Data, WithSession> = {
   GET(req, ctx) {
     const cookies = cookie.getCookies(req.headers);
     const { session } = ctx.state;
+    console.log(session.data, "session data");
 
     // const user = await ctx.state.db.collection("users").findOne({
     //   _id: ctx.state.session.get("userId"),

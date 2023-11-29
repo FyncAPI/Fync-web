@@ -19,7 +19,7 @@ export const handler: Handlers<Data, WithSession> = {
     return new Response("", {
       status: 302,
       headers: {
-        "Location": "/oauth2/auth" + "?" + query.toString(),
+        "Location": "/oauth2/login",
       },
     });
   },
