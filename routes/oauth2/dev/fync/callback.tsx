@@ -78,8 +78,4 @@ export const handler: Handlers<
       );
     }
   },
-
-  POST(req, ctx) {
-    console.log("post");
-  },
 };
