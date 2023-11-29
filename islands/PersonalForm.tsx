@@ -155,7 +155,7 @@ export default function PersonalForm() {
             <FormInput
               label="Birth Date"
               type="date"
-              name="birthDate"
+              name="birthdate"
               max="2016-01-01"
               placeholder="05/06/2000"
               required
@@ -163,7 +163,7 @@ export default function PersonalForm() {
                 if ((e.target as HTMLInputElement).value) {
                   setPersonalInfo({
                     ...personalInfo,
-                    birthDate: (e.target as HTMLInputElement).value,
+                    birthdate: (e.target as HTMLInputElement).value,
                   });
                 }
                 console.log(e, e?.target);

@@ -35,7 +35,7 @@ export const handler: Handlers<Data, WithSession> = {
   },
 
   async POST(req, ctx) {
-    const form = await req.formData();
+    const form: FormData = await req.formData();
     const { session } = ctx.state;
     const user = session.get("createUser");
 

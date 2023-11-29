@@ -14,7 +14,7 @@ export const personalInfoParser = z.object({
   username: z.string(),
   phoneNumber: z.string(),
   profilePicture: z.custom<File>((value) => value instanceof File),
-  birthDate: z.string(),
+  birthdate: z.string().optional(),
   avatar: z.string().optional(),
 });
 
