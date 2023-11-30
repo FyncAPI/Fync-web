@@ -281,7 +281,6 @@ export default function AppData(props: PageProps<Data>) {
                 </div>
               </div>
               <TabNavPartial slug={params.slug} appId={data.app._id} />
-              {env}
               <AppEditorPartial
                 env={env}
                 slug={params.slug}
