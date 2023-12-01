@@ -24,7 +24,7 @@ export const createDiscordUserParser = z.object({
   phoneNumber: z.string(),
   profilePicture: z.custom<File>((value) => value instanceof File).optional(),
   // discordProfile: z.string(),
-  birthDate: z.string(),
+  birthdate: z.string().optional(),
   avatar: z.string().optional(),
 });
 

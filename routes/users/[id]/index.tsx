@@ -132,6 +132,9 @@ export default function UserData(props: PageProps<Data>) {
                 <p class="text-primary-200 text-lg ">
                   {user.interests?.join(", ") || "No interests set for now"}
                 </p>
+                <p class="text-primary-200 text-lg">
+                  {user.birthdate}
+                </p>
               </div>
 
               {user._id == me._id
@@ -150,7 +153,7 @@ export default function UserData(props: PageProps<Data>) {
             <div class="m-5 ">
               <h1 class="text-2xl font-medium text-white">Some Data</h1>
 
-              <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
+              <div class="my-5 p-4 rounded-md items-center justify-between h-full bg-gray-800 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
                 <div class="flex flex-col">
                   <h4 class="text-primary-200 text-lg">
                     Mutual Friends
@@ -164,6 +167,7 @@ export default function UserData(props: PageProps<Data>) {
                   ))}
                 </div>
               </div>
+              
             </div>
           </>
         )}

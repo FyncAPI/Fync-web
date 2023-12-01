@@ -53,7 +53,7 @@ export default function ProfileNavButton(props: {
             Profile
           </a>
           <a
-            href={`/dev/users/${props._id}/edit`}
+            href={`/users/${props._id}/edit`}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white"
           >
             Edit Profile
