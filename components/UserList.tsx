@@ -19,7 +19,7 @@ export const UserList = (
   const { users, friendable, acceptable, user: me } = props;
 
   return (
-    <div class="flex flex-col">
+    <div class="flex flex-col -z-50">
       {users?.filter((u) => u._id != me._id).map((user) => (
         <a
           href={"/users/" + user._id}

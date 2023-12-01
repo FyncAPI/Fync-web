@@ -7,7 +7,7 @@ export default function UserNavbar({ type, user }: {
   user?: User;
 }) {
   return (
-    <nav className="sticky top-0 flex items-center justify-between flex-wrap h-full w-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+    <nav className="sticky top-0 flex items-center justify-between flex-wrap h-full w-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 z-30">
       <div className="flex items-center text-white mr-6 p-3">
         <a href="/home">
           <h1 className="font-bold text-white text-2xl">
