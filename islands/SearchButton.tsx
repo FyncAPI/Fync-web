@@ -17,7 +17,7 @@ export default function SearchButton() {
   return (
     <>
       <div>
-        search
+        cant search lol...
       </div>
       {
         /* <Head>

@@ -16,13 +16,13 @@ import InteractionsEditor from "@/islands/InteractionsEditor.tsx";
 import AppEditorPartial from "@/components/AppEditorPartial.tsx";
 
 type Data = {
-    user: User;
-    app?: App;
-    interactions?: Interaction[];
-    updateUrl?: string;
-    error?: string;
-    env?: string;
-  };
+  user: User;
+  app?: App;
+  interactions?: Interaction[];
+  updateUrl?: string;
+  error?: string;
+  env?: string;
+};
 
 export const handler: Handlers<Data, WithSession> = {
   async POST(req, ctx) {
@@ -31,57 +31,45 @@ export const handler: Handlers<Data, WithSession> = {
     const action = ctx.params.action;
 
     const { session } = ctx.state;
-    const token = session.get("devToken");
-
-    if (!token) {
-      return new Response("", {
-        status: 302,
-        headers: {
-          Location: "/dev/login",
-        },
-      });
-    }
+    const devToken = session.get("devToken");
 
     if (slug == "interactions") {
+      console.log("creating interaction", id);
       const res = await fetch(
         endpoints.apps.interaction.create.replace(
           "{id}",
-          id
+          id,
         ),
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${token}`,
-          }
-        }
+            Authorization: `Bearer ${devToken}`,
+          },
+        },
       );
 
-      const json = await res.json();
-
       if (!res.ok) {
+        console.log(res);
         return new Response(
-            JSON.stringify({
-                "Error": json
-            }),{
-                status: 400
-            }
+          JSON.stringify(res.body),
+          {
+            status: 400,
+          },
         );
       }
 
-      return new Response("",
-          {
-            status: 302,
-            headers: {
-              Location: `/dev/dashboard/app/${id}/interactions`,
-            },
-          }
-      );
+      const json = await res.json();
+      return new Response("", {
+        status: 302,
+        headers: {
+          Location: `/dev/dashboard/app/${id}/interactions`,
+        },
+      });
     }
 
     return await ctx.renderNotFound();
   },
 };
-
 
 /*export const handler: Handlers<Data, WithSession> = {
     async GET(req, ctx) {

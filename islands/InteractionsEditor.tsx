@@ -6,14 +6,14 @@ import IconX from "tabler/x.tsx";
 import { App, appParser } from "@/utils/type.ts";
 import { endpoints } from "@/constants/endpoints.ts";
 import { Interaction } from "@/utils/type.ts";
-import InteractionEditor from "../islands/InteractionEditor.tsx";
+import InteractionEditor from "@/islands/InteractionEditor.tsx";
 import { z } from "zod";
 
 export default function InteractionsEditor(
-  { interactions, app, env }: {
-    app: App;
+  { interactions, env, app }: {
     interactions: Interaction[];
     env: string;
+    app: App;
   },
 ) {
   const error = useSignal("");
@@ -30,9 +30,9 @@ export default function InteractionsEditor(
   return (
     <div class=" mt-5 p-4 rounded-md items-center justify-between h-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 ">
       <div class={"flex items-center  flex-1 grow justify-between"}>
-        <h4 class="text-primary-200 text-lg">
+        <h2 class="text-primary-200 text-4xl">
           Interactions
-        </h4>
+        </h2>
         <form
           action={`/dev/dashboard/app/${app._id}/interactions/create`}
           method="post"
@@ -40,7 +40,7 @@ export default function InteractionsEditor(
           <Button
             type={"submit"}
           >
-            {"add"}
+            add
           </Button>
         </form>
       </div>
@@ -49,7 +49,7 @@ export default function InteractionsEditor(
             <p>{JSON.stringify(interaction)}</p>
             <br />
           </>*/
-        return <InteractionEditor interaction={interaction} />;
+        return <InteractionEditor interaction={interaction} env={env} />;
         // return <InteractionEditor interaction={interaction} />;
       })}
 

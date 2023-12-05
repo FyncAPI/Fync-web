@@ -25,22 +25,22 @@ export const handler: Handlers<Data, WithSession> = {
       const data = await res.data;
       console.log(data, "resdata");
 
-      /*return new Response(data.success, {
+      return new Response(data.success, {
         status: 302,
         headers: {
           Location: "/users/" + id,
         },
-      });*/
-      return new Response(data.success, {
-        status: 200,
       });
     } catch (e) {
       console.log(e.response, "er");
 
-      return new Response(e, {
+      // Get the Referer header to determine the previous page
+      const referer = req.headers.get("Referer");
+
+      return new Response("", {
         status: 302,
         headers: {
-          Location: "/users/" + id + "/shit error",
+          Location: referer || "/users/" + id, // Use Referer if available, otherwise redirect to a default location
         },
       });
     }

@@ -24,15 +24,14 @@ export const handler: Handlers<Data, WithSession> = {
 
       const data = await res.data;
       console.log(data, "resdata");
+      // Get the Referer header to determine the previous page
+      const referer = req.headers.get("Referer");
 
-      /*return new Response(data.success, {
+      return new Response("", {
         status: 302,
         headers: {
-            Location: "/friends/requests",
+          Location: referer || "/users/" + id, // Use Referer if available, otherwise redirect to a default location
         },
-      });*/
-      return new Response(data.success, {
-        status: 200,
       });
     } catch (e) {
       console.log(e.response, "er");

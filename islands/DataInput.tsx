@@ -12,7 +12,7 @@ const DataInput = (
   } & JSX.HTMLAttributes<HTMLInputElement>,
 ) => {
   return (
-    <>
+    <div class={"flex flex-col grow"}>
       <h4 class="text-primary-200 text-lg">
         {label}
       </h4>
@@ -25,7 +25,7 @@ const DataInput = (
         onChange={onChange}
         {...rest}
       />
-    </>
+    </div>
   );
 };
 

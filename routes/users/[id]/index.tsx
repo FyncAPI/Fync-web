@@ -167,7 +167,6 @@ export default function UserData(props: PageProps<Data>) {
                   ))}
                 </div>
               </div>
-              
             </div>
           </>
         )}

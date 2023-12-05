@@ -16,37 +16,36 @@ import * as $10 from "./routes/dev/dashboard/app/[id]/[[slug]]/create.tsx";
 import * as $11 from "./routes/dev/dashboard/app/[id]/[[slug]]/index.tsx";
 import * as $12 from "./routes/dev/dashboard/create-app.tsx";
 import * as $13 from "./routes/dev/dashboard/index.tsx";
-import * as $14 from "./routes/dev/dashboard/interactions.tsx";
-import * as $15 from "./routes/dev/index.tsx";
-import * as $16 from "./routes/dev/login.tsx";
-import * as $17 from "./routes/docs/[...slug].tsx";
-import * as $18 from "./routes/docs/out.tsx";
-import * as $19 from "./routes/friends/index.tsx";
-import * as $20 from "./routes/friends/requests.tsx";
-import * as $21 from "./routes/friends/search.tsx";
-import * as $22 from "./routes/home.tsx";
-import * as $23 from "./routes/index.tsx";
-import * as $24 from "./routes/login.tsx";
-import * as $25 from "./routes/logout.tsx";
-import * as $26 from "./routes/oauth2/auth.tsx";
-import * as $27 from "./routes/oauth2/dev/fync/callback.tsx";
-import * as $28 from "./routes/oauth2/dev/fync/index.tsx";
-import * as $29 from "./routes/oauth2/discord/callback.tsx";
-import * as $30 from "./routes/oauth2/discord/df/[cid]/cb.tsx";
-import * as $31 from "./routes/oauth2/discord/index.tsx";
-import * as $32 from "./routes/oauth2/forgot-password.tsx";
-import * as $33 from "./routes/oauth2/google/callback.tsx";
-import * as $34 from "./routes/oauth2/google/index.tsx";
-import * as $35 from "./routes/oauth2/login.tsx";
-import * as $36 from "./routes/partials/dev/dashboard/app/[id]/[[slug]]/index.tsx";
-import * as $37 from "./routes/search.tsx";
-import * as $38 from "./routes/signup.tsx";
-import * as $39 from "./routes/users/[id]/accept-friend.tsx";
-import * as $40 from "./routes/users/[id]/add-friend.tsx";
-import * as $41 from "./routes/users/[id]/cancel.tsx";
-import * as $42 from "./routes/users/[id]/edit.tsx";
-import * as $43 from "./routes/users/[id]/index.tsx";
-import * as $44 from "./routes/users/[id]/reject.tsx";
+import * as $14 from "./routes/dev/index.tsx";
+import * as $15 from "./routes/dev/login.tsx";
+import * as $16 from "./routes/docs/[...slug].tsx";
+import * as $17 from "./routes/docs/out.tsx";
+import * as $18 from "./routes/friends/index.tsx";
+import * as $19 from "./routes/friends/requests.tsx";
+import * as $20 from "./routes/friends/search.tsx";
+import * as $21 from "./routes/home.tsx";
+import * as $22 from "./routes/index.tsx";
+import * as $23 from "./routes/login.tsx";
+import * as $24 from "./routes/logout.tsx";
+import * as $25 from "./routes/oauth2/auth.tsx";
+import * as $26 from "./routes/oauth2/dev/fync/callback.tsx";
+import * as $27 from "./routes/oauth2/dev/fync/index.tsx";
+import * as $28 from "./routes/oauth2/discord/callback.tsx";
+import * as $29 from "./routes/oauth2/discord/df/[cid]/cb.tsx";
+import * as $30 from "./routes/oauth2/discord/index.tsx";
+import * as $31 from "./routes/oauth2/forgot-password.tsx";
+import * as $32 from "./routes/oauth2/google/callback.tsx";
+import * as $33 from "./routes/oauth2/google/index.tsx";
+import * as $34 from "./routes/oauth2/login.tsx";
+import * as $35 from "./routes/partials/dev/dashboard/app/[id]/[[slug]]/index.tsx";
+import * as $36 from "./routes/search.tsx";
+import * as $37 from "./routes/signup.tsx";
+import * as $38 from "./routes/users/[id]/accept-friend.tsx";
+import * as $39 from "./routes/users/[id]/add-friend.tsx";
+import * as $40 from "./routes/users/[id]/cancel.tsx";
+import * as $41 from "./routes/users/[id]/edit.tsx";
+import * as $42 from "./routes/users/[id]/index.tsx";
+import * as $43 from "./routes/users/[id]/reject.tsx";
 import * as $$0 from "./islands/AccountForm.tsx";
 import * as $$1 from "./islands/AppDataEditor.tsx";
 import * as $$2 from "./islands/ArrayInput.tsx";
@@ -57,16 +56,17 @@ import * as $$6 from "./islands/CopyText.tsx";
 import * as $$7 from "./islands/Counter.tsx";
 import * as $$8 from "./islands/DataInput.tsx";
 import * as $$9 from "./islands/DiscordAuthEditor.tsx";
-import * as $$10 from "./islands/Input.tsx";
-import * as $$11 from "./islands/InteractionEditor.tsx";
-import * as $$12 from "./islands/InteractionsEditor.tsx";
-import * as $$13 from "./islands/Login.tsx";
-import * as $$14 from "./islands/PersonalForm.tsx";
-import * as $$15 from "./islands/ProfileNavButton.tsx";
-import * as $$16 from "./islands/ScopePicker.tsx";
-import * as $$17 from "./islands/SearchButton.tsx";
-import * as $$18 from "./islands/Select.tsx";
-import * as $$19 from "./islands/UserNavbar.tsx";
+import * as $$10 from "./islands/FriendingButton.tsx";
+import * as $$11 from "./islands/Input.tsx";
+import * as $$12 from "./islands/InteractionEditor.tsx";
+import * as $$13 from "./islands/InteractionsEditor.tsx";
+import * as $$14 from "./islands/Login.tsx";
+import * as $$15 from "./islands/PersonalForm.tsx";
+import * as $$16 from "./islands/ProfileNavButton.tsx";
+import * as $$17 from "./islands/ScopePicker.tsx";
+import * as $$18 from "./islands/SearchButton.tsx";
+import * as $$19 from "./islands/Select.tsx";
+import * as $$20 from "./islands/UserNavbar.tsx";
 
 const manifest = {
   routes: {
@@ -84,37 +84,36 @@ const manifest = {
     "./routes/dev/dashboard/app/[id]/[[slug]]/index.tsx": $11,
     "./routes/dev/dashboard/create-app.tsx": $12,
     "./routes/dev/dashboard/index.tsx": $13,
-    "./routes/dev/dashboard/interactions.tsx": $14,
-    "./routes/dev/index.tsx": $15,
-    "./routes/dev/login.tsx": $16,
-    "./routes/docs/[...slug].tsx": $17,
-    "./routes/docs/out.tsx": $18,
-    "./routes/friends/index.tsx": $19,
-    "./routes/friends/requests.tsx": $20,
-    "./routes/friends/search.tsx": $21,
-    "./routes/home.tsx": $22,
-    "./routes/index.tsx": $23,
-    "./routes/login.tsx": $24,
-    "./routes/logout.tsx": $25,
-    "./routes/oauth2/auth.tsx": $26,
-    "./routes/oauth2/dev/fync/callback.tsx": $27,
-    "./routes/oauth2/dev/fync/index.tsx": $28,
-    "./routes/oauth2/discord/callback.tsx": $29,
-    "./routes/oauth2/discord/df/[cid]/cb.tsx": $30,
-    "./routes/oauth2/discord/index.tsx": $31,
-    "./routes/oauth2/forgot-password.tsx": $32,
-    "./routes/oauth2/google/callback.tsx": $33,
-    "./routes/oauth2/google/index.tsx": $34,
-    "./routes/oauth2/login.tsx": $35,
-    "./routes/partials/dev/dashboard/app/[id]/[[slug]]/index.tsx": $36,
-    "./routes/search.tsx": $37,
-    "./routes/signup.tsx": $38,
-    "./routes/users/[id]/accept-friend.tsx": $39,
-    "./routes/users/[id]/add-friend.tsx": $40,
-    "./routes/users/[id]/cancel.tsx": $41,
-    "./routes/users/[id]/edit.tsx": $42,
-    "./routes/users/[id]/index.tsx": $43,
-    "./routes/users/[id]/reject.tsx": $44,
+    "./routes/dev/index.tsx": $14,
+    "./routes/dev/login.tsx": $15,
+    "./routes/docs/[...slug].tsx": $16,
+    "./routes/docs/out.tsx": $17,
+    "./routes/friends/index.tsx": $18,
+    "./routes/friends/requests.tsx": $19,
+    "./routes/friends/search.tsx": $20,
+    "./routes/home.tsx": $21,
+    "./routes/index.tsx": $22,
+    "./routes/login.tsx": $23,
+    "./routes/logout.tsx": $24,
+    "./routes/oauth2/auth.tsx": $25,
+    "./routes/oauth2/dev/fync/callback.tsx": $26,
+    "./routes/oauth2/dev/fync/index.tsx": $27,
+    "./routes/oauth2/discord/callback.tsx": $28,
+    "./routes/oauth2/discord/df/[cid]/cb.tsx": $29,
+    "./routes/oauth2/discord/index.tsx": $30,
+    "./routes/oauth2/forgot-password.tsx": $31,
+    "./routes/oauth2/google/callback.tsx": $32,
+    "./routes/oauth2/google/index.tsx": $33,
+    "./routes/oauth2/login.tsx": $34,
+    "./routes/partials/dev/dashboard/app/[id]/[[slug]]/index.tsx": $35,
+    "./routes/search.tsx": $36,
+    "./routes/signup.tsx": $37,
+    "./routes/users/[id]/accept-friend.tsx": $38,
+    "./routes/users/[id]/add-friend.tsx": $39,
+    "./routes/users/[id]/cancel.tsx": $40,
+    "./routes/users/[id]/edit.tsx": $41,
+    "./routes/users/[id]/index.tsx": $42,
+    "./routes/users/[id]/reject.tsx": $43,
   },
   islands: {
     "./islands/AccountForm.tsx": $$0,
@@ -127,16 +126,17 @@ const manifest = {
     "./islands/Counter.tsx": $$7,
     "./islands/DataInput.tsx": $$8,
     "./islands/DiscordAuthEditor.tsx": $$9,
-    "./islands/Input.tsx": $$10,
-    "./islands/InteractionEditor.tsx": $$11,
-    "./islands/InteractionsEditor.tsx": $$12,
-    "./islands/Login.tsx": $$13,
-    "./islands/PersonalForm.tsx": $$14,
-    "./islands/ProfileNavButton.tsx": $$15,
-    "./islands/ScopePicker.tsx": $$16,
-    "./islands/SearchButton.tsx": $$17,
-    "./islands/Select.tsx": $$18,
-    "./islands/UserNavbar.tsx": $$19,
+    "./islands/FriendingButton.tsx": $$10,
+    "./islands/Input.tsx": $$11,
+    "./islands/InteractionEditor.tsx": $$12,
+    "./islands/InteractionsEditor.tsx": $$13,
+    "./islands/Login.tsx": $$14,
+    "./islands/PersonalForm.tsx": $$15,
+    "./islands/ProfileNavButton.tsx": $$16,
+    "./islands/ScopePicker.tsx": $$17,
+    "./islands/SearchButton.tsx": $$18,
+    "./islands/Select.tsx": $$19,
+    "./islands/UserNavbar.tsx": $$20,
   },
   baseUrl: import.meta.url,
 };

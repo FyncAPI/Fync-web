@@ -49,15 +49,7 @@ export default function Search({ data }: PageProps<Data>) {
           Search Results for "{query}"
         </h1>
       </div>
-      {/* create a apps list */}
 
-      {
-        /* {users?.map((user) => (
-        <div key={user._id}>
-          {user?.username} {user.email}
-        </div>
-      ))} */
-      }
       <UserList user={user} users={users} friendable={true} />
     </>
   );
