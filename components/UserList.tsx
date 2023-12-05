@@ -12,7 +12,7 @@ export const UserList = (
   props: {
     users: User[];
     friendable?: boolean;
-    user: User;
+    user: User | undefined;
     acceptable?: boolean;
   },
 ) => {
@@ -20,7 +20,7 @@ export const UserList = (
 
   return (
     <div class="flex flex-col -z-50">
-      {users?.filter((u) => u._id != me._id).map((user) => (
+      {users?.filter((u) => u._id != me?._id).map((user) => (
         <a
           href={"/users/" + user._id}
           class={"mx-5 md:mx-10 my-3"}
@@ -32,7 +32,7 @@ export const UserList = (
                   ? (
                     <img
                       src={user.profilePicture}
-                      class="rounded-md"
+                      class="rounded-md max-h-full max-w-full"
                     />
                   )
                   : (
@@ -48,7 +48,7 @@ export const UserList = (
               </h2>
               <p class="text-primary-200 text-lg ">{user.name}</p>
             </div>
-            {friendable && <FriendingButton user={user} me={me} />}
+            {friendable && me && <FriendingButton user={user} me={me} />}
           </div>
         </a>
       ))}

@@ -5,10 +5,21 @@ export const interactionParser = z.object({
   version: z.number(),
   title: z.string(),
   description: z.string(),
-  // type: z.string(),
-  // data: z.any().optional(),
+  rewardDetail: z.string(),
+  urlSlug: z.string(),
+  frequency: z.number().optional(),
 
-  // createdAt: z.date().or(z.string()),
+  type: z.enum(["friendship", "event", "game", "life"]),
+  options: z.array(
+    z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
+  ),
+
+  startDate: z.date().optional(),
+  endDate: z.date().optional(),
+  createdAt: z.date().optional(),
 });
 export type Interaction = z.infer<typeof interactionParser>;
 
