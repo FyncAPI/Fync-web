@@ -33,5 +33,5 @@ description: |
 **Example:**
 
 ```bash
-curl -X POST -H "Authorization: Bearer YOUR_ACCESS_TOKEN" http://api.example.com/v1/users/123/accept-friend
+curl -X POST -H "Authorization: Bearer YOUR_ACCESS_TOKEN" https://api.fync.in/v1/users/123/accept-friend
 ```

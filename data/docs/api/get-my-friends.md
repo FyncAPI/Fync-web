@@ -63,7 +63,7 @@ GET /v1/friends/@me?friendRequests=true
 ### Example Usage (cURL)
 
 ```bash
-curl -H "Authorization: Bearer YOUR_ACCESS_TOKEN" "https://your-api-base-url/v1/friends/@me?friendRequests=true"
+curl -H "Authorization: Bearer YOUR_ACCESS_TOKEN" "https://api.fync.in/v1/friends/@me?friendRequests=true"
 ```
 
 Replace `YOUR_ACCESS_TOKEN` with the actual access token obtained during

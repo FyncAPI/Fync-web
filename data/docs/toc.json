@@ -40,8 +40,10 @@
     "pages": [
       ["get-user-by-id", "Get User Data"],
       ["get-my-friends", "List Friends"],
+      ["get-my-friendrequests", "List Friend requests"],
       ["add-friend", "Add Friend"],
-      ["accept-friend", "Accept Friend"]
+      ["accept-friend", "Accept Friend"],
+      ["interact", "Interact"]
     ]
   }
 }

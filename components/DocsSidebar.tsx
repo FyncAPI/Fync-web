@@ -51,7 +51,7 @@ export default function DocsSidebar(props: { path: string; mobile?: boolean }) {
 }
 
 const link = "text(gray-100 hover:primary-100)";
-const linkActive = "text(secondary-600 hover:secondary-500)";
+const linkActive = "text(secondary-400 hover:secondary-500)";
 
 export function SidebarCategory(props: {
   path: string;
