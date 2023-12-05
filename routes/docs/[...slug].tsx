@@ -1,7 +1,7 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Footer } from "@/components/Layout.tsx";
-import { frontMatter, gfm, renderMarkdown } from "../../utils/markdown.ts";
+import { frontMatter, renderMarkdown } from "../../utils/markdown.ts";
 import { DocsNavbar } from "../../components/DocsNavbar.tsx";
 import DocsTitle from "../../components/DocsTitle.tsx";
 import DocsSidebar from "../../components/DocsSidebar.tsx";
@@ -13,6 +13,7 @@ import {
 
 interface Data {
   page: Page;
+  user?: User;
 }
 
 interface Page extends TableOfContentsEntry {
@@ -20,21 +21,23 @@ interface Page extends TableOfContentsEntry {
   data: Record<string, unknown>;
 }
 
-export const handler: Handlers<Data> = {
+export const handler: Handlers<Data, WithSession> = {
   async GET(_req, ctx) {
     const slug = ctx.params.slug;
+
     if (slug === "") {
       return new Response("", {
         status: 307,
         headers: { location: "/docs/introduction" },
       });
     }
-    if (slug === "concepts/architechture") {
-      return new Response("", {
-        status: 307,
-        headers: { location: "/docs/concepts/architecture" },
-      });
-    }
+
+    // if (slug === "concepts/architechture") {
+    //   return new Response("", {
+    //     status: 307,
+    //     headers: { location: "/docs/concepts/architecture" },
+    //   });
+    // }
 
     const entry = TABLE_OF_CONTENTS[slug];
     console.log(entry);
@@ -47,8 +50,13 @@ export const handler: Handlers<Data> = {
     const fileContent = await Deno.readTextFile(url);
     const { body, attrs } = frontMatter<Record<string, unknown>>(fileContent);
     const page = { ...entry, markdown: body, data: attrs ?? {} };
-    const resp = ctx.render({ page });
-    return resp;
+
+    const user = ctx.state.session.get("user");
+    if (user) {
+      return ctx.render({ page, user });
+    } else {
+      return ctx.render({ page });
+    }
   },
 };
 
@@ -67,15 +75,17 @@ export default function DocsPage(props: PageProps<Data>) {
         {description && <meta name="description" content={description} />}
       </Head>
       <div class="flex flex-col min-h-screen">
-        <DocsNavbar bg="bg-slate-900" />
+        <UserNavbar user={props.data.user} />
         <Main path={props.url.pathname} page={props.data.page} />
-        <Footer />
       </div>
     </>
   );
 }
 
 import IconBooks from "tabler/books.tsx";
+import UserNavbar from "@/islands/UserNavbar.tsx";
+import { User } from "@/utils/type.ts";
+import { WithSession } from "fresh-session";
 
 function Main(props: { path: string; page: Page }) {
   return (
@@ -152,8 +162,8 @@ function DesktopSidebar(props: { path: string }) {
 function Content(props: { page: Page }) {
   const html = renderMarkdown(props.page.markdown);
   return (
-    <main class="py-6 overflow-hidden">
-      <h1 class="text(4xl gray-100) tracking-tight font-extrabold mt-6">
+    <main class="md:py-6 pb-6 overflow-hidden">
+      <h1 class="text(4xl gray-100) tracking-normal font-bold lg:mt-6 shadow-slate-600">
         {props.page.title}
       </h1>
       <div
@@ -193,7 +203,9 @@ function ForwardBackButtons(props: { slug: string }) {
                 ? `${TABLE_OF_CONTENTS[previous.category].title}: `
                 : ""}
             </span>
-            {previous.title}
+            <p class={category}>
+              {previous.title}
+            </p>
           </span>
         </a>
       )}
