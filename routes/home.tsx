@@ -35,26 +35,26 @@ export const handler: Handlers<Data, WithSession> = {
 };
 
 export default function HomePage(props: PageProps<Data>) {
-  const { data } = props;
+  const { user } = props.data;
   return (
     <>
-      <UserNavbar user={data.user} />
+      <UserNavbar user={user} />
       <div class="h-screen">
-        {props.data.user
-          ? (
-            <div>
-              {JSON.stringify(props.data.user)}
-              <image class={"w-20 h-20"} src={props.data.user.profilePicture} />
-              <div>
-                <h2>{props.data.user.name}</h2>
-              </div>
+        <div class="m-2 p-2">
+          <h1 class="text-4xl font-medium ">
+            What's up, {user.name}?
+          </h1>
+          <image class={"w-20 h-20"} src={props.data.user.profilePicture} />
+
+          <div class="flex flex-1 grow flex-row gap-2">
+            <div class="flex flex-col grow gap-2">
+              <h2 class="text-2xl font-medium ">Your Interactions</h2>
             </div>
-          )
-          : (
-            <div>
-              hell no
+            <div class="flex flex-col gap-2">
+              <h2 class="text-2xl font-medium ">Suggestion</h2>
             </div>
-          )}
+          </div>
+        </div>
       </div>
     </>
   );

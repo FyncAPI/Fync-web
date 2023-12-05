@@ -41,14 +41,31 @@ const Meta = ({ ...customMeta }) => {
 };
 
 export const Footer = () => (
-  <footer class="bg-primary-900 ">
-    <div class="max-w-screen-md mx-auto py-8 px-4 sm:px-6 lg:px-8 brightness-75 bg-opacity-30">
-      <a href="/dev" class="flex">
-        developer portal
-      </a>
-      <p class="mt-8 text-center text-base text-white ">
-        &copy; 2023 Fync, Inc. All rights reserved.
-      </p>
+  <footer class="bg-primary-900">
+    <div class="max-w-screen-md mx-auto flex flex-row pt-4 pb-10 px-4 sm:px-6 lg:px-8 bg-opacity-50 font-thin text-opacity-50">
+      <div class="flex flex-col">
+        <p>
+          &copy; 2023 Fync, Inc.
+        </p>
+      </div>
+      <div class="flex flex-row ml-auto gap-4 ">
+        <div class="flex flex-col ml-auto mx-4 self-center">
+          <a href="/dev" class="flex">
+            Dev Portal
+          </a>
+          <a href="/docs" class="flex">
+            Docs
+          </a>
+        </div>
+        <div class="flex flex-col ml-auto mx-4 self-center">
+          <a href="/dev" class="flex">
+            Contact
+          </a>
+          <a href="/docs" class="flex">
+            Blog
+          </a>
+        </div>
+      </div>
     </div>
   </footer>
 );
@@ -57,7 +74,7 @@ export function Layout({ children, ...customMeta }: Props) {
   return (
     <>
       <Meta {...customMeta} />
-      {/* <Nav /> */}{" "}
+      {/* <Nav /> */}
       <main class="flex-1 bg-slate-800 backdrop-brightness-50 min-h-screen">
         <body>
           {/* <Partial name="body"> */}

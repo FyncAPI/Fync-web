@@ -5,6 +5,8 @@ import {
   TableOfContentsCategoryEntry,
 } from "../data/docs.ts";
 import SearchButton from "../islands/SearchButton.tsx";
+import SearchBox from "@/components/SearchBox.tsx";
+import { Button } from "@/components/Button.tsx";
 
 export default function DocsSidebar(props: { path: string; mobile?: boolean }) {
   const id = String(Math.random()).replaceAll(".", "");
@@ -12,32 +14,15 @@ export default function DocsSidebar(props: { path: string; mobile?: boolean }) {
     <>
       {props.mobile
         ? (
-          <button
-            type="button"
-            class="bg-gray-200 font-bold text-gray-400 rounded-full py-1 px-2 w-full mb-2"
-            // @ts-ignore: Inline event handler
-            onClick={`document.querySelector(".DocSearch.DocSearch-Button").click()`}
-          >
-            <span class="DocSearch-Button-Container">
-              <svg
-                width="20"
-                height="20"
-                class="DocSearch-Search-Icon"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
-                  stroke="currentColor"
-                  fill="none"
-                  fill-rule="evenodd"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                </path>
-              </svg>
-              <span class="DocSearch-Button-Placeholder">Search</span>
-            </span>
-          </button>
+          // <Button
+          //   type="button"
+          //   // @ts-ignore: Inline event handler
+          //   onClick={`document.querySelector(".DocSearch.DocSearch-Button").click()`}
+          // >
+          //   <span class="DocSearch-Button-Container">
+          <SearchBox action="/docs/search" />
+          // </span>
+          // </Button>
         )
         : <SearchButton />}
 

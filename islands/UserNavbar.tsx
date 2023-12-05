@@ -1,6 +1,7 @@
 import { User } from "@/utils/type.ts";
 import ProfileNavButton from "@/islands/ProfileNavButton.tsx";
 import IconSearch from "tabler/search.tsx";
+import SearchBox from "@/components/SearchBox.tsx";
 
 export default function UserNavbar({ type, user }: {
   type?: string;
@@ -16,19 +17,7 @@ export default function UserNavbar({ type, user }: {
         </a>
       </div>
       <div className="flex items-center justify-center ml-auto mr-5 self-center">
-        <form action="/search" method="get" className="flex items-center">
-          <div>
-            <IconSearch class="absolute mt-2 ml-2" />
-            <input
-              type="text"
-              id="searchQuery"
-              name="q"
-              className="py-2 pl-10 pr-4 rounded-full text-white bg-gray-800 blur-5 w-64 focus:outline-none"
-              placeholder="Search"
-            >
-            </input>
-          </div>
-        </form>
+        <SearchBox action="/search" />
         <NavButton href="/friends" text="friends" />
         <NavButton href="/apps" text="apps" />
         {user

@@ -133,16 +133,16 @@ function MobileSidebar(props: { path: string }) {
         autocomplete="off"
       >
       </input>
-      <div class="fixed inset-0 flex z-40 hidden toggled">
+      <div class="fixed inset-0 flex z-40 hidden toggled ">
         <label
           class="absolute inset-0 bg-gray-600 opacity-75"
           for="docs_sidebar"
         />
-        <div class="relative flex-1 flex flex-col w-[16rem] h-full bg-white border(r-2 gray-100)">
-          <div class="p-4 border(b-2 gray-100) bg-green-300">
+        <div class="relative flex-1 flex flex-col w-[20rem] h-full bg-slate-800">
+          <div class="p-4 bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 z-30">
             <DocsTitle title="docs" />
           </div>
-          <nav class="pt-6 pb-16 px-4 overflow-x-auto">
+          <nav class="pt-6 pb-16 px-4 overflow-x-auto ">
             <DocsSidebar mobile path={props.path} />
           </nav>
         </div>
