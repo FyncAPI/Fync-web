@@ -26,7 +26,7 @@ export const endpoints = {
     interaction: {
       create: `${url}/v1/apps/{id}/create-interaction/`,
       update: `${url}/v1/apps/{id}/update-interaction/`,
-    }
+    },
   },
   friends: {
     get: `${url}/v1/friends/@me`,
@@ -49,9 +49,9 @@ export const endpoints = {
     get: `${url}/v1/users/`,
     getByEmail: `${url}/v1/users/email/`,
     addFriend: `${url}/v1/users/{id}/add-friend`,
-    acceptFriend: `${url}/v1/{id}/accept-friend`,
-    rejectFriend: `${url}/v1/{id}/decline-friend`,
-    cancelFriend: `${url}/v1/{id}/cancel-friend`,
+    acceptFriend: `${url}/v1/users/{id}/accept-friend`,
+    rejectFriend: `${url}/v1/users/{id}/decline-friend`,
+    cancelFriend: `${url}/v1/users/{id}/cancel-friend`,
     requests: `${url}/v1/friend-requests/@me/`,
   },
   // Home
