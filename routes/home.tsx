@@ -44,6 +44,9 @@ export default function HomePage(props: PageProps<Data>) {
           <h1 class="text-4xl font-medium ">
             What's up, {user.name}?
           </h1>
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
+            Hello world
+          </span>
           <image class={"w-20 h-20"} src={props.data.user.profilePicture} />
 
           <div class="flex flex-1 grow flex-row gap-2">

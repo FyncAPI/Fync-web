@@ -1,3 +1,25 @@
+@tailwind base;
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+  a:hover {
+    @apply text-blue-600 underline;
+  }
+  * {
+    @apply text-white;
+  }
+}
+@tailwind components;
+@tailwind utilities;
+
+
 
 .gradient-grid {
   background-image: radial-gradient(
