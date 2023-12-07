@@ -2,27 +2,14 @@ import { asset } from "$fresh/runtime.ts";
 import { JSX } from "preact/jsx-runtime";
 import ProfileNavButton from "../islands/ProfileNavButton.tsx";
 import { User } from "../utils/type.ts";
+import { NavButton } from "@/islands/UserNavbar.tsx";
 
 export const DocsNavbar = ({ bg, user }: { bg?: string; user?: User }) => (
   <>
     {/* <div class="bg-grey-500"> */}
     <nav class="flex items-center justify-between flex-wrap h-full w-full bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 sticky top-0 z-10 -mb-16 ">
       <div class="flex items-center text-white mr-6 p-3">
-        {
-          /* <a href="/" class="mr-3">
-          <img
-            src={asset("/logo.svg")}
-            width={50}
-            alt="logo"
-          />
-        </a> */
-        }
         <a href="/">
-          {
-            /* <span class="font-semibold text-xl tracking-tight ">
-            Fync
-          </span> */
-          }
           <h1 class="font-bold text-white  text-2xl ">
             Fync Docs
           </h1>
@@ -56,16 +43,4 @@ export const DocsNavbar = ({ bg, user }: { bg?: string; user?: User }) => (
       </div>
     </nav>
   </>
-);
-
-const NavButton = (
-  { href, text, ...props }: JSX.HTMLAttributes<HTMLAnchorElement> & {
-    text: string;
-  },
-) => (
-  <a href={href} {...props}>
-    <div class="hover:text-white mx-4 text-gray-500">
-      {text}
-    </div>
-  </a>
 );

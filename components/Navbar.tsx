@@ -1,6 +1,7 @@
 import { asset } from "$fresh/runtime.ts";
 import { User } from "@/utils/type.ts";
 import ProfileNavButton from "@/islands/ProfileNavButton.tsx";
+import { NavButton } from "@/islands/UserNavbar.tsx";
 
 export const Navbar = ({ type, user }: {
   type?: string;
@@ -30,12 +31,4 @@ export const Navbar = ({ type, user }: {
     </nav>
     {/* </div> */}
   </>
-);
-
-const NavButton = ({ href, text }) => (
-  <a href={href}>
-    <div class="hover:text-gray-800 mx-4 text-gray-500">
-      {text}
-    </div>
-  </a>
 );

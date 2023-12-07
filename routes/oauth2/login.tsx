@@ -5,6 +5,8 @@ import { Input } from "@/components/Input.tsx";
 import { endpoints } from "../../constants/endpoints.ts";
 import { App } from "@/utils/type.ts";
 import IconDiscordFilled from "tabler/brand-discord-filled.tsx";
+import { Type } from "$std/yaml/type.ts";
+import Banner from "@/islands/Banner.tsx";
 
 type Data = {
   error?: string | null;
@@ -109,9 +111,20 @@ export const handler: Handlers<Data, WithSession> = {
             },
           });
         }
+      } else {
+        const { error } = await res.json();
+        console.log(error, "error");
+        return ctx.render({ error });
       }
     } catch (e) {
-      console.log(e);
+      console.log(e, e.message);
+      console.log(e instanceof TypeError);
+      if (
+        e instanceof TypeError &&
+        e.message.includes("Connection refused")
+      ) {
+        return ctx.render({ error: "Connection refused" });
+      }
 
       return ctx.render({ error: "Something went wrong" });
     }
@@ -128,14 +141,7 @@ export default function AuthScreen({
     <>
       <div class="h-screen p-4 mx-auto bg-gradient-to-br from-gray-900 via-fuchsia-950 to-secondary-900 hue-rotate-15 bg-opacity-40 pt-20 flex items-center justify-center">
         <div className="p-4 -mt-56 bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg backdrop-brightness-25 bg-opacity-10  w-full max-w-md min-w-min">
-          {error && (
-            <div
-              class="bg-red-100 text-red-700 px-4 py-3 rounded relative"
-              role="alert"
-            >
-              <span class="block sm:inline">{error}</span>
-            </div>
-          )}
+          {error && <Banner type="error" text={error} />}
           <div class=" ">
             <h1 class="text-2xl font-bold lg:text-3xl m-4 text-white overflow-visible">
               Sign in to Fync
