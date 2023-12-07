@@ -14,6 +14,15 @@ jobs:
       id-token: write # Needed for auth with Deno Deploy
       contents: read # Needed to clone the repository
 
+    env: 
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
+      DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
+      FYNC_CLIENT_ID: ${{ secrets.FYNC_CLIENT_ID }}
+      FYNC_CLIENT_SECRET: ${{ secrets.FYNC_CLIENT_SECRET }}
+      ENV: ${{ secrets.ENV }}
+      APP_KEY: ${{ secrets.APP_KEY }}
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
@@ -24,15 +33,6 @@ jobs:
           deno-version: v1.x
 
       - name: Build step
-        env: 
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
-          DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
-          FYNC_CLIENT_ID: ${{ secrets.FYNC_CLIENT_ID }}
-          FYNC_CLIENT_SECRET: ${{ secrets.FYNC_CLIENT_SECRET }}
-          ENV: ${{ secrets.ENV }}
-          APP_KEY: ${{ secrets.APP_KEY }}
         run: "deno task build" # 📝 Update the build command(s) if necessary
 
       - name: Upload to Deno Deploy
