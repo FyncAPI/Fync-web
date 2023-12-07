@@ -14,15 +14,6 @@ jobs:
       id-token: write # Needed for auth with Deno Deploy
       contents: read # Needed to clone the repository
 
-    env: 
-      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-      DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
-      DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
-      FYNC_CLIENT_ID: ${{ secrets.FYNC_CLIENT_ID }}
-      FYNC_CLIENT_SECRET: ${{ secrets.FYNC_CLIENT_SECRET }}
-      ENV: ${{ secrets.ENV }}
-      APP_KEY: ${{ secrets.APP_KEY }}
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
@@ -31,12 +22,29 @@ jobs:
         uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
-
+      - name: Create Env File
+        run: |
+          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env
+          echo "GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}" >> .env
+          echo "DISCORD_CLIENT_ID=${{ secrets.DISCORD_CLIENT_ID }}" >> .env
+          echo "DISCORD_CLIENT_SECRET=${{ secrets.DISCORD_CLIENT_SECRET }}" >> .env
+          echo "FYNC_CLIENT_ID=${{ secrets.FYNC_CLIENT_ID }}" >> .env
+          echo "FYNC_CLIENT_SECRET=${{ secrets.FYNC_CLIENT_SECRET }}" >> .env
+          echo "ENV=${{ secrets.ENV }}" >> .env
+          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
+  
       - name: Build step
         run: "deno task build" # 📝 Update the build command(s) if necessary
+        env:
+          DENO_ENV: production
+        # Use the source command to load the environment file
+        shell: bash -l
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "fync" # 📝 Update the deploy project name if necessary
           entrypoint: "./main.ts" # 📝 Update the entrypoint if necessary
+
+      - name: Delete Env File
+        run: rm .env
