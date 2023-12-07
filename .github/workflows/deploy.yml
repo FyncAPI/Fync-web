@@ -35,11 +35,6 @@ jobs:
   
       - name: Build step
         run: "deno task build" # 📝 Update the build command(s) if necessary
-        env:
-          DENO_ENV: production
-        # Use the source command to load the environment file
-        shell: bash -l
-
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
