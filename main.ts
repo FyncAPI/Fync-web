@@ -8,9 +8,8 @@ import "https://deno.land/std@0.145.0/dotenv/load.ts";
 import { start } from "$fresh/server.ts";
 import manifest from "./fresh.gen.ts";
 
-import twindPlugin from "twind_fresh_plugin/twind.ts";
-import twindConfig from "./twind.config.ts";
 import { z } from "zod";
+import tailwind from "$fresh/plugins/tailwind.ts";
 
 const envParser = z.object({
   ENV: z.string(),
@@ -26,4 +25,4 @@ if (!result.success) {
   // Deno.exit(1);
 }
 
-await start(manifest, { plugins: [twindPlugin(twindConfig)] });
+await start(manifest, { plugins: [tailwind()] });

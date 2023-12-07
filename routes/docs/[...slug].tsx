@@ -24,10 +24,11 @@ interface Page extends TableOfContentsEntry {
 export const handler: Handlers<Data, WithSession> = {
   async GET(_req, ctx) {
     const slug = ctx.params.slug;
+    console.log(slug, "slug");
 
     if (slug === "") {
       return new Response("", {
-        status: 307,
+        status: 302,
         headers: { location: "/docs/introduction" },
       });
     }

@@ -1,6 +1,5 @@
 import { defineConfig } from "$fresh/server.ts";
-import twindPlugin from "twind_fresh_plugin/twind.ts";
-import twindConfig from "./twind.config.ts";
+import tailwind from "$fresh/plugins/tailwind.ts";
 import { z } from "zod";
 console.log("yoyo");
 const envParser = z.object({
@@ -13,5 +12,5 @@ const envParser = z.object({
 export const globalEnv = envParser.parse(Deno.env.toObject());
 
 export default defineConfig({
-  plugins: [twindPlugin(twindConfig)],
+  plugins: [tailwind()],
 });

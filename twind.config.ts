@@ -14,26 +14,11 @@ export default {
       presetTailWind(),
     ],
     preflight: {
-      // "@import":
-      //   `url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap')`,
       "@font-face": {
         "fontFamily": "Outfit",
         src: 'url("/fonts/Outfit-VariableFont_wght.ttf")',
-        // font-weight: 100 1000;
       },
-      // "@font-face": [
-      //   {
-      //     fontFamily: "Outfit",
-      //     fontWeight: "400",
-      //     src: 'url(/fonts/proxima-nova/400-regular.woff) format("woff")',
-      //   },
-      //   {
-      //     fontFamily: "Proxima Nova",
-      //     fontWeight: "500",
-      //     src: 'url(/fonts/proxima-nova/500-medium.woff) format("woff")',
-      //   },
-      // ],
-      // make text white by default
+
       "@layer base": {
         "*": {
           color: "#fff",

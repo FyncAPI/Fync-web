@@ -2,7 +2,7 @@ import { User } from "@/utils/type.ts";
 import ProfileNavButton from "@/islands/ProfileNavButton.tsx";
 import IconSearch from "tabler/search.tsx";
 import SearchBox from "@/components/SearchBox.tsx";
-
+import { JSX } from "preact/jsx-runtime";
 export default function UserNavbar({ type, user }: {
   type?: string;
   user?: User;
@@ -28,9 +28,13 @@ export default function UserNavbar({ type, user }: {
   );
 }
 
-const NavButton = ({ href, text }) => (
+export const NavButton = (
+  { href, text, ...props }: JSX.HTMLAttributes<HTMLAnchorElement> & {
+    text: string;
+  },
+) => (
   <a href={href}>
-    <div className="hover:text-gray-100 mx-5 text-gray-500">
+    <div className="hover:text-primary-600 brightness-150	 mx-5 text-gray-500">
       {text}
     </div>
   </a>

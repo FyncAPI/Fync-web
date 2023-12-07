@@ -4,3 +4,4 @@ deno.lock
 _fresh/
 
 .vscode
+node_modules/

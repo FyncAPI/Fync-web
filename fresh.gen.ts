@@ -2,7 +2,6 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $_name_ from "./routes/[name].tsx";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
@@ -19,6 +18,7 @@ import * as $dev_dashboard_index from "./routes/dev/dashboard/index.tsx";
 import * as $dev_index from "./routes/dev/index.tsx";
 import * as $dev_login from "./routes/dev/login.tsx";
 import * as $docs_slug_ from "./routes/docs/[...slug].tsx";
+import * as $docs_index from "./routes/docs/index.tsx";
 import * as $docs_out from "./routes/docs/out.tsx";
 import * as $friends_index from "./routes/friends/index.tsx";
 import * as $friends_requests from "./routes/friends/requests.tsx";
@@ -71,7 +71,6 @@ import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/[name].tsx": $_name_,
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
     "./routes/_middleware.ts": $_middleware,
@@ -90,6 +89,7 @@ const manifest = {
     "./routes/dev/index.tsx": $dev_index,
     "./routes/dev/login.tsx": $dev_login,
     "./routes/docs/[...slug].tsx": $docs_slug_,
+    "./routes/docs/index.tsx": $docs_index,
     "./routes/docs/out.tsx": $docs_out,
     "./routes/friends/index.tsx": $friends_index,
     "./routes/friends/requests.tsx": $friends_requests,

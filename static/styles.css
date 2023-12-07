@@ -1,3 +1,32 @@
+@tailwind base;
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+  * {
+    @apply text-white decoration-primary-100
+  }
+}
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .gradient-text-1 {
+    @apply bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent
+  }
+}
+
+.bg-clip-text {
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+}
 
 .gradient-grid {
   background-image: radial-gradient(
