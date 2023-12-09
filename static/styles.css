@@ -16,17 +16,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-VariableFont_wght.ttf') format('truetype');
+
+}
+
 @layer components {
   .gradient-text-1 {
     @apply bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent
   }
 }
 
-.bg-clip-text {
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
-}
 
 .gradient-grid {
   background-image: radial-gradient(
