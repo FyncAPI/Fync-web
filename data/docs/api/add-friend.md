@@ -9,7 +9,7 @@ description: |
 
 **Authentication:**
 
-- Requires authentication with `scopes.write.friends` scope.
+- Requires authentication with `friend.write` scope.
 - The user making the request must be authenticated.
 
 **Parameters:**

@@ -1,6 +1,5 @@
 import { Handlers } from "$fresh/server.ts";
 import { WithSession } from "fresh-session";
-import { discordClient } from "@/utils/discordClient.ts";
 import { denoGrant } from "@/utils/grant.ts";
 import { Providers } from "deno_grant";
 

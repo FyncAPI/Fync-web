@@ -28,30 +28,32 @@ export default function ScopePicker({
             <h3>
               {key}
             </h3>
-            {values.map((value) => (
-              <label for={value} class={"p-2"}>
+            {Object.entries(values).map(([k, v]) => (
+              <label for={v} class={"p-2"}>
                 <input
-                  name={value}
+                  name={v}
                   type={"checkbox"}
-                  id={value}
+                  id={v}
                   class="mr-2"
-                  checked={selected.value.includes(value)}
-                  value={value}
+                  checked={selected.value.includes(v)}
+                  value={v}
                   onChange={() => {
-                    console.log(selected.value, value);
-                    if (selected.value.includes(value)) {
+                    console.log(selected.value, v);
+                    if (selected.value.includes(v)) {
                       selected.value = selected.value.filter((
-                        v,
-                      ) => v !== value);
+                        va,
+                      ) =>
+                        va !== v
+                      );
                     } else {
                       selected.value = [
                         ...selected.value,
-                        value,
+                        v,
                       ];
                     }
                   }}
                 />
-                {value}
+                {k}
               </label>
             ))}
           </div>

@@ -16,6 +16,6 @@ export const fyncOauthClient = new OAuth2Client({
   tokenUri: apiURI + "/auth/access_token",
   redirectUri: serverURI + "/oauth2/dev/fync/callback",
   defaults: {
-    scope: scopes.dev,
+    scope: [scopes.dev.admin],
   },
 });

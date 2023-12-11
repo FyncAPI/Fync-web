@@ -9,7 +9,7 @@ description: |
 
 **Authentication:**
 
-- Requires authentication with `scopes.read.friends` scope.
+- Requires authentication with `scopes.friend.read` scope.
 - The user making the request must be authenticated.
 
 **Request:**

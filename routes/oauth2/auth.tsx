@@ -163,7 +163,7 @@ export default function AuthScreen({
                     </strong>
                   </h1>
                   <h3 class="text-gray-400 text-md m-4">
-                    by <strong>{app?.owner}</strong>
+                    by <strong>{app?.owner || "idk"}</strong>
                   </h3>
                   <p class="text-gray-400 text-md m-4">
                     <strong class={"text-white"}>{app?.name}</strong>{" "}
