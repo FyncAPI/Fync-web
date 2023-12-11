@@ -43,6 +43,7 @@
       ["get-my-friendrequests", "List Friend requests"],
       ["add-friend", "Add Friend"],
       ["accept-friend", "Accept Friend"],
+      ["decline-friend", "Decline Friend"],
       ["interact", "Interact"]
     ]
   }
