@@ -128,7 +128,7 @@ export const handler: Handlers<Data, WithSession> = {
       });
     }
 
-    if (slug == undefined) {
+    if (slug == undefined || slug == "discord") {
       try {
         const data = form.get("changes");
 

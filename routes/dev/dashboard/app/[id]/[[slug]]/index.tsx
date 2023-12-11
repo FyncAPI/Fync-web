@@ -124,7 +124,9 @@ export const handler: Handlers<Data, WithSession> = {
       });
     }
 
-    if (slug == undefined) {
+    console.log(form.get("changes"), "changes");
+
+    if (slug == undefined || slug == "discord") {
       try {
         const data = form.get("changes");
 
@@ -210,7 +212,6 @@ export const handler: Handlers<Data, WithSession> = {
         });
       }
     }
-
     return ctx.render({
       app: await getApp(id, token),
       user: session.get("user"),

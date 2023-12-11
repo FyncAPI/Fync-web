@@ -6,7 +6,7 @@ import DiscordAuthEditor from "@/islands/DiscordAuthEditor.tsx";
 
 export default function AppEditorPartial(props: {
   env: string;
-  app?: App;
+  app: App;
   interactions?: Interaction[] | null;
   slug: string;
 }) {

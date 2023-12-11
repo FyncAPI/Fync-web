@@ -17,7 +17,8 @@ export default function DiscordAuthEditor(
   const changedData = useSignal<Partial<App>>({});
   const validated = useSignal(false);
   const edited = computed(() => {
-    return Object.keys(changedData.value).length;
+    return Object.keys(changedData.value).length &&
+      JSON.stringify(changedData.value) !== JSON.stringify(appData.value);
   });
   const selectedScopes = useSignal<string[]>(app.discordScopes || []);
   const update = (
@@ -121,6 +122,7 @@ export default function DiscordAuthEditor(
                     return result;
                   } catch (ex) {
                     console.log(ex.message);
+                    console.error(ex);
                     error.value = ex.message;
 
                     e.preventDefault();
