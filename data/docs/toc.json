@@ -8,13 +8,11 @@
   "reference": {
     "title": "Reference",
     "pages": [
-      ["oauth2", "OAuth2"],
-      ["discord-flow", "Discord Flow"],
       ["access-token", "Access Token"],
       ["user", "User"],
       ["friend", "Friend"],
       ["friendship", "Friendship"],
-      ["intereaction", "Interaction"],
+      ["interaction", "Interaction"],
       ["app", "app"],
       ["errors", "Errors"]
     ]
@@ -31,8 +29,7 @@
     "title": "Discord Flow Login",
     "pages": [
       ["overview", "Overview"],
-      ["setup", "Setup"],
-      ["customize", "Customize"]
+      ["setup", "Setup"]
     ]
   },
   "api": {

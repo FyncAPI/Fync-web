@@ -39,21 +39,21 @@ const link = "text(gray-100 hover:primary-100)";
 const linkActive = "text(secondary-400 hover:secondary-500)";
 
 export function SidebarCategory(props: {
-  path: string;
   category: TableOfContentsCategory;
 }) {
   const { title, href, entries } = props.category;
 
-  const outerLink = `${href == props.path ? linkActive : link} font-bold`;
-
   return (
     <li class="my-2 block">
-      <a href={href} class={outerLink}>{title}</a>
+      <a
+        href={href}
+        class="text-primary-50 hover:text-primary-200 aria-[current]:text-primary-400 aria-[current]:hover:underline font-bold"
+      >
+        {title}
+      </a>
       {entries.length > 0 && (
-        <ol class="pl-4 list-decimal nested">
-          {entries.map((entry) => (
-            <SidebarEntry path={props.path} entry={entry} />
-          ))}
+        <ol class="pl-2 list-decimal nested">
+          {entries.map((entry) => <SidebarEntry entry={entry} />)}
         </ol>
       )}
     </li>
@@ -61,16 +61,18 @@ export function SidebarCategory(props: {
 }
 
 export function SidebarEntry(props: {
-  path: string;
   entry: TableOfContentsCategoryEntry;
 }) {
   const { title, href } = props.entry;
 
-  const innerLink = `${href == props.path ? linkActive : link} font-normal`;
-
   return (
-    <li class="my-0.5">
-      <a href={href} class={innerLink}>{title}</a>
-    </li>
+    <div class="py-[1px]">
+      <a
+        href={href}
+        class="aria-[current]:text-white aria-[current]:border-primary-600 aria-[current]:bg-primary-900 border-l-4 border-transparent px-4 py-0.5 transition-colors hover:text-primary-200 font-normal "
+      >
+        {title}
+      </a>
+    </div>
   );
 }

@@ -9,7 +9,7 @@ description: |
 
 **Authentication:**
 
-- Requires authentication with `scopes.friendship.write` scope.
+- Requires authentication with `friendship.write` scope.
 - The user making the request must be authenticated.
 
 **Parameters:**
@@ -18,7 +18,7 @@ description: |
 
 **Request:**
 
-- body:
+- body: `users`: Array of user ids to increase friendship for.
   ```json
   {
       "users": ["user_id_1", "user_id_2", ...]
@@ -71,5 +71,5 @@ description: |
 **Example:**
 
 ```bash
-curl -X POST -H "Authorization: Bearer YOUR_ACCESS_TOKEN" -d '{"users": ["USER_ID_1", "USER_ID_2"]}' http://api.fync.in/i/interaction-slug
+curl -X POST -H "Authorization: Bearer YOUR_ACCESS_TOKEN" -d '{"users": ["USER_ID_1", "USER_ID_2"]}' https://api.fync.in/i/:slug
 ```

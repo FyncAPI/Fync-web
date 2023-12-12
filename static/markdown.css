@@ -710,7 +710,7 @@ ol.nested li:before {
 }
 
 .markdown-body .highlight {
-  border: 1px solid var(--color-border-muted);
+  /* border: 1px solid var(--color-border-muted); */
   border-radius: 0.5rem;
 }
 
@@ -720,6 +720,7 @@ ol.nested li:before {
 
 .fenced-code {
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 .fenced-code pre {
   margin-bottom: 0;
@@ -728,10 +729,11 @@ ol.nested li:before {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   padding: 0.5rem;
-  background: #eaeef1;
+  background: #071938;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 0.5rem;
 }
 .fenced-code-header + pre {
   border-top-left-radius: 0 !important;

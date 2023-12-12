@@ -1,4 +1,4 @@
-import { asset, Head } from "$fresh/runtime.ts";
+import { asset, Head, Partial } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Footer } from "@/components/Layout.tsx";
 import { frontMatter, renderMarkdown } from "../../utils/markdown.ts";
@@ -75,9 +75,11 @@ export default function DocsPage(props: PageProps<Data>) {
         <link rel="stylesheet" href={asset("/markdown.css")} />
         {description && <meta name="description" content={description} />}
       </Head>
-      <div class="flex flex-col min-h-screen">
+      <div class="flex flex-col min-h-screen" f-client-nav>
         <UserNavbar user={props.data.user} />
-        <Main path={props.url.pathname} page={props.data.page} />
+        <Partial name="docs">
+          <Main path={props.url.pathname} page={props.data.page} />
+        </Partial>
       </div>
     </>
   );
@@ -92,10 +94,10 @@ function Main(props: { path: string; page: Page }) {
   return (
     <div class="flex-1">
       <MobileSidebar path={props.path} />
-      <div class="flex mx-auto max-w-screen-lg px-4 py-5 justify-end">
+      <div class="flex mx-auto max-w-screen-lg px-2 py-4 justify-end">
         <label
           for="docs_sidebar"
-          class="px-4 py-3 md:hidden flex items-center hover:bg-gray-100 rounded gap-2"
+          class="px-4 py-3 md:hidden flex items-center hover:bg-primary-900 bg-primary-800 rounded gap-2"
         >
           <svg
             class="h-6 w-6"
@@ -134,7 +136,7 @@ function MobileSidebar(props: { path: string }) {
         autocomplete="off"
       >
       </input>
-      <div class="fixed inset-0 flex z-40 hidden toggled ">
+      <div class="fixed inset-0 z-40 hidden toggled ">
         <label
           class="absolute inset-0 bg-gray-600 opacity-75"
           for="docs_sidebar"
@@ -154,7 +156,7 @@ function MobileSidebar(props: { path: string }) {
 
 function DesktopSidebar(props: { path: string }) {
   return (
-    <nav class="w-[16rem] flex-shrink-0 hidden md:block py-8 pr-4 border(r-2 gray-100)">
+    <nav class="w-[16rem] flex-shrink-0 hidden md:block py-4 pr-4 border(r-2 gray-100) pl-4 bg-slate-900 rounded-lg ">
       <DocsSidebar path={props.path} />
     </nav>
   );
@@ -219,7 +221,9 @@ function ForwardBackButtons(props: { slug: string }) {
                 ? `${TABLE_OF_CONTENTS[next.category].title}: `
                 : ""}
             </span>
-            {next.title}
+            <p class={category}>
+              {next.title}
+            </p>
           </span>
         </a>
       )}
