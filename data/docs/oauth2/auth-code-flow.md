@@ -63,8 +63,40 @@ property.
 ### 4. Exchange the authorization code for an access token
 
 Once you have the authorization code, you will need to exchange it for an access
-token. You can do this by making a `POST` request to the `/oauth2/token`
-endpoint.
+token. You can do this by making a `POST` request to
+`https://fync.in/api/oauth/token` endpoint.
+
+> example request
+
+```ts
+function exchangeCodeForToken(authorizationCode) {
+  console.log(process.env.EXPO_PUBLIC_FYNC_CLIENT_ID);
+  const tokenRequestBody = new FormData();
+  tokenRequestBody.append("grant_type", "authorization_code");
+  tokenRequestBody.append("code", authorizationCode);
+  tokenRequestBody.append("client_id", FYNC_CLIENT_ID);
+  tokenRequestBody.append(
+    "client_secret",
+    FYNC_CLIENT_SECRET,
+  );
+
+  return fetch("https://fync.in/api/oauth/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: tokenRequestBody,
+  })
+    .then((response) => response.json())
+    .then((tokenData) => {
+      console.log(tokenData);
+      // Handle the obtained access token (tokenData.access_token)
+      console.log("Access Token:", tokenData.access_token);
+      return tokenData.access_token;
+    })
+    .catch((error) => console.error("Error during token exchange:", error));
+}
+```
 
 ### 5. Use the access token to make requests
 
